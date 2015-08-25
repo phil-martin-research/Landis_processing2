@@ -1,0 +1,34 @@
+LandisData     Scenario
+
+
+Duration       50
+
+
+Species        "E:\LandisIIv6_test\Landis run8\speciesNFANX3.txt"
+
+
+Ecoregions     "E:\LandisIIv6_test\Landis run8\ecoregionsNFv2.txt"
+EcoregionsMap  "E:\LandisIIv6_test\Landis run8\ecoregionsNF.gis"
+
+
+CellLength     50  << meters
+
+
+
+>>  Succession Extension    Initialization File
+>> ----------------------   -------------------
+   "Age-only Succession"    "E:\LandisIIv6_test\Landis run8\successionNFV2.txt"
+
+
+>> Disturbance Extensions   Initialization File
+>> ----------------------   -------------------
+
+   DisturbancesRandomOrder  no  << optional parameter; default = no
+
+
+>>    Other Extensions      Initialization File
+>> ----------------------   -------------------
+   "Output Cohort Statistics"    "E:\LandisIIv6_test\Landis run8\CohortStatsAVG.txt"
+
+
+
