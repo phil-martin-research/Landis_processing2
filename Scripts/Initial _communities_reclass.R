@@ -14,6 +14,7 @@ R2<-raster(Init_comm)
 for (i in 2:length(Un_vals)){
   print(paste("percent done = ",round((i/length(Un_vals))*100,digits = 2),sep=""))
   Init_comm2<-Init_comm
+  plot(Init_comm2)
   Init_comm2[Init_comm2==Un_vals[i]]<-9999999
   Init_comm2[Init_comm2!=9999999]<-NA
   Init_comm2[Init_comm2==9999999]<-1
@@ -32,7 +33,3 @@ plot(R2_reclass)
 
 
 writeRaster(R2_reclass,"Inital_comm_reclass.img",format="HFA",overwrite=T)
-
-Comm_reclass<-raster("Inital_comm_reclass.img")
-
-length(unique(Comm_reclass))
