@@ -1,5 +1,5 @@
-#script to produce estimations of ecosystem services/functions based on
-#observed relationship with biomass
+#script to produce regressions of ecosystem services/functions vs biomass
+#fruom Paul's gradient plots
 
 #author: Phil martin
 #Date 2015/09/24
@@ -12,12 +12,6 @@ library(reshape2)
 library(plyr)
 library(MuMIn)
 
-#load data Landis II outputs
-raster("Century_outputs/")
-
-File_names<-list.files(pattern="*.img",recursive=T)
-File_names<-File_names[!grepl("*.dbf",File_names)]
-File_names<-File_names[grepl("TotalBiomass",File_names)]
 
 
 #load in Paul's biomass data
