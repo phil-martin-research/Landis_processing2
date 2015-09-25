@@ -78,9 +78,11 @@ File_names<-File_names[grepl("TotalBiomass",File_names)]
 #for each replicate of each scenario predict values of each ecosystem service
 #or biodiversity value and output this as a raster and summarise values as 
 #the mean pixel value, with stadard deviation and standard error
-j<-1
-i<-1
+
+length(File_names)
+
 n<-0
+ptm <- proc.time()
 Mean_summary<-NULL
 for (j in 1:nrow(Coefficients)){
 for (i in 1:length(File_names)){
@@ -101,25 +103,26 @@ for (i in 1:length(File_names)){
   )
   Mean_summary<-rbind(Mean_sub,Mean_summary) #this binds all iterations together
   
-  
   #the bit below produces a new .img raster in the directory Data/Maps_from_R/
   #the file names are in the format Variablename_scenarionumber_replicate_year.img
   #e.g.Lichen_1_1_170.img
-  writeRaster(Prediction,
-   filename=paste("Data/Maps_from_R/",
-   Coefficients[j,1],"_",
-   gsub( "_r.*$", "", gsub("^.*?-biomass","", File_names[i]))
-   ,"_",
-   gsub( "/TotalBiomass.*$", "", gsub("^.*?_r","", File_names[i])),"_",
-   Year=as.numeric(sub("^(.*)[.].*", "\\1",gsub("^.*?Biomass-","", File_names[i]))),
-   ".img",
-   sep = ""),
-   format="HFA",overwrite=T)
-   plot(Prediction)
+  #currently this is not functional
+  #writeRaster(Prediction,
+   #filename=paste("Data/Maps_from_R/",
+   #Coefficients[j,1],"_",
+   #gsub( "_r.*$", "", gsub("^.*?-biomass","", File_names[i]))
+   #,"_",
+   #gsub( "/TotalBiomass.*$", "", gsub("^.*?_r","", File_names[i])),"_",
+   #Year=as.numeric(sub("^(.*)[.].*", "\\1",gsub("^.*?Biomass-","", File_names[i]))),
+   #".img",
+   #sep = ""),
+   #format="HFA",overwrite=T)
+   
+   #this bit of code just tells you how much of the loop is done
    n<-n+1
-   print(paste("percent done=", n/(210*5),"%"))
+   print(paste("percent done=", (n/(210*5))*100,"%"))
 }
 }
-
+proc.time() - ptm
 
 
