@@ -1,5 +1,5 @@
 #script to produce regressions of ecosystem services/functions vs biomass
-#fruom Paul's gradient plots
+#from Paul's gradient plots
 
 #author: Phil martin
 #Date 2015/09/24
@@ -13,18 +13,22 @@ library(plyr)
 library(MuMIn)
 library(gtools)
 
+#clear previous R objects
+rm(list=ls())
+
 #load in standard error function
 stderr <- function(x) sqrt(var(x,na.rm=TRUE)/length(na.omit(x)))
 
 #load in Paul's biomass data
 BM<-read.csv("Data/BMLan.csv",header = T)
-BM<-subset(BM,AGB<450) # remove very large biomass value
+BM<-subset(BM,AGB<600)
 BM$AGB_std<-(BM$AGB-mean(BM$AGB))/sd(BM$AGB) #standardise biomass
 
+summary(BM$AGB_std)
 
 #run a loop to test each variable and produce predictions
 df<-NULL
-df<-data.frame(AGB_std=seq(-1.35,1.8,0.01))
+df<-data.frame(AGB_std=seq(-1.3,3.0,0.01))
 df$AGB<-(df$AGB_std*sd(BM$AGB))+mean(BM$AGB)
 df<-data.frame(df,SRR=NA,Min_rate=NA,Fungi=NA,GF=NA,Lichen=NA)
 Coefficients<-NULL
@@ -76,9 +80,6 @@ File_names<-list.files(pattern="*.img",recursive=T)
 File_names<-File_names[!grepl("*.dbf",File_names)]
 File_names<-File_names[grepl("TotalBiomass",File_names)]
 
-#for each replicate of each scenario predict values of each ecosystem service
-#or biodiversity value and output this as a raster and summarise values as 
-#the mean pixel value, with stadard deviation and standard error
 
 File_names<-rev(mixedsort(File_names))
 
@@ -119,6 +120,11 @@ P2+ylab("Number of pixels")+xlab("Aboveground biomass")
 ggsave("Figures/landis_histogram.pdf",dpi = 400,height=6,width=18,units="in")
 
 ggplot(data=BM_summary4,aes(x=mean_AGB,y=pixel_count))+geom_point(lty=2,size=2)
+
+#for each replicate of each scenario predict values of each ecosystem service
+#or biodiversity value and output this as a raster and summarise values as 
+#the mean pixel value, with stadard deviation and standard error
+
 
 n<-0
 ptm <- proc.time()
@@ -174,7 +180,7 @@ head(Summary_var)
 
 #plot the results of this
 theme_set(theme_bw(base_size=12))
-P1<-ggplot(Summary_var,aes(x=Year,y=mean_var,ymax=max_var,ymin=min_var,colour=Scenario,fill=Scenario))+geom_ribbon(alpha=0.5)+geom_line()+facet_wrap(~Var,scales = "free_y")
+P1<-ggplot(Summary_var,aes(x=Year,y=mean_var,ymax=max_var,ymin=min_var,colour=Scenario,fill=Scenario))+geom_ribbon(alpha=0.5)+geom_line(alpha=0.5)+facet_wrap(~Var,scales = "free_y")
 P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
 P2+ylab("Value")+scale_fill_brewer("Scenario",palette="Set1")+scale_colour_brewer("Scenario",palette="Set1")+xlim(0,100)
 ggsave("Figures/ES_landis.pdf",dpi = 400,height=6,width=8,units="in")

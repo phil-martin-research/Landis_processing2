@@ -18,3 +18,6 @@ raster("Century_outputs/")
 File_names<-list.files(pattern="*.img",recursive=T)
 File_names<-File_names[!grepl("*.dbf",File_names)]
 File_names<-File_names[grepl("TotalBiomass",File_names)]
+
+
+plot((((raster(File_names[1]))/100)*0.005345)+4.358917)
