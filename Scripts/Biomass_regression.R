@@ -11,6 +11,7 @@ library(lme4)
 library(reshape2)
 library(plyr)
 library(MuMIn)
+library(gtools)
 
 #load in standard error function
 stderr <- function(x) sqrt(var(x,na.rm=TRUE)/length(na.omit(x)))
@@ -79,7 +80,45 @@ File_names<-File_names[grepl("TotalBiomass",File_names)]
 #or biodiversity value and output this as a raster and summarise values as 
 #the mean pixel value, with stadard deviation and standard error
 
-length(File_names)
+File_names<-rev(mixedsort(File_names))
+
+#a loop to check what is going on with biomass
+BM<-NULL
+for (i in 1:length(File_names)){
+  Biomass<-raster(File_names[i])
+  Biomass[Biomass==0]<-NA
+  BM_freq<-data.frame(freq(Biomass/100))
+  BM_freq$bin<-cut(BM_freq$value,seq(0,600,by = 10),labels=as.numeric(seq(10,600,by=10)))
+  BM_freq$bin<-as.numeric(as.character(BM_freq$bin))
+  BM_sum<-ddply(BM_freq,.(bin),summarise,AGB=sum(count))
+  BM_sum$Scenario<-paste("Scenario =",gsub( "_r.*$", "", gsub("^.*?-biomass","", File_names[i])))
+  BM_sum$Replicate<-paste("Replicate =",gsub( "/TotalBiomass.*$", "", gsub("^.*?_r","", File_names[i])))
+  BM_sum$Year<-paste("Year =",as.numeric(sub("^(.*)[.].*", "\\1",gsub("^.*?Biomass-","", File_names[i]))))
+  BM_sum$Year2<-as.numeric(sub("^(.*)[.].*", "\\1",gsub("^.*?Biomass-","", File_names[i])))
+  BM_sum$Mean<-cellStats(Biomass,'mean',na.rm=T)
+  BM_sum<-subset(BM_sum,!is.na(bin))
+  BM<-rbind(BM,BM_sum)
+}
+
+
+BM_summary<-ddply(BM,.(Scenario,Year,bin,Year2),summarise,pixel_count=sum(AGB)/3,mean_AGB=mean(Mean/100))
+head(BM_summary2)
+BM_summary2<-subset(BM_summary,Year2<=100)
+BM_summary2$Year3<-factor(BM_summary2$Year,
+                    c("Year = 0","Year = 10","Year = 20","Year = 30","Year = 40","Year = 50",
+                      "Year = 60","Year = 70","Year = 80","Year = 90","Year = 100"))
+head(BM_summary3)
+
+BM_summary4<-ddply(BM_summary2,.(Scenario,Year3),summarise,mean_AGB=sum(mean_AGB*pixel_count)/sum(pixel_count),pixel_count2=sum(pixel_count))
+head(BM_summary4)
+
+theme_set(theme_bw(base_size=12))
+P1<-ggplot(BM_summary3,aes(x=bin,y=pixel_count))+geom_bar(stat = "identity",fill="grey")+geom_vline(data=BM_summary4,aes(xintercept=mean_AGB),lty=2,size=0.5)+facet_grid(Scenario~Year3)
+P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
+P2+ylab("Number of pixels")+xlab("Aboveground biomass")
+ggsave("Figures/landis_histogram.pdf",dpi = 400,height=6,width=18,units="in")
+
+ggplot(data=BM_summary4,aes(x=mean_AGB,y=pixel_count))+geom_point(lty=2,size=2)
 
 n<-0
 ptm <- proc.time()
@@ -96,6 +135,7 @@ for (i in 1:length(File_names)){
   #the model replicate and the scenario number
   Mean_sub<-data.frame(Mean=cellStats(Prediction,'mean',na.rm=T),
   Std_dev=cellStats(Prediction,'sd',na.rm=T),
+  AGB=cellStats(Biomass,'mean',na.rm=T),
   Var=Coefficients[j,1],
   Year=as.numeric(sub("^(.*)[.].*", "\\1",gsub("^.*?Biomass-","", File_names[i]))),
   Replicate=gsub( "/TotalBiomass.*$", "", gsub("^.*?_r","", File_names[i])),
@@ -125,4 +165,25 @@ for (i in 1:length(File_names)){
 }
 proc.time() - ptm
 
+Mean_summary$Mean2<-ifelse(Mean_summary$Var=="Fungi"|Mean_summary$Var=="GF"|Mean_summary$Var=="Lichen",exp(Mean_summary$Mean),Mean_summary$Mean)
+
+head(Mean_summary)
+
+Summary_var<-ddply(Mean_summary,.(Scenario,Year,Var),summarise,mean_var=mean(Mean2),max_var=max(Mean2),min_var=min(Mean2),mean_AGB=mean(AGB))
+head(Summary_var)
+
+#plot the results of this
+theme_set(theme_bw(base_size=12))
+P1<-ggplot(Summary_var,aes(x=Year,y=mean_var,ymax=max_var,ymin=min_var,colour=Scenario,fill=Scenario))+geom_ribbon(alpha=0.5)+geom_line()+facet_wrap(~Var,scales = "free_y")
+P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
+P2+ylab("Value")+scale_fill_brewer("Scenario",palette="Set1")+scale_colour_brewer("Scenario",palette="Set1")+xlim(0,100)
+ggsave("Figures/ES_landis.pdf",dpi = 400,height=6,width=8,units="in")
+
+P1<-ggplot(Summary_var,aes(x=mean_AGB/100,y=mean_var,colour=Scenario,fill=Scenario))+geom_line()+facet_wrap(~Var,scales = "free_y")
+P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
+P2+ylab("Value")+scale_fill_brewer("Scenario",palette="Set1")+scale_colour_brewer("Scenario",palette="Set1")
+
+P1<-ggplot(Summary_var,aes(y=mean_AGB/100,x=Year,colour=Scenario,fill=Scenario))+geom_line()+facet_wrap(~Var,scales = "free_y")
+P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
+P2+ylab("Value")+scale_fill_brewer("Scenario",palette="Set1")+scale_colour_brewer("Scenario",palette="Set1")
 
