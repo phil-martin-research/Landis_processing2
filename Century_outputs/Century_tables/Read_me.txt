@@ -22,3 +22,5 @@ Century-succession-log21 harvesting browsing press 100%
 
 
 r1, r2 etc. different replicates
+
+scenarios 1-6 are now the final ones (as of 29/09/15)

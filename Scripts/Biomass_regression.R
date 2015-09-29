@@ -4,6 +4,15 @@
 #author: Phil martin
 #Date 2015/09/24
 
+setInternet2(TRUE)
+install.packages('MuMIn')
+install.packages("raster")
+install.packages("ggplot2")
+install.packages("lme4")
+install.packages("reshape2")
+install.packages("plyr")
+install.packages("gtools")
+
 #open packages
 library(raster)
 library(ggplot2)
