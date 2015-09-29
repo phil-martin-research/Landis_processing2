@@ -12,6 +12,7 @@ library(reshape2)
 library(plyr)
 library(MuMIn)
 library(gtools)
+library(tidyr)
 
 #clear previous R objects
 rm(list=ls())
@@ -175,8 +176,11 @@ Mean_summary$Mean2<-ifelse(Mean_summary$Var=="Fungi"|Mean_summary$Var=="GF"|Mean
 
 head(Mean_summary)
 
-Summary_var<-ddply(Mean_summary,.(Scenario,Year,Var),summarise,mean_var=mean(Mean2),max_var=max(Mean2),min_var=min(Mean2),mean_AGB=mean(AGB))
-head(Summary_var)
+Summary_var<-ddply(Mean_summary,.(Scenario,Year,Var),summarise,mean_var=mean(Mean2),mean_AGB=mean(AGB)/100)
+Summary_var<-subset(Summary_var,Year<=100)
+
+Summary_table<-spread(Summary_var,Var,mean_var)
+write.csv(x=Summary_table,"Data/R_output/Landis_ES.csv",row.names=F)
 
 #plot the results of this
 theme_set(theme_bw(base_size=12))
