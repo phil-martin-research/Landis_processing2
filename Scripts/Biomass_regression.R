@@ -4,15 +4,6 @@
 #author: Phil martin
 #Date 2015/09/24
 
-setInternet2(TRUE)
-install.packages('MuMIn')
-install.packages("raster")
-install.packages("ggplot2")
-install.packages("lme4")
-install.packages("reshape2")
-install.packages("plyr")
-install.packages("gtools")
-
 #open packages
 library(raster)
 library(ggplot2)
@@ -25,9 +16,6 @@ library(tidyr)
 
 #clear previous R objects
 rm(list=ls())
-
-#load in standard error function
-stderr <- function(x) sqrt(var(x,na.rm=TRUE)/length(na.omit(x)))
 
 #load in Paul's biomass data
 BM<-read.csv("Data/BMLan.csv",header = T)
@@ -96,7 +84,9 @@ File_names<-rev(mixedsort(File_names))
 #a loop to check what is going on with biomass
 BM<-NULL
 for (i in 1:length(File_names)){
+  i<-1
   Biomass<-raster(File_names[i])
+  plot(Biomass)
   Biomass[Biomass==0]<-NA
   BM_freq<-data.frame(freq(Biomass/100))
   BM_freq$bin<-cut(BM_freq$value,seq(0,600,by = 10),labels=as.numeric(seq(10,600,by=10)))
