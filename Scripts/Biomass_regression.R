@@ -4,6 +4,8 @@
 #author: Phil martin
 #Date 2015/09/24
 
+
+
 setInternet2(TRUE)
 install.packages('MuMIn')
 install.packages("raster")
@@ -12,6 +14,7 @@ install.packages("lme4")
 install.packages("reshape2")
 install.packages("plyr")
 install.packages("gtools")
+install.packages("rgdal")
 
 #open packages
 library(raster)
@@ -22,6 +25,7 @@ library(plyr)
 library(MuMIn)
 library(gtools)
 library(tidyr)
+library(rgdal)
 
 #clear previous R objects
 rm(list=ls())
@@ -113,7 +117,7 @@ for (i in 1:length(File_names)){
 
 
 BM_summary<-ddply(BM,.(Scenario,Year,bin,Year2),summarise,pixel_count=sum(AGB)/3,mean_AGB=mean(Mean/100))
-head(BM_summary2)
+head(BM_summary)
 BM_summary2<-subset(BM_summary,Year2<=100)
 BM_summary2$Year3<-factor(BM_summary2$Year,
                     c("Year = 0","Year = 10","Year = 20","Year = 30","Year = 40","Year = 50",
@@ -124,7 +128,7 @@ BM_summary4<-ddply(BM_summary2,.(Scenario,Year3),summarise,mean_AGB=sum(mean_AGB
 head(BM_summary4)
 
 theme_set(theme_bw(base_size=12))
-P1<-ggplot(BM_summary3,aes(x=bin,y=pixel_count))+geom_bar(stat = "identity",fill="grey")+geom_vline(data=BM_summary4,aes(xintercept=mean_AGB),lty=2,size=0.5)+facet_grid(Scenario~Year3)
+P1<-ggplot(BM_summary2,aes(x=bin,y=pixel_count))+geom_bar(stat = "identity",fill="grey")+geom_vline(data=BM_summary4,aes(xintercept=mean_AGB),lty=2,size=0.5)+facet_grid(Scenario~Year3)
 P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
 P2+ylab("Number of pixels")+xlab("Aboveground biomass")
 ggsave("Figures/landis_histogram.pdf",dpi = 400,height=6,width=18,units="in")
