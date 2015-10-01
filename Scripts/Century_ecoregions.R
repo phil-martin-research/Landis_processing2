@@ -16,17 +16,14 @@ library(gtools)
 #clear previous R objects
 rm(list=ls())
 
-
 #load in Paul's biomass data
 BM<-read.csv("Data/BMLan.csv",header = T)
 BM<-subset(BM,AGB<600)
 BM$AGB_std<-(BM$AGB-mean(BM$AGB))/sd(BM$AGB) #standardise biomass
 
-#import Elena's ecoregion data
-EcoR<-read.csv("Century_outputs/Century_tables/Century-succession-log6_r1.csv")
 
-
-#run a loop to test each variable and produce predictions
+#run a loop to test each model and produce a coefficient for each 
+#variable
 Coefficients<-NULL
 for (i in 4:5){
   M1<-lmer(BM[[i]]~AGB_std+(1|Site),data=BM)
@@ -54,31 +51,69 @@ for (i in 6:8){
 #tidy data
 rownames(Coefficients)<-NULL
 
-#create predictions from the model coefficients using Elena's ecoregion data
-EcoR2<-data.frame(EcoR[-6],SRR=NA,Min_rate=NA,Fungi=NA,GF=NA,Lichen=NA)
-str(EcoR2)
 
+###############################################################################
+#create predictions from the model coefficients using Elena's ecoregion data###
+###############################################################################
+
+#import data
+Eco_regions<-list.files(pattern="Century-succession-log",recursive=T)
+
+#make prediction for each time step of each ecoregion of each scenario
+
+Eco_summary<-NULL
 ptm <- proc.time()
-Mean_summary<-NULL
+for (i in 1:length(Eco_regions)){#for each file in the list Eco_regions run this code
+  EcoR<-read.csv(Eco_regions[i])
+  N_col<-ncol(EcoR)
+  EcoR2<-data.frame(EcoR[-c(5:6,(8:N_col))],SRR=NA,Min_rate=NA,Fungi=NA,GF=NA,Lichen=NA)
+  Mean_summary<-NULL
 for (j in 1:nrow(Coefficients)){
   if (j<=3){
     Prediction<-((((((EcoR2$AGB)/100)-mean(BM$AGB))/sd(BM$AGB))*Coefficients[j,3]+ #use coefficients to predict ES and biodiversity values
                     (((((EcoR2$AGB)/100)-mean(BM$AGB))/sd(BM$AGB))^2)*Coefficients[j,4])+Coefficients[j,2])
     EcoR2[[5+j]]<-Prediction
-    colnames(EcoR2)[5+j]<-as.character(Coefficients[j,1])
 } else {
   Prediction<-((((((EcoR2$AGB)/100)-mean(BM$AGB))/sd(BM$AGB))*Coefficients[j,3]+ #use coefficients to predict ES and biodiversity values
                   (((((EcoR2$AGB)/100)-mean(BM$AGB))/sd(BM$AGB))^2)*Coefficients[j,4])+Coefficients[j,2])
   EcoR2[[5+j]]<-exp(Prediction)
-  colnames(EcoR2)[5+j]<-as.character(Coefficients[j,1])
 }
 }
+
+EcoR2$Scenario<-gsub( "_r.*$", "", gsub("^.*?Century-succession-log","", Eco_regions[i]))
+Eco_summary<-rbind(Eco_summary,EcoR2)
+}
+
 proc.time() - ptm
 
-head(EcoR3)
+Eco_summary$AGB<-Eco_summary$AGB/100
+head(Eco_summary,200)
+
+Eco_summary_melt<-melt(Eco_summary,id.vars = c("Time","EcoregionName","EcoregionIndex","NumSites","Scenario"))
+head(Eco_summary_melt)
+
+Plot1<-ggplot(Eco_summary_melt,aes(x=Time,y=value,group=EcoregionName))+geom_line(size=0.5,alpha=0.2)+facet_grid(variable~Scenario,scales="free_y")
+Plot1+geom_smooth(aes(group=NULL),size=3)
 
 #calculate mean of the results for each time step, weighting by number of pixels in each 
 #ecoregion
-EcoR3<-ddply(EcoR2,.(Time,EcoregionName),summarise,mean_AGB=(AGB*NumSites)/100,sum_sites=sum(NumSites))
-ddply(EcoR3,.(Time),summarise,mean_AGB2=mean_AGB/sum(sum_sites))
-ddply()
+
+Eco_summary2<-ddply(Eco_summary,.(Time,Scenario),function(X) data.frame(AGB=weighted.mean(X$AGB,X$NumSites,na.rm = T),
+                                          SRR=weighted.mean(X$SRR,X$NumSites,na.rm = T),
+                                          Min_rate=weighted.mean(X$Min_rate,X$NumSites,na.rm = T),
+                                          Fungi=weighted.mean(X$Fungi,X$NumSites,na.rm = T),
+                                          GF=weighted.mean(X$GF,X$NumSites,na.rm = T),
+                                          Lichen=weighted.mean(X$Lichen,X$NumSites,na.rm = T)))
+head(Eco_summary2)
+write.csv(x=Eco_summary2,"Data/R_output/Ecoregion_summary.csv")
+
+Eco_summary_melt2<-melt(Eco_summary2,id.vars = c("Time","Scenario"))
+head(Eco_summary_melt2)
+
+#plot results of this
+theme_set(theme_bw(base_size=12))
+P1<-ggplot(Eco_summary_melt,aes(x=Time,y=value,group=EcoregionName))+geom_line(size=0.2,alpha=0.1)+facet_grid(variable~Scenario,scales="free_y")
+P2<-P1+geom_line(data=Eco_summary_melt2,aes(x=Time,y=value,group=NULL),size=1.5,alpha=1)
+P3<-P2+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
+P3+ylab("Value")+xlim(0,100)+xlab("Time(Years)")
+ggsave("Figures/Ecoregion_ES.pdf",dpi = 400,height=8,width=10,units="in")
