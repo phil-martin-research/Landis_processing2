@@ -66,6 +66,7 @@ theme_set(theme_bw(base_size=12))
 P1<-ggplot(BM_melt,aes(x=AGB,y=value,group=Site))+geom_point(size=3,shape=1)+facet_wrap(~variable,scales = "free_y")
 P1+geom_line(data=df_melt,aes(group=NULL),size=2)+
   theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))                                                                                                                                           
+
 ggsave("Figures/AGB_regressions.pdf",dpi=400,height=6,width=8,units='in')
 
 ###################################################
@@ -77,8 +78,6 @@ ggsave("Figures/AGB_regressions.pdf",dpi=400,height=6,width=8,units='in')
 File_names<-list.files(pattern="*.img",recursive=T)
 File_names<-File_names[!grepl("*.dbf",File_names)]
 File_names<-File_names[grepl("TotalBiomass",File_names)]
-
-
 File_names<-rev(mixedsort(File_names))
 
 #a loop to check what is going on with biomass
@@ -183,16 +182,7 @@ write.csv(x=Summary_table,"Data/R_output/Landis_ES.csv",row.names=F)
 
 #plot the results of this
 theme_set(theme_bw(base_size=12))
-P1<-ggplot(Summary_var,aes(x=Year,y=mean_var,ymax=max_var,ymin=min_var,colour=Scenario,fill=Scenario))+geom_ribbon(alpha=0.5)+geom_line(alpha=0.5)+facet_wrap(~Var,scales = "free_y")
+P1<-ggplot(Summary_var,aes(x=Year,y=mean_var,colour=Scenario))+geom_line(alpha=0.5)+facet_wrap(~Var,scales = "free_y")
 P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
-P2+ylab("Value")+scale_fill_brewer("Scenario",palette="Set1")+scale_colour_brewer("Scenario",palette="Set1")+xlim(0,100)
+P2+ylab("Value")+scale_colour_brewer("Scenario",palette="Set1")+xlim(0,100)
 ggsave("Figures/ES_landis.pdf",dpi = 400,height=6,width=8,units="in")
-
-P1<-ggplot(Summary_var,aes(x=mean_AGB/100,y=mean_var,colour=Scenario,fill=Scenario))+geom_line()+facet_wrap(~Var,scales = "free_y")
-P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
-P2+ylab("Value")+scale_fill_brewer("Scenario",palette="Set1")+scale_colour_brewer("Scenario",palette="Set1")
-
-P1<-ggplot(Summary_var,aes(y=mean_AGB/100,x=Year,colour=Scenario,fill=Scenario))+geom_line()+facet_wrap(~Var,scales = "free_y")
-P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
-P2+ylab("Value")+scale_fill_brewer("Scenario",palette="Set1")+scale_colour_brewer("Scenario",palette="Set1")
-
