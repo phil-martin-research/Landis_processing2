@@ -7,6 +7,7 @@ library(MuMIn)
 library(gridExtra)
 library(gtools)
 library(raster)
+library(tidyr)
 
 #remove any R objects
 rm(list=ls())
@@ -138,6 +139,9 @@ head(Mean_summary)
 
 Summary_var<-ddply(Mean_summary,.(Scenario,Year,Var),summarise,mean_var=mean(Mean),mean_AGB=mean(AGB))
 Summary_var<-subset(Summary_var,Year<=100)
+
+Summary_table<-spread(Summary_var,Var,mean_var)
+write.csv(x=Summary_table,"Data/R_output/Landis_Rec_Aes.csv",row.names=F)
 
 theme_set(theme_bw(base_size=12))
 P1<-ggplot(Summary_var,aes(x=Year,y=mean_var,colour=Scenario))+geom_line()+facet_wrap(~Var,scales = "free_y")
