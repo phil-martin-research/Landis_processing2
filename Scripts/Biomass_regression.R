@@ -4,8 +4,6 @@
 #author: Phil martin
 #Date 2015/09/24
 
-<<<<<<< HEAD
-
 
 setInternet2(TRUE)
 install.packages('MuMIn')
@@ -16,9 +14,9 @@ install.packages("reshape2")
 install.packages("plyr")
 install.packages("gtools")
 install.packages("rgdal")
+install.packages("tidyr")
 
-=======
->>>>>>> bd338d0fd6355b30efdc58635150969df698bd76
+
 #open packages
 library(raster)
 library(ggplot2)
@@ -99,9 +97,7 @@ File_names<-rev(mixedsort(File_names))
 #a loop to check what is going on with biomass
 BM<-NULL
 for (i in 1:length(File_names)){
-  i<-1
   Biomass<-raster(File_names[i])
-  plot(Biomass)
   Biomass[Biomass==0]<-NA
   BM_freq<-data.frame(freq(Biomass/100))
   BM_freq$bin<-cut(BM_freq$value,seq(0,600,by = 10),labels=as.numeric(seq(10,600,by=10)))
