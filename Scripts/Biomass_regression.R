@@ -175,7 +175,7 @@ for (i in 1:length(File_names)){
    
    #this bit of code just tells you how much of the loop is done
    n<-n+1
-   print(paste("percent done=", (n/(210*5))*100,"%"))
+   print(paste("percent done=", (n/(length(File_names)*nrow(Coefficients)))*100,"%"))
 }
 }
 proc.time() - ptm
