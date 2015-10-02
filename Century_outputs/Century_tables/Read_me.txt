@@ -9,7 +9,7 @@ Century-succession-log8 harvesting press 40%
 Century-succession-log9 harvesting press 60%
 Century-succession-log10 harvesting press 80%
 Century-succession-log11 harvesting press 100%
-Century-succession-log12 harvesting browsing pulse 20%
+Century-succession-log12 TEST harvesting press 100% cutting both beech and oak > 45 cm dbh
 Century-succession-log13 harvesting browsing pulse 40%
 Century-succession-log14 harvesting browsing pulse 60%
 Century-succession-log15 harvesting browsing pulse 80%

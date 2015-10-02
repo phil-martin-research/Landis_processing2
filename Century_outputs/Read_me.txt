@@ -9,7 +9,7 @@ output-leaf-biomass8 harvesting press 40%
 output-leaf-biomass9 harvesting press 60%
 output-leaf-biomass10 harvesting press 80%
 output-leaf-biomass11 harvesting press 100%
-output-leaf-biomass12 harvesting browsing pulse 20%
+output-leaf-biomass12 TEST harvesting press 100% cutting both beech and oak > 45 cm dbh
 output-leaf-biomass13 harvesting browsing pulse 40%
 output-leaf-biomass14 harvesting browsing pulse 60%
 output-leaf-biomass15 harvesting browsing pulse 80%
