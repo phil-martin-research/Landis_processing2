@@ -103,7 +103,7 @@ for (i in 1:length(File_names)){
   BM_freq$bin<-cut(BM_freq$value,seq(0,600,by = 10),labels=as.numeric(seq(10,600,by=10)))
   BM_freq$bin<-as.numeric(as.character(BM_freq$bin))
   BM_sum<-ddply(BM_freq,.(bin),summarise,AGB=sum(count))
-  BM_sum$Scenario<-paste("Scenario =",gsub( "_r.*$", "", gsub("^.*?-biomass","", File_names[i])))
+  BM_sum$Scenario<-paste("Sc =",gsub( "_r.*$", "", gsub("^.*?-biomass","", File_names[i])))
   BM_sum$Replicate<-paste("Replicate =",gsub( "/TotalBiomass.*$", "", gsub("^.*?_r","", File_names[i])))
   BM_sum$Year<-paste("Year =",as.numeric(sub("^(.*)[.].*", "\\1",gsub("^.*?Biomass-","", File_names[i]))))
   BM_sum$Year2<-as.numeric(sub("^(.*)[.].*", "\\1",gsub("^.*?Biomass-","", File_names[i])))
@@ -119,7 +119,6 @@ BM_summary2<-subset(BM_summary,Year2<=100)
 BM_summary2$Year3<-factor(BM_summary2$Year,
                     c("Year = 0","Year = 10","Year = 20","Year = 30","Year = 40","Year = 50",
                       "Year = 60","Year = 70","Year = 80","Year = 90","Year = 100"))
-head(BM_summary3)
 
 BM_summary4<-ddply(BM_summary2,.(Scenario,Year3),summarise,mean_AGB=sum(mean_AGB*pixel_count)/sum(pixel_count),pixel_count2=sum(pixel_count))
 head(BM_summary4)
@@ -130,7 +129,6 @@ P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank
 P2+ylab("Number of pixels")+xlab("Aboveground biomass")
 ggsave("Figures/landis_histogram.pdf",dpi = 400,height=6,width=18,units="in")
 
-ggplot(data=BM_summary4,aes(x=mean_AGB,y=pixel_count))+geom_point(lty=2,size=2)
 
 #for each replicate of each scenario predict values of each ecosystem service
 #or biodiversity value and output this as a raster and summarise values as 
