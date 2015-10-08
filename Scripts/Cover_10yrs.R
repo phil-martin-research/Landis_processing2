@@ -4,8 +4,8 @@
 #load packages
 library(raster)
 library(rgdal)
-library(dplyr)
 library(plyr)
+library(dplyr)
 library(ggplot2)
 library(scales)
 
