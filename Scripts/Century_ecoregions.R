@@ -111,6 +111,18 @@ Eco_summary2<-ddply(Eco_summary,.(Time,Scenario),function(X) data.frame(AGB=weig
 head(Eco_summary2)
 write.csv(x=Eco_summary2,"Data/R_output/Ecoregion_summary.csv")
 
+#calculate mean of the results for each time step for each ecoregion
+
+Eco_summary3<-ddply(Eco_summary,.(Time,Scenario,EcoregionName),function(X) data.frame(AGB=mean(X$AGB,na.rm = T),
+                                                                        SRR=mean(X$SRR,na.rm = T),
+                                                                        Min_rate=mean(X$Min_rate,na.rm = T),
+                                                                        Fungi=mean(X$Fungi,na.rm = T),
+                                                                        GF=mean(X$GF,na.rm = T),
+                                                                        Lichen=mean(X$Lichen,na.rm = T)))
+head(Eco_summary3,200)
+write.csv(x=Eco_summary3,"Data/R_output/Ecoregion_means.csv")
+
+
 Eco_summary_melt3<-melt(Eco_summary2,id.vars = c("Time","Scenario"))
 head(Eco_summary_melt3)
 
