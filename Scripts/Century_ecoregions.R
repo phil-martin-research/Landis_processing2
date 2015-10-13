@@ -79,8 +79,8 @@ for (j in 1:nrow(Coefficients)){
   EcoR2[[5+j]]<-exp(Prediction)
 }
 }
-
 EcoR2$Scenario<-gsub( "_r.*$", "", gsub("^.*?Century-succession-log","", Eco_regions[i]))
+EcoR2$Replicate<-gsub( ".csv.*$", "", gsub("^.*?_r","", Eco_regions[i]))
 Eco_summary<-rbind(Eco_summary,EcoR2)
 }
 
@@ -89,10 +89,14 @@ proc.time() - ptm
 Eco_summary$AGB<-Eco_summary$AGB/100
 head(Eco_summary,200)
 
-Eco_summary_melt<-melt(Eco_summary,id.vars = c("Time","EcoregionName","EcoregionIndex","NumSites","Scenario"))
-head(Eco_summary_melt)
 
-Plot1<-ggplot(Eco_summary_melt,aes(x=Time,y=value,group=EcoregionName))+geom_line(size=0.5,alpha=0.2)+facet_grid(variable~Scenario,scales="free_y")
+
+Eco_summary_melt<-melt(Eco_summary,id.vars = c("Time","EcoregionName","EcoregionIndex","NumSites","Scenario","Replicate"))
+head(Eco_summary_melt)
+Eco_summary_melt2<-ddply(Eco_summary_melt,.(Time,EcoregionName,Scenario,variable),summarise,mean_var=mean(value))
+
+
+Plot1<-ggplot(Eco_summary_melt2,aes(x=Time,y=mean_var,group=interaction(EcoregionName)))+geom_line(size=0.5,alpha=0.2)+facet_grid(variable~Scenario,scales="free_y")
 Plot1+geom_smooth(aes(group=NULL),size=3)
 
 #calculate mean of the results for each time step, weighting by number of pixels in each 
@@ -107,13 +111,13 @@ Eco_summary2<-ddply(Eco_summary,.(Time,Scenario),function(X) data.frame(AGB=weig
 head(Eco_summary2)
 write.csv(x=Eco_summary2,"Data/R_output/Ecoregion_summary.csv")
 
-Eco_summary_melt2<-melt(Eco_summary2,id.vars = c("Time","Scenario"))
-head(Eco_summary_melt2)
+Eco_summary_melt3<-melt(Eco_summary2,id.vars = c("Time","Scenario"))
+head(Eco_summary_melt3)
 
 #plot results of this
 theme_set(theme_bw(base_size=12))
-P1<-ggplot(Eco_summary_melt,aes(x=Time,y=value,group=EcoregionName))+geom_line(size=0.2,alpha=0.1)+facet_grid(variable~Scenario,scales="free_y")
-P2<-P1+geom_line(data=Eco_summary_melt2,aes(x=Time,y=value,group=NULL),size=1.5,alpha=1)
+P1<-ggplot(Eco_summary_melt2,aes(x=Time,y=mean_var,group=EcoregionName))+geom_line(size=0.2,alpha=0.1)+facet_grid(variable~Scenario,scales="free_y")
+P2<-P1+geom_line(data=Eco_summary_melt3,aes(x=Time,y=value,group=NULL),size=1.5,alpha=1)
 P3<-P2+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
 P3+ylab("Value")+xlim(0,100)+xlab("Time(Years)")
 ggsave("Figures/Ecoregion_ES.pdf",dpi = 400,height=8,width=10,units="in")
