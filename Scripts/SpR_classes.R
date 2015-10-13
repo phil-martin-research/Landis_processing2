@@ -16,28 +16,42 @@ rm(list=ls())
 #returns all .img files in any folders in the same directory
 File_names<-list.files(pattern="*.img",recursive=T)
 #selects species richness .img files
-File_names<-File_names[grepl("SPP-RICH",File_names)]
 Mask_names<-File_names[grepl("AGE-MAX",File_names)]
+Mask_names<-Mask_names[!grepl("dbf",Mask_names)]
+File_names<-File_names[grepl("SPP-RICH",File_names)]
+File_names<-File_names[grepl("SPP-RICH",File_names)]
 
 plot(raster(Mask_names[1]))
+
+m <- c(0, 10, -9999,  11, 500, 1)
+rclmat <- matrix(m, ncol=3, byrow=TRUE)
+
+rc <- reclassify(raster(Mask_names[1]), rclmat)
+plot(calc(File, function(x) File + rc))
+
 
 #loop to give output for analysis of species richness
 Cell_stats<-NULL
 for (j in 1:length(File_names)){
   print(paste("Percent done:",100*(j/length(File_names)),"%"))
   #loads individual .img file
-  File<-raster(File_names[j]) 
+  File<-raster(File_names[j])
+  reclassify
   #produces table showing frequency of different levels of spp richness
   Cell_freq<-data.frame(freq(File)) 
   #puts scenario name in a column
-  Cell_freq$scenario<-sub(".*?Landis run8/(.*?)/.*", "\\1",File_names[j]) 
+  Cell_freq$scenario<-gsub("_r.*","",sub(".*?cohort-stats(.*?)/.*", "\\1", File_names[j])) 
   #puts replicate name in column
-  Cell_freq$replicate<-as.numeric(gsub("^.*?/","",sub(".*?replicate(.*?)/output.*","\\1", File_names[j]))) 
+  Cell_freq$replicate<-as.numeric(sub(".*?_r(.*?)/.*", "\\1", File_names[j]))
   #puts age in column
   Cell_freq$age<-as.numeric(sub("^(.*)[.].*", "\\1",gsub("^.*?SPP-RICH-","", File_names[j])))
   #binds together all frequency tables
   Cell_stats<-rbind(Cell_freq,Cell_stats) 
 }
+
+
+
+
 
 head(Cell_stats)
 #now bin data and calculate means
