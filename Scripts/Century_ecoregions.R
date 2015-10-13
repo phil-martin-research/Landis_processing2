@@ -102,12 +102,15 @@ Plot1+geom_smooth(aes(group=NULL),size=3)
 #calculate mean of the results for each time step, weighting by number of pixels in each 
 #ecoregion
 
-Eco_summary2<-ddply(Eco_summary,.(Time,Scenario),function(X) data.frame(AGB=weighted.mean(X$AGB,X$NumSites,na.rm = T),
-                                          SRR=weighted.mean(X$SRR,X$NumSites,na.rm = T),
-                                          Min_rate=weighted.mean(X$Min_rate,X$NumSites,na.rm = T),
-                                          Fungi=weighted.mean(X$Fungi,X$NumSites,na.rm = T),
-                                          GF=weighted.mean(X$GF,X$NumSites,na.rm = T),
-                                          Lichen=weighted.mean(X$Lichen,X$NumSites,na.rm = T)))
+Eco_summary2<-ddply(Eco_summary,.(Time,Scenario),mutate,function(X) data.frame(AGB_m=weighted.mean(X$AGB,X$NumSites,na.rm = T),
+                                          SRR_m=weighted.mean(X$SRR,X$NumSites,na.rm = T),
+                                          Min_rate_m=weighted.mean(X$Min_rate,X$NumSites,na.rm = T),
+                                          Fungi_m=weighted.mean(X$Fungi,X$NumSites,na.rm = T),
+                                          GF_m=weighted.mean(X$GF,X$NumSites,na.rm = T),
+                                          Lichen_m=weighted.mean(X$Lichen,X$NumSites,na.rm = T)))
+
+
+head(Eco_summary)
 head(Eco_summary2)
 write.csv(x=Eco_summary2,"Data/R_output/Ecoregion_summary.csv")
 
