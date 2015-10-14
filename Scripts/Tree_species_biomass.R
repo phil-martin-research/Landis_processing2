@@ -22,24 +22,18 @@ Mean_ER<-ddply(BM_ER,.(Time,Ecoregion,Scenario),summarise,m_betu_pend=mean(SppBi
       m_quercus=mean(SppBiomass_querrobu)/100,
       m_pinus_sylv=mean(SppBiomass_pinusylv)/100,
       m_fagus_sylv=mean(SppBiomass_fagusylv)/100,
-      m_ilex_aqui=mean(SppBiomass_ilexaqui)/100)
+      m_ilex_aqui=mean(SppBiomass_ilexaqui)/100,
+      Num_sum=sum(NumSites))
 
 
-Mean_ER2<-melt(Mean_ER,id.vars=c("Time","Ecoregion","Scenario"))
+Mean_ER2<-melt(Mean_ER,id.vars=c("Time","Ecoregion","Scenario","Num_sum"))
 
-Mean_ER3<-ddply(BM_ER,.(Time,Scenario),summarise,
-                function(X) data.frame(m_betu_pend=weighted.mean(X$SppBiomass_betupend,X$NumSites,na.rm = T)
-                ))
-
-weighted.mean(File_sub2$SppBiomass_betupend,File_sub2$NumSites,na.rm = T)/100
-                                       m_quercus=weighted.mean(X$SppBiomass_querrobu,X$NumSites,na.rm = T),
-                                       m_pinus_sylv=weighted.mean(X$SppBiomass_pinusylv,X$NumSites,na.rm = T),
-                                       m_fagus_sylv=weighted.mean(X$SppBiomass_fagusylv,X$NumSites,na.rm = T),
-                                       m_ilex_aqui=weighted.mean(X$SppBiomass_ilexaqui,X$NumSites,na.rm = T)
-                                       ))
-
-
+head(Mean_ER2)
+WM_ER2<-ddply(Mean_ER2,.(Scenario,variable,Time),summarise,Mean=weighted.mean(value,Num_sum,na.rm = T))
+head(WM_ER2)
 
 theme_set(theme_bw(base_size=12))
 P1<-ggplot(Mean_ER2,aes(x=Time,y=value,group=Ecoregion,colour=variable))+geom_line(alpha=0.5)+facet_grid(variable~Scenario,scales="free")
-P1+
+P2<-P1+geom_line(data=WM_ER2,aes(y=Mean,group=NULL),colour="black",size=2,alpha=0.8)+scale_colour_brewer("Species",palette = "Set1")
+P2+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
+ggsave("Figures/Tree_sp_biomass.pdf",dpi = 400,height=8,width=10,units="in")
