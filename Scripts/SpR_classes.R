@@ -23,20 +23,18 @@ File_names<-File_names[grepl("SPP-RICH",File_names)]
 
 plot(raster(Mask_names[1]))
 
-m <- c(0, 10, -9999,  11, 500, 1)
+#create matrix for reclassification
+m <- c(0, 10, -NA,  11, 500, 1)
 rclmat <- matrix(m, ncol=3, byrow=TRUE)
-
-rc <- reclassify(raster(Mask_names[1]), rclmat)
-plot(calc(File, function(x) File + rc))
-
-
 #loop to give output for analysis of species richness
 Cell_stats<-NULL
 for (j in 1:length(File_names)){
   print(paste("Percent done:",100*(j/length(File_names)),"%"))
   #loads individual .img file
   File<-raster(File_names[j])
-  reclassify
+  #reclassify age raster so that pixel with age >10 = NA
+  rc <- reclassify(raster(Mask_names[j]), rclmat)
+  File<-(mask(File,rc))
   #produces table showing frequency of different levels of spp richness
   Cell_freq<-data.frame(freq(File)) 
   #puts scenario name in a column
@@ -70,16 +68,16 @@ Cell_stats3<-ddply(Cell_stats2,.(bin_cut,age,scenario),summarise,Total2=mean(Tot
 
 #now plot results
 theme_set(theme_bw(base_size=12))
-P1<-ggplot(Cell_stats3,aes(x=as.factor(age),y=(Total2/113321)*100,fill=bin_cut))+geom_bar(stat="identity")+facet_wrap(~scenario)+scale_fill_brewer("Species richness",palette="Blues")
+P1<-ggplot(Cell_stats3,aes(x=as.factor(age),y=(Total2/27636)*100,fill=bin_cut))+geom_bar(stat="identity")+facet_wrap(~scenario)+scale_fill_brewer("Species richness",palette="Blues")
 P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
 P2+ylab("Percentage cover")+xlab("Year")+scale_y_continuous(labels = comma)
 ggsave("Figures/Sp_R_class.pdf",height=6,width=8,units="in",dpi=400)
 
 #an alternative way of showing the same data
 theme_set(theme_bw(base_size=12))
-P1<-ggplot(Cell_stats3,aes(x=age,y=(Total2/113321)*100,ymax=((Total2+SD)/113321)*100,ymin=((Total2-SD)/113321)*100,colour=bin_cut))+geom_pointrange(stat="identity")+geom_line()+facet_wrap(~scenario)+scale_colour_brewer("Species richness",palette="Set1")
+P1<-ggplot(Cell_stats3,aes(x=age,y=(Total2/27636)*100,ymax=((Total2+SD)/27636)*100,ymin=((Total2-SD)/27636)*100,colour=bin_cut))+geom_pointrange(stat="identity")+geom_line()+facet_wrap(~scenario)+scale_colour_brewer("Species richness",palette="Set1")
 P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
 P2+ylab("Percentage cover")+xlab("Year")+scale_y_continuous(labels = comma)
-ggsave("Figures/Sp_R_class.pdf",height=6,width=8,units="in",dpi=400)
+ggsave("Figures/Sp_R_class2.pdf",height=6,width=8,units="in",dpi=400)
 
 
