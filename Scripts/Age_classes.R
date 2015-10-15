@@ -38,7 +38,7 @@ Cell_stats2<-ddply(Cell_stats,.(replicate,bin_cut,age,scenario),summarise,Total=
 Cell_stats3<-ddply(Cell_stats2,.(bin_cut,age,scenario),summarise,Total2=mean(Total),sd=sd(Total))
 Cell_stats3<-subset(Cell_stats3,!is.na(bin_cut))
 
-head(Cell_stats)
+head(Cell_stats2)
 
 #now plot results
 theme_set(theme_bw(base_size=12))
