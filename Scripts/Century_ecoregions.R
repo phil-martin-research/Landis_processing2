@@ -8,22 +8,27 @@
 library(raster)
 library(ggplot2)
 library(lme4)
+library(reshape)
 library(reshape2)
 library(plyr)
 library(MuMIn)
 library(gtools)
+library(SDMTools)
+library(tidyr)
+library(dplyr)
 
 #clear previous R objects
 rm(list=ls())
 
 #load in Paul's biomass data
 BM<-read.csv("Data/BMLan.csv",header = T)
-BM<-subset(BM,AGB<600)
+BM<-subset(BM,AGB<600)#subset to remove one site with extreme AGB value
 BM$AGB_std<-(BM$AGB-mean(BM$AGB))/sd(BM$AGB) #standardise biomass
 
 
 #run a loop to test each model and produce a coefficient for each 
 #variable
+#first using SRR and mineralisation rate
 Coefficients<-NULL
 for (i in 4:5){
   M1<-lmer(BM[[i]]~AGB_std+(1|Site),data=BM)
@@ -36,6 +41,7 @@ for (i in 4:5){
                                  AGB=coef(Mod_average)[2],
                                  AGB_sq=coef(Mod_average)[3]))
 }
+#and then for count data - fungi, ground floa and lichen species richness
 for (i in 6:8){
   M1<-glmer(BM[[i]]~AGB_std+(1|Site),data=BM,family="poisson")
   M2<-glmer(BM[[i]]~AGB_std+I(AGB_std^2)+(1|Site),data=BM,family="poisson")
@@ -60,9 +66,7 @@ rownames(Coefficients)<-NULL
 Eco_regions<-list.files(pattern="Century-succession-log",recursive=T)
 
 #make prediction for each time step of each ecoregion of each scenario
-
 Eco_summary<-NULL
-ptm <- proc.time()
 for (i in 1:length(Eco_regions)){#for each file in the list Eco_regions run this code
   EcoR<-read.csv(Eco_regions[i])
   N_col<-ncol(EcoR)
@@ -84,55 +88,41 @@ EcoR2$Replicate<-gsub( ".csv.*$", "", gsub("^.*?_r","", Eco_regions[i]))
 Eco_summary<-rbind(Eco_summary,EcoR2)
 }
 
-proc.time() - ptm
-
+#calculate AGB in Mg per Ha
 Eco_summary$AGB<-Eco_summary$AGB/100
-head(Eco_summary,200)
 
-
-
+#melt data to give one column with all variable values 
 Eco_summary_melt<-melt(Eco_summary,id.vars = c("Time","EcoregionName","EcoregionIndex","NumSites","Scenario","Replicate"))
-head(Eco_summary_melt)
-Eco_summary_melt2<-ddply(Eco_summary_melt,.(Time,EcoregionName,Scenario,variable),summarise,mean_var=mean(value))
 
-
-Plot1<-ggplot(Eco_summary_melt2,aes(x=Time,y=mean_var,group=interaction(EcoregionName)))+geom_line(size=0.5,alpha=0.2)+facet_grid(variable~Scenario,scales="free_y")
-Plot1+geom_smooth(aes(group=NULL),size=3)
+#produce mean for each variable in each ecoregion at each time step, in each scenario
+Eco_summary2<-ddply(Eco_summary,.(Time,EcoregionName,EcoregionIndex,Scenario),numcolwise(mean,na.rm=T))
 
 #calculate mean of the results for each time step, weighting by number of pixels in each 
 #ecoregion
 
-Eco_summary2<-ddply(Eco_summary,.(Time,Scenario),mutate,function(X) data.frame(AGB_m=weighted.mean(X$AGB,X$NumSites,na.rm = T),
-                                          SRR_m=weighted.mean(X$SRR,X$NumSites,na.rm = T),
-                                          Min_rate_m=weighted.mean(X$Min_rate,X$NumSites,na.rm = T),
-                                          Fungi_m=weighted.mean(X$Fungi,X$NumSites,na.rm = T),
-                                          GF_m=weighted.mean(X$GF,X$NumSites,na.rm = T),
-                                          Lichen_m=weighted.mean(X$Lichen,X$NumSites,na.rm = T)))
+Eco_summary3<-ddply(Eco_summary_melt,.(Time,EcoregionName,EcoregionIndex,Scenario),summarise,
+                    W_M=weighted.mean(value,NumSites,na.rm = T),SD=wt.sd(value,NumSites))
 
 
-head(Eco_summary)
-head(Eco_summary2)
+head(Eco_summary3)
+head(spread(data = Eco_summary,variable,.(W_M,SD)))
+head(dcast(data = Eco_summary,Time + Scenario ~variable))
 write.csv(x=Eco_summary2,"Data/R_output/Ecoregion_summary.csv")
 
 #calculate mean of the results for each time step for each ecoregion
 
-Eco_summary3<-ddply(Eco_summary,.(Time,Scenario,EcoregionName),function(X) data.frame(AGB=mean(X$AGB,na.rm = T),
-                                                                        SRR=mean(X$SRR,na.rm = T),
-                                                                        Min_rate=mean(X$Min_rate,na.rm = T),
-                                                                        Fungi=mean(X$Fungi,na.rm = T),
-                                                                        GF=mean(X$GF,na.rm = T),
-                                                                        Lichen=mean(X$Lichen,na.rm = T)))
-head(Eco_summary3,200)
+Eco_summary2<-ddply(Eco_summary_melt,.(Time,Scenario,EcoregionName,variable),summarise,Mean=mean(value))
+head(Eco_summary2)
 write.csv(x=Eco_summary3,"Data/R_output/Ecoregion_means.csv")
 
 
-Eco_summary_melt3<-melt(Eco_summary2,id.vars = c("Time","Scenario"))
-head(Eco_summary_melt3)
+
+head(Eco_summary2)
 
 #plot results of this
 theme_set(theme_bw(base_size=12))
-P1<-ggplot(Eco_summary_melt2,aes(x=Time,y=mean_var,group=EcoregionName))+geom_line(size=0.2,alpha=0.1)+facet_grid(variable~Scenario,scales="free_y")
-P2<-P1+geom_line(data=Eco_summary_melt3,aes(x=Time,y=value,group=NULL),size=1.5,alpha=1)
+P1<-ggplot(Eco_summary2,aes(x=Time,y=Mean,group=EcoregionName))+geom_line(size=0.2,alpha=0.1)+facet_grid(variable~Scenario,scales="free_y")
+P2<-P1+geom_ribbon(data=Eco_summary,aes(y=W_M,ymax=W_M+SD,ymin=W_M-SD,group=NULL),alpha=0.5)+geom_line(data=Eco_summary,aes(x=Time,y=W_M,group=NULL),size=1.5,alpha=1)
 P3<-P2+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
 P3+ylab("Value")+xlim(0,100)+xlab("Time(Years)")
 ggsave("Figures/Ecoregion_ES.pdf",dpi = 400,height=8,width=10,units="in")
