@@ -20,9 +20,10 @@ library(dplyr)
 #clear previous R objects
 rm(list=ls())
 
-#load in Paul's biomass data
+#load in Paul and Arjan's  data
 BM<-read.csv("Data/BMLan.csv",header = T)
-BM<-subset(BM,AGB<600)#subset to remove one site with extreme AGB value
+Rec_aes<-read.csv("Data/Rec_aes_reorg.csv",header = T)
+BM<-subset(BM,AGB<600)#subset to remove one site with extreme AGB value from Paul's data
 BM$AGB_std<-(BM$AGB-mean(BM$AGB))/sd(BM$AGB) #standardise biomass
 
 
@@ -53,6 +54,18 @@ for (i in 6:8){
                                  AGB=coef(Mod_average)[2],
                                  AGB_sq=coef(Mod_average)[3]))
 }
+for (i in 3:4){
+  M1<-lmer(Rec_aes[[i]]~mean_AGB+(1|ID),data=Rec_aes)
+  M2<-lmer(Rec_aes[[i]]~mean_AGB+I(mean_AGB^2)+(1|ID),data=Rec_aes)
+  M0<-lmer(Rec_aes[[i]]~1+(1|ID),data=Rec_aes)
+  Mod_average<-model.avg(M1,M2,M0)
+  summary(Mod_average)
+  Coefficients<-rbind(Coefficients,
+                      data.frame(Var=colnames(Rec_aes[i]),
+                                 Intercept=coef(Mod_average)[1],
+                                 AGB=coef(Mod_average)[2],
+                                 AGB_sq=coef(Mod_average)[3]))
+}
 
 #tidy data
 rownames(Coefficients)<-NULL
@@ -70,19 +83,22 @@ Eco_summary<-NULL
 for (i in 1:length(Eco_regions)){#for each file in the list Eco_regions run this code
   EcoR<-read.csv(Eco_regions[i])
   N_col<-ncol(EcoR)
-  EcoR2<-data.frame(EcoR[-c(5:6,(8:N_col))],SRR=NA,Min_rate=NA,Fungi=NA,GF=NA,Lichen=NA)
+  EcoR2<-data.frame(EcoR[-c(5:6,(8:N_col))],SRR=NA,Min_rate=NA,Fungi=NA,GF=NA,Lichen=NA,Aesthetic=NA,Recreation=NA)
   Mean_summary<-NULL
 for (j in 1:nrow(Coefficients)){
   if (j<=3){
     Prediction<-((((((EcoR2$AGB)/100)-mean(BM$AGB))/sd(BM$AGB))*Coefficients[j,3]+ #use coefficients to predict ES and biodiversity values
                     (((((EcoR2$AGB)/100)-mean(BM$AGB))/sd(BM$AGB))^2)*Coefficients[j,4])+Coefficients[j,2])
     EcoR2[[5+j]]<-Prediction
+  } else if (j>=6) {
+  Prediction<-((((EcoR2$AGB/100)*Coefficients[j,3])+ #use coefficients to predict ES and biodiversity values
+                  (((EcoR2$AGB/100)^2)*Coefficients[j,4])+Coefficients[j,2])*4)+1
+  EcoR2[[5+j]]<-Prediction
 } else {
   Prediction<-((((((EcoR2$AGB)/100)-mean(BM$AGB))/sd(BM$AGB))*Coefficients[j,3]+ #use coefficients to predict ES and biodiversity values
                   (((((EcoR2$AGB)/100)-mean(BM$AGB))/sd(BM$AGB))^2)*Coefficients[j,4])+Coefficients[j,2])
   EcoR2[[5+j]]<-exp(Prediction)
-}
-}
+}}
 EcoR2$Scenario<-paste("Scenario ",gsub( "_r.*$", "", gsub("^.*?Century-succession-log","", Eco_regions[i])),sep="")
 EcoR2$Replicate<-gsub( ".csv.*$", "", gsub("^.*?_r","", Eco_regions[i]))
 Eco_summary<-rbind(Eco_summary,EcoR2)
@@ -104,8 +120,10 @@ Eco_summary3<-ddply(Eco_summary,.(Time,Scenario),summarise,
               Min_rate_M=weighted.mean(Min_rate,NumSites,na.rm = T),Min_rate_SD=wt.sd(Min_rate,NumSites),
               Fungi_M=weighted.mean(Fungi,NumSites,na.rm = T),Fungi_SD=wt.sd(Fungi,NumSites),
               GF_M=weighted.mean(GF,NumSites,na.rm = T),GF_SD=wt.sd(GF,NumSites),
-              Lichen_M=weighted.mean(Lichen,NumSites,na.rm = T),Lichen_SD=wt.sd(Lichen,NumSites))
-head(Eco_summary2,200)
+              Lichen_M=weighted.mean(Lichen,NumSites,na.rm = T),Lichen_SD=wt.sd(Lichen,NumSites),
+              Aesthetic_M=weighted.mean(Aesthetic,NumSites,na.rm = T),Aesthetic_SD=wt.sd(Aesthetic,NumSites),
+              Recreation_M=weighted.mean(Recreation,NumSites,na.rm = T),Recreation_SD=wt.sd(Recreation,NumSites))
+head(Eco_summary3,200)
 write.csv(x=Eco_summary3,"Data/R_output/Ecoregion_summary.csv")
 
 
