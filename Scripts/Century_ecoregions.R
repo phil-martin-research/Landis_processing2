@@ -144,14 +144,3 @@ Eco_summary3<-ddply(Eco_summary,.(Time,Scenario),summarise,
               Recreation_M=weighted.mean(Recreation,NumSites,na.rm = T),Recreation_SD=wt.sd(Recreation,NumSites))
 head(Eco_summary3,200)
 write.csv(x=Eco_summary3,"Data/R_output/Ecoregion_summary.csv")
-
-
-
-
-#plot results of this
-theme_set(theme_bw(base_size=12))
-P1<-ggplot(Eco_summary2,aes(x=Time,y=AGB_M))+geom_line()+facet_wrap(~Scenario,nrow = 1)
-P2<-P1+geom_ribbon(data=Eco_summary2,aes(y=AGB_M,ymax=AGB_M+AGB_SD,ymin=AGB_M-AGB_SD,group=NULL),alpha=0.5)
-P3<-P2+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
-P3+ylab("Value")+xlim(0,100)+xlab("Time(Years)")
-ggsave("Figures/Ecoregion_ES.pdf",dpi = 400,height=8,width=10,units="in")
