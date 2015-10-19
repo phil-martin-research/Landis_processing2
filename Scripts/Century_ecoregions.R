@@ -25,7 +25,17 @@ BM<-read.csv("Data/BMLan.csv",header = T)
 Rec_aes<-read.csv("Data/Rec_aes_reorg.csv",header = T)
 BM<-subset(BM,AGB<600)#subset to remove one site with extreme AGB value from Paul's data
 BM$AGB_std<-(BM$AGB-mean(BM$AGB))/sd(BM$AGB) #standardise biomass
+#tranform recreation data
+Rec_aes$Rec_trans<-((Rec_aes$Recreation-1)/4)
+Rec_aes$Rec_transM<-ifelse(Rec_aes$Rec_trans==0,Rec_aes$Rec_trans+0.01,Rec_aes$Rec_trans)
+Rec_aes$Rec_transM<-ifelse(Rec_aes$Rec_transM==1,Rec_aes$Rec_transM-0.01,Rec_aes$Rec_transM)
+Rec_aes$Rec_transM<-qlogis(Rec_aes$Rec_transM)
+Rec_aes$Aes_trans<-((Rec_aes$Aesthetic-1)/4)
+Rec_aes$Aes_transM<-ifelse(Rec_aes$Aes_trans==0,Rec_aes$Aes_trans+0.01,Rec_aes$Aes_trans)
+Rec_aes$Aes_transM<-ifelse(Rec_aes$Aes_transM==1,Rec_aes$Aes_transM-0.01,Rec_aes$Aes_transM)
+Rec_aes$Aes_transM<-qlogis(Rec_aes$Aes_transM)
 
+head(Rec_aes)
 
 #run a loop to test each model and produce a coefficient for each 
 #variable
@@ -37,10 +47,10 @@ for (i in 4:5){
   M0<-lmer(BM[[i]]~1+(1|Site),data=BM)
   Mod_average<-model.avg(M1,M2,M0)
   Coefficients<-rbind(Coefficients,
-                      data.frame(Var=colnames(BM[i]),
-                                 Intercept=coef(Mod_average)[1],
-                                 AGB=coef(Mod_average)[2],
-                                 AGB_sq=coef(Mod_average)[3]))
+                      data.frame(Var=colnames(Rec_aes[i]),
+                                 Intercept=summary(Mod_average)$coefmat.full[1,1],
+                                 AGB=summary(Mod_average)$coefmat.full[2,1],
+                                 AGB_sq=summary(Mod_average)$coefmat.full[3,1]))
 }
 #and then for count data - fungi, ground floa and lichen species richness
 for (i in 6:8){
@@ -49,23 +59,25 @@ for (i in 6:8){
   M0<-glmer(BM[[i]]~1+(1|Site),data=BM,family="poisson")
   Mod_average<-model.avg(M1,M2,M0)
   Coefficients<-rbind(Coefficients,
-                      data.frame(Var=colnames(BM[i]),
-                                 Intercept=coef(Mod_average)[1],
-                                 AGB=coef(Mod_average)[2],
-                                 AGB_sq=coef(Mod_average)[3]))
+                      data.frame(Var=colnames(Rec_aes[i]),
+                                 Intercept=summary(Mod_average)$coefmat.full[1,1],
+                                 AGB=summary(Mod_average)$coefmat.full[2,1],
+                                 AGB_sq=summary(Mod_average)$coefmat.full[3,1]))
 }
-for (i in 3:4){
+for (i in c(7,9)){
+  i<-7
   M1<-lmer(Rec_aes[[i]]~mean_AGB+(1|ID),data=Rec_aes)
   M2<-lmer(Rec_aes[[i]]~mean_AGB+I(mean_AGB^2)+(1|ID),data=Rec_aes)
   M0<-lmer(Rec_aes[[i]]~1+(1|ID),data=Rec_aes)
   Mod_average<-model.avg(M1,M2,M0)
-  summary(Mod_average)
   Coefficients<-rbind(Coefficients,
                       data.frame(Var=colnames(Rec_aes[i]),
-                                 Intercept=coef(Mod_average)[1],
-                                 AGB=coef(Mod_average)[2],
-                                 AGB_sq=coef(Mod_average)[3]))
+                                 Intercept=summary(Mod_average)$coefmat.full[1,1],
+                                 AGB=summary(Mod_average)$coefmat.full[2,1],
+                                 AGB_sq=summary(Mod_average)$coefmat.full[3,1]))
 }
+
+
 
 #tidy data
 rownames(Coefficients)<-NULL
@@ -91,9 +103,14 @@ for (j in 1:nrow(Coefficients)){
                     (((((EcoR2$AGB)/100)-mean(BM$AGB))/sd(BM$AGB))^2)*Coefficients[j,4])+Coefficients[j,2])
     EcoR2[[5+j]]<-Prediction
   } else if (j>=6) {
-  Prediction<-((((EcoR2$AGB/100)*Coefficients[j,3])+ #use coefficients to predict ES and biodiversity values
-                  (((EcoR2$AGB/100)^2)*Coefficients[j,4])+Coefficients[j,2])*4)+1
-  EcoR2[[5+j]]<-Prediction
+  Prediction<-(((((EcoR2$AGB/100)*Coefficients[j,3])+ #use coefficients to predict ES and biodiversity values
+                  (((EcoR2$AGB/100)^2)*Coefficients[j,4])+Coefficients[j,2])))
+  EcoR2[[5+j]]<-((plogis(Prediction))*4)+1
+  
+  head(EcoR2)
+  plot(EcoR2$AGB,((plogis(Prediction))*4)+1)
+  
+  
 } else {
   Prediction<-((((((EcoR2$AGB)/100)-mean(BM$AGB))/sd(BM$AGB))*Coefficients[j,3]+ #use coefficients to predict ES and biodiversity values
                   (((((EcoR2$AGB)/100)-mean(BM$AGB))/sd(BM$AGB))^2)*Coefficients[j,4])+Coefficients[j,2])
