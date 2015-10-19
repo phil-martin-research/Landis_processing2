@@ -83,7 +83,7 @@ for (j in 1:nrow(Coefficients)){
   EcoR2[[5+j]]<-exp(Prediction)
 }
 }
-EcoR2$Scenario<-gsub( "_r.*$", "", gsub("^.*?Century-succession-log","", Eco_regions[i]))
+EcoR2$Scenario<-paste("Scenario ",gsub( "_r.*$", "", gsub("^.*?Century-succession-log","", Eco_regions[i])),sep="")
 EcoR2$Replicate<-gsub( ".csv.*$", "", gsub("^.*?_r","", Eco_regions[i]))
 Eco_summary<-rbind(Eco_summary,EcoR2)
 }
@@ -107,22 +107,29 @@ Eco_summary3<-ddply(Eco_summary_melt,.(Time,EcoregionName,EcoregionIndex,Scenari
 head(Eco_summary3)
 head(spread(data = Eco_summary,variable,.(W_M,SD)))
 head(dcast(data = Eco_summary,Time + Scenario ~variable))
-write.csv(x=Eco_summary2,"Data/R_output/Ecoregion_summary.csv")
+
 
 #calculate mean of the results for each time step for each ecoregion
 
-Eco_summary2<-ddply(Eco_summary_melt,.(Time,Scenario,EcoregionName,variable),summarise,Mean=mean(value))
-head(Eco_summary2)
-write.csv(x=Eco_summary3,"Data/R_output/Ecoregion_means.csv")
+head(Eco_summary)
+
+Eco_summary2<-ddply(Eco_summary,.(Time,Scenario),summarise,
+              AGB_M=weighted.mean(AGB,NumSites,na.rm = T),AGB_SD=wt.sd(AGB,NumSites),
+              SRR_M=weighted.mean(SRR,NumSites,na.rm = T),SRR_SD=wt.sd(SRR,NumSites),
+              Min_rate_M=weighted.mean(Min_rate,NumSites,na.rm = T),Min_rate_SD=wt.sd(Min_rate,NumSites),
+              Fungi_M=weighted.mean(Fungi,NumSites,na.rm = T),Fungi_SD=wt.sd(Fungi,NumSites),
+              GF_M=weighted.mean(GF,NumSites,na.rm = T),GF_SD=wt.sd(GF,NumSites),
+              Lichen_M=weighted.mean(Lichen,NumSites,na.rm = T),Lichen_SD=wt.sd(Lichen,NumSites))
+head(Eco_summary2,200)
+write.csv(x=Eco_summary2,"Data/R_output/Ecoregion_summary.csv")
 
 
 
-head(Eco_summary2)
 
 #plot results of this
 theme_set(theme_bw(base_size=12))
-P1<-ggplot(Eco_summary2,aes(x=Time,y=Mean,group=EcoregionName))+geom_line(size=0.2,alpha=0.1)+facet_grid(variable~Scenario,scales="free_y")
-P2<-P1+geom_ribbon(data=Eco_summary,aes(y=W_M,ymax=W_M+SD,ymin=W_M-SD,group=NULL),alpha=0.5)+geom_line(data=Eco_summary,aes(x=Time,y=W_M,group=NULL),size=1.5,alpha=1)
+P1<-ggplot(Eco_summary2,aes(x=Time,y=AGB_M))+geom_line()+facet_wrap(~Scenario,nrow = 1)
+P2<-P1+geom_ribbon(data=Eco_summary2,aes(y=AGB_M,ymax=AGB_M+AGB_SD,ymin=AGB_M-AGB_SD,group=NULL),alpha=0.5)
 P3<-P2+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
 P3+ylab("Value")+xlim(0,100)+xlab("Time(Years)")
 ggsave("Figures/Ecoregion_ES.pdf",dpi = 400,height=8,width=10,units="in")
