@@ -91,29 +91,14 @@ Eco_summary<-rbind(Eco_summary,EcoR2)
 #calculate AGB in Mg per Ha
 Eco_summary$AGB<-Eco_summary$AGB/100
 
-#melt data to give one column with all variable values 
-Eco_summary_melt<-melt(Eco_summary,id.vars = c("Time","EcoregionName","EcoregionIndex","NumSites","Scenario","Replicate"))
-
 #produce mean for each variable in each ecoregion at each time step, in each scenario
 Eco_summary2<-ddply(Eco_summary,.(Time,EcoregionName,EcoregionIndex,Scenario),numcolwise(mean,na.rm=T))
+write.csv(x=Eco_summary2,"Data/R_output/Ecoregion_means.csv")
 
 #calculate mean of the results for each time step, weighting by number of pixels in each 
 #ecoregion
 
-Eco_summary3<-ddply(Eco_summary_melt,.(Time,EcoregionName,EcoregionIndex,Scenario),summarise,
-                    W_M=weighted.mean(value,NumSites,na.rm = T),SD=wt.sd(value,NumSites))
-
-
-head(Eco_summary3)
-head(spread(data = Eco_summary,variable,.(W_M,SD)))
-head(dcast(data = Eco_summary,Time + Scenario ~variable))
-
-
-#calculate mean of the results for each time step for each ecoregion
-
-head(Eco_summary)
-
-Eco_summary2<-ddply(Eco_summary,.(Time,Scenario),summarise,
+Eco_summary3<-ddply(Eco_summary,.(Time,Scenario),summarise,
               AGB_M=weighted.mean(AGB,NumSites,na.rm = T),AGB_SD=wt.sd(AGB,NumSites),
               SRR_M=weighted.mean(SRR,NumSites,na.rm = T),SRR_SD=wt.sd(SRR,NumSites),
               Min_rate_M=weighted.mean(Min_rate,NumSites,na.rm = T),Min_rate_SD=wt.sd(Min_rate,NumSites),
@@ -121,7 +106,7 @@ Eco_summary2<-ddply(Eco_summary,.(Time,Scenario),summarise,
               GF_M=weighted.mean(GF,NumSites,na.rm = T),GF_SD=wt.sd(GF,NumSites),
               Lichen_M=weighted.mean(Lichen,NumSites,na.rm = T),Lichen_SD=wt.sd(Lichen,NumSites))
 head(Eco_summary2,200)
-write.csv(x=Eco_summary2,"Data/R_output/Ecoregion_summary.csv")
+write.csv(x=Eco_summary3,"Data/R_output/Ecoregion_summary.csv")
 
 
 
