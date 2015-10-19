@@ -49,7 +49,7 @@ for (i in 4:5){
   M0<-lmer(BM[[i]]~1+(1|Site),data=BM)
   Mod_average<-model.avg(M1,M2,M0)
   Coefficients<-rbind(Coefficients,
-                      data.frame(Var=colnames(Rec_aes[i]),
+                      data.frame(Var=colnames(BM[i]),
                                  Intercept=summary(Mod_average)$coefmat.full[1,1],
                                  AGB=summary(Mod_average)$coefmat.full[2,1],
                                  AGB_sq=summary(Mod_average)$coefmat.full[3,1]))
@@ -61,13 +61,12 @@ for (i in 6:8){
   M0<-glmer(BM[[i]]~1+(1|Site),data=BM,family="poisson")
   Mod_average<-model.avg(M1,M2,M0)
   Coefficients<-rbind(Coefficients,
-                      data.frame(Var=colnames(Rec_aes[i]),
+                      data.frame(Var=colnames(BM[i]),
                                  Intercept=summary(Mod_average)$coefmat.full[1,1],
                                  AGB=summary(Mod_average)$coefmat.full[2,1],
                                  AGB_sq=summary(Mod_average)$coefmat.full[3,1]))
 }
 for (i in c(7,9)){
-  i<-7
   M1<-lmer(Rec_aes[[i]]~mean_AGB+(1|ID),data=Rec_aes)
   M2<-lmer(Rec_aes[[i]]~mean_AGB+I(mean_AGB^2)+(1|ID),data=Rec_aes)
   M0<-lmer(Rec_aes[[i]]~1+(1|ID),data=Rec_aes)
