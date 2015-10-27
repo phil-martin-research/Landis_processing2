@@ -104,12 +104,7 @@ for (j in 1:nrow(Coefficients)){
   } else if (j>=6) {
   Prediction<-(((((EcoR2$AGB/100)*Coefficients[j,3])+ #use coefficients to predict ES and biodiversity values
                   (((EcoR2$AGB/100)^2)*Coefficients[j,4])+Coefficients[j,2])))
-  EcoR2[[5+j]]<-((plogis(Prediction))*4)+1
-  
-  head(EcoR2)
-  plot(EcoR2$AGB,((plogis(Prediction))*4)+1)
-  
-  
+  EcoR2[[5+j]]<-((plogis(Prediction))*4)+1  
 } else {
   Prediction<-((((((EcoR2$AGB)/100)-mean(BM$AGB))/sd(BM$AGB))*Coefficients[j,3]+ #use coefficients to predict ES and biodiversity values
                   (((((EcoR2$AGB)/100)-mean(BM$AGB))/sd(BM$AGB))^2)*Coefficients[j,4])+Coefficients[j,2])
@@ -139,5 +134,4 @@ Eco_summary3<-ddply(Eco_summary,.(Time,Scenario),summarise,
               Lichen_M=weighted.mean(Lichen,NumSites,na.rm = T),Lichen_SD=wt.sd(Lichen,NumSites),
               Aesthetic_M=weighted.mean(Aesthetic,NumSites,na.rm = T),Aesthetic_SD=wt.sd(Aesthetic,NumSites),
               Recreation_M=weighted.mean(Recreation,NumSites,na.rm = T),Recreation_SD=wt.sd(Recreation,NumSites))
-head(Eco_summary3,200)
 write.csv(x=Eco_summary3,"Data/R_output/Ecoregion_summary.csv")
