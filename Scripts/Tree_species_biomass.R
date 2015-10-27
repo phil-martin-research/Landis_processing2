@@ -43,6 +43,8 @@ Mean_ER2<-melt(Mean_ER,id.vars=c("Time","Ecoregion","Scenario","Num_sum"))
 #get weighted mean for each species for each scenario at each time step
 WM_ER2<-ddply(Mean_ER2,.(Scenario,variable,Time),summarise,Mean=weighted.mean(value,Num_sum,na.rm = T),SD=wt.sd(value,Num_sum))
 
+write.csv(x=WM_ER2,"Data/R_output/SpeciesBio_summary.csv")
+
 #produce figure
 theme_set(theme_bw(base_size=12))
 P1<-ggplot(Mean_ER2,aes(x=Time,y=value,group=Ecoregion,colour=variable))+geom_line(alpha=0.5)+facet_grid(variable~Scenario,scales="free_y")

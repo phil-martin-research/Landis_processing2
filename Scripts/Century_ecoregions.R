@@ -4,6 +4,8 @@
 #author: Phil martin
 #Date 2015/09/24
 
+install.packages("SDMTools")
+
 #open packages
 library(raster)
 library(ggplot2)
