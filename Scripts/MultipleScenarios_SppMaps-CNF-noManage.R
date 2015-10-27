@@ -3,12 +3,15 @@
 #################################Created by M. Lucash, adapted from M. Creutzburg's file
 
 # Load libraries
-#library(sqldf)
-#library(plyr)
+install.packages("sqldf")
+install.packages("plotrix")
+
+library(sqldf)
+library(plyr)
 library(rgdal)   #Needed for rasters
 library(raster)  #Needed for rasters
 library(plotrix) #Needed for SE
-#library(ggplot2)
+library(ggplot2)
 
 ecoregion_map<-raster("I:/Research/Shares/scheller_lab/Lucash/LANDIS_Input_Files/AFRI_input_files/CNF_landscape_Input_Files/CNF_Landscape_1ha -Fire/EcoregionMap_060815_v9.img")
 #plot(ecoregion_map)
