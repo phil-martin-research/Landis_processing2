@@ -20,6 +20,8 @@ File_names<-File_names[!grepl("MIN",File_names)]
 File_names<-File_names[!grepl("Biomass",File_names)]
 File_names<-File_names[!grepl("reclass",File_names)]
 File_names<-File_names[!grepl("initial",File_names)]
+File_names<-File_names[!grepl("ecoregions",File_names)]
+
 
 #loop to get statistics for each species at each time point for each scenario
 Cell_stats<-NULL
