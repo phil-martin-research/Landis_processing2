@@ -24,6 +24,7 @@ for (i in 1:length(Eco_region_BM)){
   File<-read.csv(Eco_region_BM[i])
   #remove blank column
   File_sub<-File[-ncol(File)]
+  hist(File_sub$Time)
   #remove rows containing NAs
   File_sub2<-File_sub[complete.cases(File_sub),]
   #insert a column with the scenario number

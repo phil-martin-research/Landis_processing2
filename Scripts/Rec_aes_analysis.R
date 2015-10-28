@@ -23,6 +23,8 @@ Rec_aes$Rec_transM<-ifelse(Rec_aes$Rec_trans==0,Rec_aes$Rec_trans+0.01,Rec_aes$R
 Rec_aes$Rec_transM<-ifelse(Rec_aes$Rec_transM==1,Rec_aes$Rec_transM-0.01,Rec_aes$Rec_transM)
 Rec_aes$Rec_transM<-qlogis(Rec_aes$Rec_transM)
 
+head()
+
 M1_rec<-lmer(Rec_transM~mean_AGB+(1|ID),data=Rec_aes)
 M2_rec<-lmer(Rec_transM~mean_AGB+I(mean_AGB^2)+(1|ID),data=Rec_aes)
 M0_rec<-lmer(Rec_transM~1+(1|ID),data=Rec_aes)
