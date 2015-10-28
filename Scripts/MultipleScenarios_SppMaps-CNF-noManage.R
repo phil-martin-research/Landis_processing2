@@ -13,12 +13,12 @@ library(raster)  #Needed for rasters
 library(plotrix) #Needed for SE
 library(ggplot2)
 
-ecoregion_map<-raster("I:/Research/Shares/scheller_lab/Lucash/LANDIS_Input_Files/AFRI_input_files/CNF_landscape_Input_Files/CNF_Landscape_1ha -Fire/EcoregionMap_060815_v9.img")
+ecoregion_map<-raster("E:/NERC_BESS/Landis_processing2/ecoregions_woodext.img")
 #plot(ecoregion_map)
 ecoregion_DF_initial<-as.data.frame(ecoregion_map)
 
 colnames(ecoregion_DF_initial)<-'Ecoregion'
-subset_eco<-subset(ecoregion_DF_initial, ecoregion_DF_initial$Ecoregion >0 )
+subset_eco<-subset(ecoregion_DF_initial, ecoregion_DF_initial$Ecoregion > 0 & ecoregion_DF_initial$Ecoregion <31)
 active_cells<-nrow(subset_eco)
 print(nrow(ecoregion_DF_initial))
 print(nrow(subset_eco))

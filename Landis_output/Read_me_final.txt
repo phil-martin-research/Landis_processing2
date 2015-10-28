@@ -1,7 +1,7 @@
 Century-succession-log1 no disturbances
 Century-succession-log2 harvesting pulse 20%
 Century-succession-log3 harvesting pulse 40%
-Century-succession-log4 harvesting pulse 60%
+Century-succession-log4 harvesting pulse 60% r2 not copied
 Century-succession-log5 harvesting pulse 80%
 Century-succession-log6 harvesting pulse 100%
 
