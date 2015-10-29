@@ -12,7 +12,7 @@ library(SDMTools)
 Eco_region_BM<-list.files(pattern="spp-biomass-log",recursive=T)
 
 #run a loop to read in each .csv containing tree species biomass values
-#remove columns that are not useful and ass a column to give details of
+#remove columns that are not useful and as a column to give details of
 #the scenario being run
 BM_ER<-NULL
 for (i in 1:length(Eco_region_BM)){
