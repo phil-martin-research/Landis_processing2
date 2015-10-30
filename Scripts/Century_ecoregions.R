@@ -109,28 +109,31 @@ for (j in 1:nrow(Coefficients)){
   EcoR2[[5+j]]<-exp(Prediction)
 }}
 EcoR2$Scenario<-paste("Scenario ",gsub( "_r.*$", "", gsub("^.*?Century-succession-log","", Eco_regions[i])),sep="")
-EcoR2$Replicate<-gsub( ".csv.*$", "", gsub("^.*?_r","", Eco_regions[i]))
+EcoR2$Replicate<-as.numeric(gsub( ".csv.*$", "", gsub("^.*?_r","", Eco_regions[i])))
 Eco_summary<-rbind(Eco_summary,EcoR2)
 }
 #calculate AGB in Mg per Ha
 Eco_summary$AGB<-Eco_summary$AGB/100
 
-#produce mean for each variable in each ecoregion at each time step, in each scenario
-Eco_summary2<-ddply(Eco_summary,.(Time,EcoregionName,EcoregionIndex,Scenario),numcolwise(mean,na.rm=T))
+head(Eco_summary)
 
 #calculate mean of the results for each time step, weighting by number of pixels in each 
 #ecoregion
 
 Eco_summary4<-ddply(Eco_summary,.(Time,Scenario),summarise,
-                    AGB_M=weighted.mean(AGB,NumSites,na.rm = T),AGB_SD=wt.sd(AGB,NumSites),
-                    SRR_M=weighted.mean(SRR,NumSites,na.rm = T),SRR_SD=wt.sd(SRR,NumSites),
-                    Min_rate_M=weighted.mean(Min_rate,NumSites,na.rm = T),Min_rate_SD=wt.sd(Min_rate,NumSites),
-                    Fungi_M=weighted.mean(Fungi,NumSites,na.rm = T),Fungi_SD=wt.sd(Fungi,NumSites),
-                    GF_M=weighted.mean(GF,NumSites,na.rm = T),GF_SD=wt.sd(GF,NumSites),
-                    Lichen_M=weighted.mean(Lichen,NumSites,na.rm = T),Lichen_SD=wt.sd(Lichen,NumSites),
-                    Aesthetic_M=weighted.mean(Aesthetic,NumSites,na.rm = T),Aesthetic_SD=wt.sd(Aesthetic,NumSites),
-                    Recreation_M=weighted.mean(Recreation,NumSites,na.rm = T),Recreation_SD=wt.sd(Recreation,NumSites),
-                    Fungi_val_m=weighted.mean(Fungi_val,NumSites,na.rm = T),Fungi_val_SD=wt.sd(Fungi_val,NumSites))
+                    AGB_M=as.numeric(weighted.mean(AGB,NumSites,na.rm = T)),AGB_SD=as.numeric(wt.sd(AGB,NumSites)),
+                    SRR_M=as.numeric(weighted.mean(SRR,NumSites,na.rm = T)),SRR_SD=as.numeric(wt.sd(SRR,NumSites)),
+                    Min_rate_M=as.numeric(weighted.mean(Min_rate,NumSites,na.rm = T)),Min_rate_SD=as.numeric(wt.sd(Min_rate,NumSites)),
+                    Fungi_M=as.numeric(weighted.mean(Fungi,NumSites,na.rm = T)),Fungi_SD=as.numeric(wt.sd(Fungi,NumSites)),
+                    GF_M=as.numeric(weighted.mean(GF,NumSites,na.rm = T)),GF_SD=as.numeric(wt.sd(GF,NumSites)),
+                    Lichen_M=as.numeric(weighted.mean(Lichen,NumSites,na.rm = T)),Lichen_SD=as.numeric(wt.sd(Lichen,NumSites)),
+                    Aesthetic_M=as.numeric(weighted.mean(Aesthetic,NumSites,na.rm = T)),Aesthetic_SD=as.numeric(wt.sd(Aesthetic,NumSites)),
+                    Recreation_M=as.numeric(weighted.mean(Recreation,NumSites,na.rm = T)),Recreation_SD=as.numeric(wt.sd(Recreation,NumSites)),
+                    Fungi_val_m=as.numeric(weighted.mean(Fungi_val,NumSites,na.rm = T)),Fungi_val_SD=as.numeric(wt.sd(Fungi_val,NumSites))
+                    )
+
+str(Eco_summary)
+str(Eco_summary4)
 
 #################################################
 #run calculations for carbon and nitrogen flux###
@@ -179,7 +182,7 @@ CN_ER_sum<-ddply(CN_ER,.(Time,EcoregionName,Scenario),summarise,Carbon_flux=mean
 WM_CN<-ddply(CN_ER,.(Scenario,Time),summarise,Mean_C=weighted.mean(C_change,NumSites,na.rm = T),SD_C=wt.sd(C_change,NumSites),
              Mean_N=weighted.mean(N_change,NumSites,na.rm = T),SD_N=wt.sd(N_change,NumSites))
 
-#########################
+##########################
 #calculate timber value# 
 #########################
 
@@ -212,7 +215,6 @@ BM_ER$Vol<-((BM_ER$SppBiomass_fagusylv/0.55)+(BM_ER$SppBiomass_querrobu/0.56))/1
 Timber_sum<-ddply(BM_ER,.(Time,EcoregionName,Scenario),summarise,Timber=mean(Vol))
 Timber<-ddply(BM_ER,.(Scenario,Time),summarise,Mean_vol=weighted.mean(Vol,NumSites,na.rm = T)
              ,Vol_SD=wt.sd(Vol,NumSites))
-
 ###################################################################################################################
 #merge all different ecosystem services and biodiversity measures together into two dataframes#####################
 ###################################################################################################################
@@ -226,4 +228,6 @@ write.csv(x=Eco_summary3,"Data/R_output/Ecoregion_means.csv")
 #ecoregion
 
 Eco_summary5<-merge(merge(Eco_summary4,WM_CN,by=c("Scenario","Time")),Timber,by=c("Scenario","Time"))
+str(Eco_summary5)
+str(Eco_summary4)
 write.csv(x=Eco_summary5,"Data/R_output/Ecoregion_summary.csv")
