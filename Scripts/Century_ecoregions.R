@@ -2,7 +2,7 @@
 #Elena's Landis-II 'ecoregions' using data from Paul's gradient plots
 
 #author: Phil martin
-#Date 2015/09/24
+#Date 2015/11/04
 
 #open packages
 library(raster)
@@ -113,7 +113,6 @@ EcoR2$Replicate<-as.numeric(gsub( ".csv.*$", "", gsub("^.*?_r","", Eco_regions[i
 Eco_summary<-rbind(Eco_summary,EcoR2)
 }
 
-head(Eco_summary)
 #calculate AGB in Mg per Ha
 Eco_summary$AGB<-Eco_summary$AGB/100
 
@@ -142,12 +141,10 @@ Eco_summary4<-ddply(Eco_summary,.(Scenario,Time),summarise,
                     Fungi_val_m=weighted.mean(Fungi_val,NumSites,na.rm = T),
                     Fungi_val_SD=wt.sd(Fungi_val,NumSites)
                     )
-
-WM_CN<-ddply(CN_ER,.(Scenario,Time),summarise,Mean_C=weighted.mean(C_change,NumSites,na.rm = T),SD_C=wt.sd(C_change,NumSites),
-             Mean_N=weighted.mean(N_change,NumSites,na.rm = T),SD_N=wt.sd(N_change,NumSites))
-
-
-str(Eco_summary4$AGB_M)
+str(Eco_summary4)
+for (i in 3:ncol(Eco_summary4)){
+  Eco_summary4[,i]<-as.numeric(Eco_summary4[,i])
+}
 
 
 #################################################
@@ -191,12 +188,13 @@ for (i in 1:length(C_N)){
     CN_ER<-rbind(ER_sub,CN_ER)
   }
 }
-
+str(CN_ER)
 #summarise carbon and nitrogen flux
-CN_ER_sum<-ddply(CN_ER,.(Time,EcoregionName,Scenario),summarise,Carbon_flux=mean(C_change),Nitrogen_flux=mean(N_change))
+CN_ER_sum<-ddply(CN_ER,.(Time,EcoregionName,Scenario),summarise,Carbon_flux=mean(C_change,na.rm = T),Nitrogen_flux=mean(N_change,na.rm = T))
 WM_CN<-ddply(CN_ER,.(Scenario,Time),summarise,Mean_C=weighted.mean(C_change,NumSites,na.rm = T),SD_C=wt.sd(C_change,NumSites),
              Mean_N=weighted.mean(N_change,NumSites,na.rm = T),SD_N=wt.sd(N_change,NumSites))
 
+str(CN_ER_sum)
 ##########################
 #calculate timber value# 
 #########################
@@ -227,7 +225,7 @@ for (i in 1:length(Eco_region_BM)){
 #convert biomass to volume using expansion factor of 0.55 for beech and 0.56 for oak
 BM_ER$Vol<-((BM_ER$SppBiomass_fagusylv/0.55)+(BM_ER$SppBiomass_querrobu/0.56))/100
 
-Timber_sum<-ddply(BM_ER,.(Time,EcoregionName,Scenario),summarise,Timber=mean(Vol))
+Timber_sum<-ddply(BM_ER,.(Time,EcoregionName,Scenario),summarise,Timber=mean(Vol,na.rm = T))
 Timber<-ddply(BM_ER,.(Scenario,Time),summarise,Mean_vol=weighted.mean(Vol,NumSites,na.rm = T)
              ,Vol_SD=wt.sd(Vol,NumSites))
 ###################################################################################################################
