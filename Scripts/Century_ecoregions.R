@@ -112,28 +112,43 @@ EcoR2$Scenario<-paste("Scenario ",gsub( "_r.*$", "", gsub("^.*?Century-successio
 EcoR2$Replicate<-as.numeric(gsub( ".csv.*$", "", gsub("^.*?_r","", Eco_regions[i])))
 Eco_summary<-rbind(Eco_summary,EcoR2)
 }
+
+head(Eco_summary)
 #calculate AGB in Mg per Ha
 Eco_summary$AGB<-Eco_summary$AGB/100
 
-head(Eco_summary)
+Eco_summary2<-ddply(Eco_summary,.(Time,EcoregionName,EcoregionIndex,Scenario),numcolwise(mean,na.rm=T))
 
 #calculate mean of the results for each time step, weighting by number of pixels in each 
 #ecoregion
 
-Eco_summary4<-ddply(Eco_summary,.(Time,Scenario),summarise,
-                    AGB_M=as.numeric(weighted.mean(AGB,NumSites,na.rm = T)),AGB_SD=as.numeric(wt.sd(AGB,NumSites)),
-                    SRR_M=as.numeric(weighted.mean(SRR,NumSites,na.rm = T)),SRR_SD=as.numeric(wt.sd(SRR,NumSites)),
-                    Min_rate_M=as.numeric(weighted.mean(Min_rate,NumSites,na.rm = T)),Min_rate_SD=as.numeric(wt.sd(Min_rate,NumSites)),
-                    Fungi_M=as.numeric(weighted.mean(Fungi,NumSites,na.rm = T)),Fungi_SD=as.numeric(wt.sd(Fungi,NumSites)),
-                    GF_M=as.numeric(weighted.mean(GF,NumSites,na.rm = T)),GF_SD=as.numeric(wt.sd(GF,NumSites)),
-                    Lichen_M=as.numeric(weighted.mean(Lichen,NumSites,na.rm = T)),Lichen_SD=as.numeric(wt.sd(Lichen,NumSites)),
-                    Aesthetic_M=as.numeric(weighted.mean(Aesthetic,NumSites,na.rm = T)),Aesthetic_SD=as.numeric(wt.sd(Aesthetic,NumSites)),
-                    Recreation_M=as.numeric(weighted.mean(Recreation,NumSites,na.rm = T)),Recreation_SD=as.numeric(wt.sd(Recreation,NumSites)),
-                    Fungi_val_m=as.numeric(weighted.mean(Fungi_val,NumSites,na.rm = T)),Fungi_val_SD=as.numeric(wt.sd(Fungi_val,NumSites))
+Eco_summary4<-ddply(Eco_summary,.(Scenario,Time),summarise,
+                    AGB_M=weighted.mean(AGB,NumSites,na.rm = T),
+                    AGB_SD=wt.sd(AGB,NumSites),
+                    SRR_M=weighted.mean(SRR,NumSites,na.rm = T),
+                    SRR_SD=wt.sd(SRR,NumSites),
+                    Min_rate_M=weighted.mean(Min_rate,NumSites,na.rm = T),
+                    Min_rate_SD=wt.sd(Min_rate,NumSites),
+                    Fungi_M=weighted.mean(Fungi,NumSites,na.rm = T),
+                    Fungi_SD=wt.sd(Fungi,NumSites),
+                    GF_M=weighted.mean(GF,NumSites,na.rm = T),
+                    GF_SD=wt.sd(GF,NumSites),
+                    Lichen_M=weighted.mean(Lichen,NumSites,na.rm = T),
+                    Lichen_SD=wt.sd(Lichen,NumSites),
+                    Aesthetic_M=weighted.mean(Aesthetic,NumSites,na.rm = T),
+                    Aesthetic_SD=wt.sd(Aesthetic,NumSites),
+                    Recreation_M=weighted.mean(Recreation,NumSites,na.rm = T),
+                    Recreation_SD=wt.sd(Recreation,NumSites),
+                    Fungi_val_m=weighted.mean(Fungi_val,NumSites,na.rm = T),
+                    Fungi_val_SD=wt.sd(Fungi_val,NumSites)
                     )
 
-str(Eco_summary)
-str(Eco_summary4)
+WM_CN<-ddply(CN_ER,.(Scenario,Time),summarise,Mean_C=weighted.mean(C_change,NumSites,na.rm = T),SD_C=wt.sd(C_change,NumSites),
+             Mean_N=weighted.mean(N_change,NumSites,na.rm = T),SD_N=wt.sd(N_change,NumSites))
+
+
+str(Eco_summary4$AGB_M)
+
 
 #################################################
 #run calculations for carbon and nitrogen flux###
@@ -221,13 +236,10 @@ Timber<-ddply(BM_ER,.(Scenario,Time),summarise,Mean_vol=weighted.mean(Vol,NumSit
 
 
 Eco_summary3<-merge(merge(Eco_summary2,CN_ER_sum,by=c("EcoregionName","Scenario","Time")),Timber_sum,by=c("EcoregionName","Scenario","Time"))
-head(Eco_summary3)
 write.csv(x=Eco_summary3,"Data/R_output/Ecoregion_means.csv")
 
 #calculate mean of the results for each time step, weighting by number of pixels in each 
 #ecoregion
 
 Eco_summary5<-merge(merge(Eco_summary4,WM_CN,by=c("Scenario","Time")),Timber,by=c("Scenario","Time"))
-str(Eco_summary5)
-str(Eco_summary4)
 write.csv(x=Eco_summary5,"Data/R_output/Ecoregion_summary.csv")
