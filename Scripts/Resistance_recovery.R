@@ -78,20 +78,32 @@ ggsave("Figures/Resistance.pdf",width = 8,height = 6,units = "in",dpi = 400)
 #calculate the rate of recovery and how long it takes
 
 Recovery_summary<-NULL
+Recovery_summary2<-NULL
 for (i in 1:length(Un_Scen)){
   Scen_sub<-subset(Eco_summary,Scenario==Un_Scen[i])
+  head(Scen_sub)
   for (j in seq(4,26,by = 2)){
-    for (k in 2:nrow(Scen_sub)){
-    Recovery<-data.frame(Scenario=unique(Scen_sub$Scenario),Variable=colnames(Scen_sub[j]),
-                         Time=Scen_sub[k,2],
-                         Resistance=1-((2*(Scen_sub[2,y]-Scen_sub[6,y]))/(Scen_sub[2,y]+(Scen_sub[2,y]-Scen_sub[6,y]))),
-                           Recovery=(((2*(Scen_sub[1,j]-Scen_sub[5,j]))/
-                               ((Scen_sub[1,j]-Scen_sub[5,j])+
-                                  (Scen_sub[1,j]-Scen_sub[k,j])))-1)/
-                           (Scen_sub[k,2]-Scen_sub[j,2]))
+    #j<-6
+    for (k in 7:nrow(Scen_sub)){
+      #k<-7
+    Recovery<-data.frame(Scenario=unique(Un_Scen[i]),Variable=colnames(Scen_sub[j]),
+                         Time=Scen_sub[k,3],
+                         Resistance=1-((2*(Scen_sub[2,j]-Scen_sub[6,j]))/(Scen_sub[2,j]+(Scen_sub[2,j]-Scen_sub[6,j]))),
+                         Resistance2=1-((2*(Scen_sub[2,j]-Scen_sub[k,j]))/(Scen_sub[2,j]+(Scen_sub[2,j]-Scen_sub[k,j]))),
+                           Recovery=(((2*(Scen_sub[2,j]-Scen_sub[6,j]))/
+                               ((Scen_sub[2,j]-Scen_sub[6,j])+
+                                  (Scen_sub[2,j]-Scen_sub[k,j])))-1)/
+                           (Scen_sub[k,3]-Scen_sub[6,3]))
     Recovery_summary<-rbind(Recovery,Recovery_summary)
   }
 }
+#Recovery_summary2<-rbind(Recovery_summary,Recovery_summary2)
 }
 
-head(Recovery_summary)
+Recovery_summary$Resistance<-ifelse(Recovery_summary$Scenario=="Scenario 1",1,Recovery_summary$Resistance)#set Scenario 1 resistance as equal to 1
+Recovery_summary$Resistance<-ifelse(Recovery_summary$Resistance>=1,1,Recovery_summary$Resistance) #set resistance as equal to 1 if variable increases
+
+Recovery_sub<-subset(Recovery_summary,Time>5)
+head(Recovery_sub)
+
+ggplot(Recovery_sub,aes(x=Time,y=Resistance2,colour=Scenario))+geom_line()+facet_wrap(~Variable,scales="free_y")
