@@ -5,6 +5,7 @@
 library(ggplot2)
 library(tidyr)
 library(dplyr)
+library(vegan)
 
 #organise data
 Eco_summary<-read.csv("Data/R_output/Ecoregion_summary.csv")
@@ -177,7 +178,18 @@ ggsave("Figures/Persistence.pdf",width = 8,height = 6,units = "in",dpi = 400)
 
 names(Eco_summ_clean)[3:ncol(Eco_summ_clean)]
 
-Eco_summ_clean<-Eco_summary[-c(1,seq(5,27,by=2))]
-Uni<-expand.grid(unique(Eco_summ_clean$Scenario))
-
-
+Sor_sim_sum<-NULL
+Eco_summ_clean<-Eco_summary[-c(1,seq(5,27,by=2),22,24)]
+head(Eco_summary)
+Uni_Scen<-unique(Eco_summ_clean$Scenario)
+for (i in 1:length(Uni_Scen)){
+  i<-2
+  Eco_sum_sub<-subset(Eco_summ_clean,Scenario==Uni_Scen[i])
+  Eco_sum_sub2<-(Eco_sum_sub)[-c(1:2)]
+  Eco_sum_sub3<-(Eco_sum_sub2)[-1,]
+  Eco_sum_sub[101,]
+  Sor_sim<-data.frame(Scenario=Uni_Scen[i],Sim=1-vegdist(Eco_sum_sub3)[100])
+  Sor_sim_sum<-rbind(Sor_sim_sum,Sor_sim)
+}
+          
+ggplot(Sor_sim_sum,aes(x=Scenario,y=Sim))+geom_point(shape=1,size=2)+geom_hline(yintercept=1,lty=2,alpha=0.5)
