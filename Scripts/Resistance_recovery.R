@@ -6,7 +6,16 @@ library(ggplot2)
 
 #organise data
 Eco_summary<-read.csv("Data/R_output/Ecoregion_summary.csv")
-Eco_summary$Scenario<-factor(Eco_summary$Scenario,c("Scenario 1","Scenario 2","Scenario 3","Scenario 4","Scenario 5","Scenario 6", "Scenario 12"))
+Eco_summary<-Eco_summary[order(Eco_summary[,3]),]
+
+
+#############################################################
+#1 - RESISTANCE##############################################
+#This part of the script calculates resistance of the #######
+#different biodiversity/ecosystem function/ecosystem service#
+#metrics used for each of the different scenarios of dieback#
+#############################################################
+
 
 #produce vector with details of different scenarios
 Sc<-Eco_summary$Scenario
@@ -56,17 +65,26 @@ P1<-ggplot(Res_summary,aes(x=Scenario,y=Resistance))+facet_wrap(~ESLab,scales = 
 P1+theme(axis.text.x = element_text(angle = 90))+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
 ggsave("Figures/Resistance.pdf",width = 8,height = 6,units = "in",dpi = 400)
 
+#############################################################
+#2 - Recovery################################################
+#This part of the script calculates recovery of the #######
+#different biodiversity/ecosystem function/ecosystem service#
+#metrics used for each of the different scenarios of dieback#
+#############################################################
+
+
+
 #recovery
 #calculate the rate of recovery and how long it takes
 
 Recovery_summary<-NULL
 for (i in 1:length(Un_Scen)){
   Scen_sub<-subset(Eco_summary,Scenario==Un_Scen[i])
-  for (j in seq(4,18,by = 2)){
+  for (j in seq(4,26,by = 2)){
     for (k in 2:nrow(Scen_sub)){
     Recovery<-data.frame(Scenario=unique(Scen_sub$Scenario),Variable=colnames(Scen_sub[j]),
                          Time=Scen_sub[k,2],
-                           Resistance=1-((2*(Scen_sub[1,j]-Scen_sub[5,j]))/(Scen_sub[1,j]+(Scen_sub[1,j]-Scen_sub[5,j]))),
+                         Resistance=1-((2*(Scen_sub[2,y]-Scen_sub[6,y]))/(Scen_sub[2,y]+(Scen_sub[2,y]-Scen_sub[6,y]))),
                            Recovery=(((2*(Scen_sub[1,j]-Scen_sub[5,j]))/
                                ((Scen_sub[1,j]-Scen_sub[5,j])+
                                   (Scen_sub[1,j]-Scen_sub[k,j])))-1)/
