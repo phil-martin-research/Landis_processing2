@@ -247,7 +247,3 @@ write.csv(x=Eco_summary_means,"Data/R_output/Ecoregion_means.csv")
 
 Eco_summary_weighted<-merge(merge(Eco_summary3,WM_CN,by=c("Scenario","Time")),Timber,by=c("Scenario","Time"))
 write.csv(x=Eco_summary_weighted,"Data/R_output/Ecoregion_summary.csv")
-
-
-P1<-ggplot(Eco_summary_means,aes(x=Time,y=Nitrogen_flux,group=EcoregionName))+geom_line(alpha=0.1)+facet_wrap(~Scenario,scales="free")
-P1+geom_ribbon(data=Eco_summary_weighted,aes(x=Time,y=Mean_N,ymax=Mean_N+SD_N,ymin=Mean_N-SD_N,group=NULL),alpha=0.5)+geom_line(data=Eco_summary_weighted,aes(x=Time,y=Mean_N,ymax=Mean_N+SD_N,ymin=Mean_N-SD_N,group=NULL))
