@@ -56,6 +56,7 @@ Com_sim_sum$Scenario<-factor(Com_sim_sum$Scenario,c("1","2","3","4","5","6","7",
 WM_Com_sim$Scenario<-factor(WM_Com_sim$Scenario,c("1","2","3","4","5","6","7","8","9","10","11","12"))
 
 #plot results
+theme_set(theme_bw(base_size=8))
 P1<-ggplot(Com_sim_sum,aes(x=Time,y=m_sim,group=Ecoregion))+geom_line(alpha=0.2)+facet_wrap(~Scenario)
 P2<-P1+geom_ribbon(data=WM_Com_sim,aes(y=Mean,ymax=Mean+SD,ymin=Mean-SD,group=NULL),alpha=0.5)+geom_line(data=WM_Com_sim,aes(y=Mean,ymax=Mean+SD,ymin=Mean-SD,group=NULL),size=2,alpha=0.8)
 P3<-P2+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
