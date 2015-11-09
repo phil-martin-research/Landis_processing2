@@ -77,7 +77,7 @@ Scenario_labeller <- function(var, value){ # lifted bodily from the R Cookbook
     value[value=="Scenario 8"]   <- 20
     value[value=="Scenario 9"]   <- 40
     value[value=="Scenario 10"]   <- 60
-    value[value=="Scenario 1`"]   <- 80
+    value[value=="Scenario 11"]   <- 80
     value[value=="Scenario 12"]   <- 100
   }
   return(value)
@@ -93,11 +93,11 @@ Scenario_labeller2 <- function(var, value){ # lifted bodily from the R Cookbook
     value[value=="Scenario 4"]   <- "Pulse"
     value[value=="Scenario 5"]   <- "Pulse"
     value[value=="Scenario 6"]   <- "Pulse"
-    value[value=="Scenario 7"]   <- "No disturbance"
+    value[value=="Scenario 7"]   <- "Press"
     value[value=="Scenario 8"]   <- "Pulse + Press"
     value[value=="Scenario 9"]   <- "Pulse + Press"
     value[value=="Scenario 10"]   <- "Pulse + Press"
-    value[value=="Scenario 1`"]   <- "Pulse + Press"
+    value[value=="Scenario 11"]   <- "Pulse + Press"
     value[value=="Scenario 12"]   <- "Pulse + Press"
   }
   return(value)
@@ -108,9 +108,10 @@ Res_summary$Scen_lab2 <- Scenario_labeller2('Scenario',Res_summary$Scenario)
 
 #plot results
 theme_set(theme_bw(base_size=12))
-P1<-ggplot(Res_summary,aes(x=Scen_lab,y=Resistance))+facet_wrap(~ESLab)+geom_hline(yintercept=1,lty=2,alpha=0.5,size=0.5)+geom_point(size=2,shape=1)
+P1<-ggplot(Res_summary,aes(x=Scen_lab,y=Resistance,shape=Scen_lab2,colour=Scen_lab2))+facet_wrap(~ESLab)+geom_hline(yintercept=1,lty=2,alpha=0.5,size=0.5)+geom_point(size=2,alpha=0.5)
 P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
-P2+xlab("Percentage beech and oak biomass lost in disturbance")+ylab("Resistance of biodivesrity and ecosystem services to disturbance")
+P3<-P2+xlab("Percentage beech and oak biomass lost in disturbance")+ylab("Resistance of biodivesrity and ecosystem services to disturbance")
+P3+scale_colour_manual("Disturbance type",values = c("green","purple","blue","red"))+scale_shape_manual("Disturbance type",values = c(0, 1, 15, 16))
 ggsave("Figures/Resistance.pdf",width = 8,height = 6,units = "in",dpi = 400)
 
 #############################################################
@@ -151,6 +152,7 @@ Recovery_summary$Resistance<-ifelse(Recovery_summary$Resistance>=1,1,Recovery_su
 
 #subset data so that data before time step==5, data from Scenario 1 and where resistance>1 are removed
 Recovery_sub<-subset(Recovery_summary,Time>5&Scenario!="Scenario 1"&Resistance<1)
+Recovery_sub<-subset(Recovery_sub,Variable!="Min_rate_M"&Variable!="GF_M")
 
 ggplot(Recovery_sub,aes(x=Time,y=Resistance2,colour=Scenario))+geom_line()+facet_wrap(~Variable,scales="free_y")
 
@@ -176,18 +178,17 @@ for (i in 1:nrow(Un_Sce_ES)){
 
 R_summ$variable<-R_summ$Variable#tidy data
 R_summ$ESLab <- ES_labeller('variable',R_summ$variable)#relabel variables for ease of plotting
+R_summ$Scen_lab <- as.numeric(Scenario_labeller('Scenario',R_summ$Scenario))
+R_summ$Scen_lab2 <- Scenario_labeller2('Scenario',R_summ$Scenario)
+R_summ<-subset(R_summ,Scen_lab2!="Press")
+
 
 #plot of time taken for recovery
-P1<-ggplot(R_summ,aes(x=Scenario,y=Time))+geom_point(size=2,shape=1)+facet_wrap(~ESLab,scales="free_y",ncol=5)
-P2<-P1+theme(axis.text.x = element_text(angle = 90))+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
-P2+ylab("Time taken for recovery (Years)")+ theme(strip.text.x = element_text(size = 8))
+P1<-ggplot(R_summ,aes(x=Scen_lab,y=Time,colour=Scen_lab2,shape=Scen_lab2))+geom_point(size=2,alpha=0.5)+facet_wrap(~ESLab,ncol=4)
+P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
+P3<-P2+ylab("Time taken for recovery (Years)")+ theme(strip.text.x = element_text(size = 8))+xlab("Percentage beech and oak biomass lost in disturbance")
+P3+scale_colour_manual("Disturbance type",values = c("blue","red"))+scale_shape_manual("Disturbance type",values = c(15, 16))
 ggsave("Figures/Recovery_time.pdf",width = 8,height = 6,units = "in",dpi = 400)
-
-#plot of recovery rate
-P1<-ggplot(R_summ,aes(x=Scenario,y=Recovery*100))+geom_point(size=2,shape=1)+facet_wrap(~ESLab,scales="free_y",ncol=5)
-P2<-P1+theme(axis.text.x = element_text(angle = 90))+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
-P2+ylab("Annual percentage increase in variable")+ theme(strip.text.x = element_text(size = 8))
-ggsave("Figures/Recovery_rate.pdf",width = 8,height = 6,units = "in",dpi = 400)
 
 
 ##################################################################
@@ -212,10 +213,16 @@ for (i in 1:nrow(Un_Sce_ES)){
 Pers_summ$Resistance2<-ifelse(Pers_summ$Resistance2>1,1,Pers_summ$Resistance2)
 Pers_summ$variable<-Pers_summ$Variable
 Pers_summ$ESLab <- ES_labeller('variable',Pers_summ$variable)
+Pers_summ$Scen_lab <- as.numeric(Scenario_labeller('Scenario',Pers_summ$Scenario))
+Pers_summ$Scen_lab2 <- Scenario_labeller2('Scenario',Pers_summ$Scenario)
+Pers_summ<-subset(Pers_summ,Scen_lab2!="Press"&Scenario!="Scenario 1")
 
-P1<-ggplot(Pers_summ,aes(x=Scenario,y=Resistance2))+geom_point(size=2,shape=1)+facet_wrap(~ESLab,scales="free_y",ncol=4)
-P2<-P1+theme(axis.text.x = element_text(angle = 90))+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
-P2+ylab("Value after 100 years relative to Year 0")+ theme(strip.text.x = element_text(size = 8))+geom_hline(yintercept=1,lty=2,alpha=0.5,size=0.5)+geom_point(size=2,shape=1)
+
+P1<-ggplot(Pers_summ,aes(x=Scen_lab,y=Resistance2,colour=Scen_lab2,shape=Scen_lab2))+geom_point(size=2,alpha=0.5)+facet_wrap(~ESLab,ncol=4)
+P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
+P3<-P2+ylab("Value after 100 years relative to year 0")+ theme(strip.text.x = element_text(size = 8))+geom_hline(yintercept=1,lty=2,alpha=0.5,size=0.5)
+P4<-P3+scale_colour_manual("Disturbance type",values = c("blue","red"))+scale_shape_manual("Disturbance type",values = c(15, 16))
+P4+xlab("Percentage beech and oak biomass lost in disturbance")+ theme(panel.margin = unit(1, "lines"))
 ggsave("Figures/Persistence.pdf",width = 8,height = 6,units = "in",dpi = 400)
 
 #now if we treat each variable as if it was a species we can produce a similarity index to see summarise which 
