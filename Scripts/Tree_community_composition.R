@@ -24,7 +24,6 @@ for (i in 1:length(Eco_region_BM)){
   File<-read.csv(Eco_region_BM[i])
   #remove blank column
   File_sub<-File[-ncol(File)]
-  hist(File_sub$Time)
   #remove rows containing NAs
   File_sub2<-File_sub[complete.cases(File_sub),]
   #insert a column with the scenario number
@@ -35,29 +34,28 @@ for (i in 1:length(Eco_region_BM)){
 }
 
 BM_ER<-subset(BM_ER,Time<=100)
-head(BM_ER)
 Uniq_combs<-unique(BM_ER[c("Scenario", "Replicate","EcoregionIndex")])
-str(Sub_CC)
 Com_sim<-NULL
 for (i in 1:nrow(Uniq_combs)){#for each unique combination of scenario and replicate
   #subset species composition to give all time steps
   Sub_CC<-BM_ER[with(BM_ER, Scenario==Uniq_combs$Scenario[i] & Replicate==Uniq_combs$Replicate[i] & EcoregionIndex==Uniq_combs$EcoregionIndex[i]), ]
   #drop columns that do not refer to species abundance
-  head(Sub_CC)
   Sub_CC2<-Sub_CC[,-c(1:4,ncol(Sub_CC)-1,ncol(Sub_CC))]
-  head(Sub_CC2)
   #create dataframe including scenario, replicate and time
   #along with sorensen index using time 0 as a comparitor
   #currently all of these equal 1, as no species are lost or gained
-  Community<-data.frame(Sub_CC[,c(1:4,ncol(Sub_CC)-1,ncol(Sub_CC))],similarity=c(1,(1-vegdist(Sub_CC2))[1:10]))
+  Community<-data.frame(Sub_CC[,c(1:4,ncol(Sub_CC)-1,ncol(Sub_CC))],similarity=c(1,(1-vegdist(Sub_CC2))[1:100]))
   #bind results to last set of loop results
   Com_sim<-rbind(Community,Com_sim)
 }
 
+#oragnise data for plotting
 Com_sim_sum<-ddply(Com_sim,.(Time,Ecoregion,Scenario),summarise,m_sim=mean(similarity),Num_sum=sum(NumSites))
 WM_Com_sim<-ddply(Com_sim_sum,.(Scenario,Time),summarise,Mean=weighted.mean(m_sim,Num_sum,na.rm = T),SD=wt.sd(m_sim,Num_sum))
+Com_sim_sum$Scenario<-factor(Com_sim_sum$Scenario,c("1","2","3","4","5","6","7","8","9","10","11","12"))
+WM_Com_sim$Scenario<-factor(WM_Com_sim$Scenario,c("1","2","3","4","5","6","7","8","9","10","11","12"))
 
-
+#plot results
 P1<-ggplot(Com_sim_sum,aes(x=Time,y=m_sim,group=Ecoregion))+geom_line(alpha=0.2)+facet_wrap(~Scenario)
 P2<-P1+geom_ribbon(data=WM_Com_sim,aes(y=Mean,ymax=Mean+SD,ymin=Mean-SD,group=NULL),alpha=0.5)+geom_line(data=WM_Com_sim,aes(y=Mean,ymax=Mean+SD,ymin=Mean-SD,group=NULL),size=2,alpha=0.8)
 P3<-P2+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
