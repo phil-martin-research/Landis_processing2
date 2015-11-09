@@ -11,6 +11,65 @@ library(vegan)
 Eco_summary<-read.csv("Data/R_output/Ecoregion_summary.csv")
 Eco_summary<-Eco_summary[order(Eco_summary[,3]),]
 
+#functions to make plotting of figures easier
+
+ES_labeller <- function(var, value){ # lifted bodily from the R Cookbook
+  value <- as.character(value)
+  if (var=="variable") {
+    value[value=="Timber_M"]   <- "Timber volume"
+    value[value=="Nitrogen_flux_M"]   <- "Nitrogen sequestration"
+    value[value=="Carbon_flux_M"]   <- "Carbon sequestration"
+    value[value=="Recreation_M"]   <- "Recreation value"
+    value[value=="Aesthetic_M"]   <- "Aesthetic value"
+    value[value=="Lichen_M"]   <- "Lichen species \nrichness"
+    value[value=="GF_M"]   <- "Ground flora \nspecies richness"
+    value[value=="Fungi_M"]   <- "Fungi species richness"
+    value[value=="Min_rate_M"]   <- "Nitrogen mineralistation \nrate"
+    value[value=="SRR_M"]   <- "Soil respiration rate"
+    value[value=="AGB_M"]   <- "Above ground biomass"
+    value[value=="Fungi_val_M"]   <- "Commercially valuable \nfungi richness"
+  }
+  return(value)
+}
+
+Scenario_labeller <- function(var, value){ # lifted bodily from the R Cookbook
+  value <- as.character(value)
+  if (var=="Scenario") {
+    value[value=="Scenario 1"]   <- 0
+    value[value=="Scenario 2"]   <- 20
+    value[value=="Scenario 3"]   <- 40
+    value[value=="Scenario 4"]   <- 60
+    value[value=="Scenario 5"]   <- 80
+    value[value=="Scenario 6"]   <- 100
+    value[value=="Scenario 7"]   <- 0
+    value[value=="Scenario 8"]   <- 20
+    value[value=="Scenario 9"]   <- 40
+    value[value=="Scenario 10"]   <- 60
+    value[value=="Scenario 11"]   <- 80
+    value[value=="Scenario 12"]   <- 100
+  }
+  return(value)
+}
+
+Scenario_labeller2 <- function(var, value){ # lifted bodily from the R Cookbook
+  value <- as.character(value)
+  if (var=="Scenario") {
+    value[value=="Scenario 1"]   <- "No disturbance"
+    value[value=="Scenario 2"]   <- "Pulse"
+    value[value=="Scenario 3"]   <- "Pulse"
+    value[value=="Scenario 4"]   <- "Pulse"
+    value[value=="Scenario 5"]   <- "Pulse"
+    value[value=="Scenario 6"]   <- "Pulse"
+    value[value=="Scenario 7"]   <- "Press"
+    value[value=="Scenario 8"]   <- "Pulse + Press"
+    value[value=="Scenario 9"]   <- "Pulse + Press"
+    value[value=="Scenario 10"]   <- "Pulse + Press"
+    value[value=="Scenario 11"]   <- "Pulse + Press"
+    value[value=="Scenario 12"]   <- "Pulse + Press"
+  }
+  return(value)
+}
+
 
 #############################################################
 #1 - RESISTANCE##############################################
@@ -35,74 +94,17 @@ for (i in 1:length(Un_Scen)){
     Res_summary<-rbind(Resistance,Res_summary)
   }
 }
-Res_summary$Resistance<-ifelse(Res_summary$Resistance>1,1,Res_summary$Resistance) #set resistance as equal to 1 if variable increases
-Res_summary$Resistance<-ifelse(Res_summary$Scenario=="Scenario 1",1,Res_summary$Resistance)#set Scenario 1 resistance as equal to 1
-Res_summary$Resistance<-ifelse(Res_summary$Resistance<0,0,Res_summary$Resistance)#set resistance as equal to 0 if it is less than 0
 
+#set resistance as equal to 1 if variable increases
+Res_summary$Resistance<-ifelse(Res_summary$Resistance>1,1,Res_summary$Resistance) 
+#set Scenario 1 resistance as equal to 1
+Res_summary$Resistance<-ifelse(Res_summary$Scenario=="Scenario 1",1,Res_summary$Resistance)
+#set resistance as equal to 0 if it is less than 0
+Res_summary$Resistance<-ifelse(Res_summary$Resistance<0,0,Res_summary$Resistance)
 
-
-#prepare descriptive labels for different facets
-
-ES_labeller <- function(var, value){ # lifted bodily from the R Cookbook
-  value <- as.character(value)
-  if (var=="variable") {
-    value[value=="Timber_M"]   <- "Timber volume"
-    value[value=="Nitrogen_flux_M"]   <- "Nitrogen sequestration"
-    value[value=="Carbon_flux_M"]   <- "Carbon sequestration"
-    value[value=="Recreation_M"]   <- "Recreation value"
-    value[value=="Aesthetic_M"]   <- "Aesthetic value"
-    value[value=="Lichen_M"]   <- "Lichen species \nrichness"
-    value[value=="GF_M"]   <- "Ground flora \nspecies richness"
-    value[value=="Fungi_M"]   <- "Fungi species richness"
-    value[value=="Min_rate_M"]   <- "Nitrogen mineralistation \nrate"
-    value[value=="SRR_M"]   <- "Soil respiration rate"
-    value[value=="AGB_M"]   <- "Above ground biomass"
-    value[value=="Fungi_val_M"]   <- "Commercially valuable \nfungi richness"
-  }
-  return(value)
-}
+#prepare descriptive labels for different figures
 Res_summary$ESLab <- ES_labeller('variable',Res_summary$variable)
-
-
-Scenario_labeller <- function(var, value){ # lifted bodily from the R Cookbook
-  value <- as.character(value)
-  if (var=="Scenario") {
-    value[value=="Scenario 1"]   <- 0
-    value[value=="Scenario 2"]   <- 20
-    value[value=="Scenario 3"]   <- 40
-    value[value=="Scenario 4"]   <- 60
-    value[value=="Scenario 5"]   <- 80
-    value[value=="Scenario 6"]   <- 100
-    value[value=="Scenario 7"]   <- 0
-    value[value=="Scenario 8"]   <- 20
-    value[value=="Scenario 9"]   <- 40
-    value[value=="Scenario 10"]   <- 60
-    value[value=="Scenario 11"]   <- 80
-    value[value=="Scenario 12"]   <- 100
-  }
-  return(value)
-}
 Res_summary$Scen_lab <- as.numeric(Scenario_labeller('Scenario',Res_summary$Scenario))
-
-Scenario_labeller2 <- function(var, value){ # lifted bodily from the R Cookbook
-  value <- as.character(value)
-  if (var=="Scenario") {
-    value[value=="Scenario 1"]   <- "No disturbance"
-    value[value=="Scenario 2"]   <- "Pulse"
-    value[value=="Scenario 3"]   <- "Pulse"
-    value[value=="Scenario 4"]   <- "Pulse"
-    value[value=="Scenario 5"]   <- "Pulse"
-    value[value=="Scenario 6"]   <- "Pulse"
-    value[value=="Scenario 7"]   <- "Press"
-    value[value=="Scenario 8"]   <- "Pulse + Press"
-    value[value=="Scenario 9"]   <- "Pulse + Press"
-    value[value=="Scenario 10"]   <- "Pulse + Press"
-    value[value=="Scenario 11"]   <- "Pulse + Press"
-    value[value=="Scenario 12"]   <- "Pulse + Press"
-  }
-  return(value)
-}
-
 Res_summary$Scen_lab2 <- Scenario_labeller2('Scenario',Res_summary$Scenario)
 
 
@@ -154,6 +156,8 @@ Recovery_summary$Resistance<-ifelse(Recovery_summary$Resistance>=1,1,Recovery_su
 Recovery_sub<-subset(Recovery_summary,Time>5&Scenario!="Scenario 1"&Resistance<1)
 Recovery_sub<-subset(Recovery_sub,Variable!="Min_rate_M"&Variable!="GF_M")
 
+
+#not sure what is going on with carbon here - this will need fixing
 ggplot(Recovery_sub,aes(x=Time,y=Resistance2,colour=Scenario))+geom_line()+facet_wrap(~Variable,scales="free_y")
 
 #now work out the first time point at which Resistance2>=1, thereby working out the time
@@ -168,10 +172,10 @@ for (i in 1:nrow(Un_Sce_ES)){
   if (!is.na(First_recov)){
   Recov_summary<-Scen_sub[(First_recov),]#get row at which variable has recovered
   }else{#if it didn't recover, set "Time" as==100
-   Recov_summary<-Scen_sub[(First_recov),]
-   Recov_summary$Scenario<-Un_Sce_ES[i,1]
-   Recov_summary$Variable<-Un_Sce_ES[i,2]
-   Recov_summary$Time<-100
+   Recov_summary<-Scen_sub[(First_recov),]#give the first row at which the variable has recovered
+   Recov_summary$Scenario<-Un_Sce_ES[i,1]#include scenario number
+   Recov_summary$Variable<-Un_Sce_ES[i,2]#include variable name
+   Recov_summary$Time<-100#set time as 100 if there is no recvery within time-frame
   }
   R_summ<-rbind(R_summ,Recov_summary)
 }
@@ -184,11 +188,12 @@ R_summ<-subset(R_summ,Scen_lab2!="Press")
 
 
 #plot of time taken for recovery
-P1<-ggplot(R_summ,aes(x=Scen_lab,y=Time,colour=Scen_lab2,shape=Scen_lab2))+geom_point(size=2,alpha=0.5)+facet_wrap(~ESLab,ncol=4)
+P1<-ggplot(R_summ,aes(x=Scen_lab,y=Time,colour=Scen_lab2,shape=Scen_lab2))+geom_point(size=2,alpha=0.5)+facet_wrap(~ESLab,ncol=5)
 P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
 P3<-P2+ylab("Time taken for recovery (Years)")+ theme(strip.text.x = element_text(size = 8))+xlab("Percentage beech and oak biomass lost in disturbance")
-P3+scale_colour_manual("Disturbance type",values = c("blue","red"))+scale_shape_manual("Disturbance type",values = c(15, 16))
-ggsave("Figures/Recovery_time.pdf",width = 8,height = 6,units = "in",dpi = 400)
+P4<-P3+scale_colour_manual("Disturbance type",values = c("blue","red"))+scale_shape_manual("Disturbance type",values = c(15, 16))
+P4+theme(panel.margin = unit(1, "lines"))
+ggsave("Figures/Recovery_time.pdf",width = 10,height = 5,units = "in",dpi = 400)
 
 
 ##################################################################
@@ -202,16 +207,19 @@ ggsave("Figures/Recovery_time.pdf",width = 8,height = 6,units = "in",dpi = 400)
 #
 
 
+#loop to get values or ecosystem services/biodiversity relative to first time step, after 100 years
 Un_Sce_ES<-expand.grid(unique(Recovery_summary$Scenario),unique(Recovery_summary$Variable))#unique combinations of scenario and variable
 Pers_summ<-NULL
 for (i in 1:nrow(Un_Sce_ES)){
   Scen_sub<-subset(Recovery_summary,Scenario==Un_Sce_ES[i,1]&Variable==Un_Sce_ES[i,2])#subset for each row of Un_Sce_ES
-  Pers_sub<-tail(Scen_sub,1)
-  Pers_summ<-rbind(Pers_summ,Pers_sub)
+  Pers_sub<-tail(Scen_sub,1)#get value after 100 years
+  Pers_summ<-rbind(Pers_summ,Pers_sub)#bind all dataframes together
 }
 
+#set value as 1 if value is greater after 100 years at time zero
 Pers_summ$Resistance2<-ifelse(Pers_summ$Resistance2>1,1,Pers_summ$Resistance2)
 Pers_summ$variable<-Pers_summ$Variable
+#relabel bits for plotting of figures
 Pers_summ$ESLab <- ES_labeller('variable',Pers_summ$variable)
 Pers_summ$Scen_lab <- as.numeric(Scenario_labeller('Scenario',Pers_summ$Scenario))
 Pers_summ$Scen_lab2 <- Scenario_labeller2('Scenario',Pers_summ$Scenario)
