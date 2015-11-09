@@ -5,17 +5,16 @@ library(grid)
 Eco_summary<-read.csv("Data/R_output/Ecoregion_summary.csv")
 Eco_means<-read.csv("Data/R_output/Ecoregion_means.csv")
 
-head(Eco_means)
-str(Eco_summary)
-
 Eco_means<-Eco_means[,-16]
 
-Eco_means$Scenario<-factor(Eco_means$Scenario,c("Scenario 1","Scenario 2","Scenario 3","Scenario 4","Scenario 5","Scenario 6", "Scenario 12"))
-Eco_summary$Scenario<-factor(Eco_summary$Scenario,c("Scenario 1","Scenario 2","Scenario 3","Scenario 4","Scenario 5","Scenario 6", "Scenario 12"))
+Eco_means$Scenario<-factor(Eco_means$Scenario,c("Scenario 1","Scenario 2","Scenario 3","Scenario 4","Scenario 5","Scenario 6",
+                                                "Scenario 7","Scenario 8","Scenario 9","Scenario 10","Scenario 11","Scenario 12"))
+Eco_summary$Scenario<-factor(Eco_summary$Scenario,c("Scenario 1","Scenario 2","Scenario 3","Scenario 4","Scenario 5","Scenario 6",
+                                                    "Scenario 7","Scenario 8","Scenario 9","Scenario 10","Scenario 11","Scenario 12"))
 
 out<-NULL
 t<-1
-theme_set(theme_bw(base_size=12))
+theme_set(theme_bw(base_size=8))
 for (i in names(Eco_means)[-c(1:6)]){
   Y_var<-i
   Y_var2<-paste(i,"_M",sep = "")
@@ -37,12 +36,3 @@ pdf(file = "Figures/Ecosystem_trajectories_2.pdf",width = 10,height=8)
 do.call(grid.arrange, c(out[7],out[8],out[9],out[10],out[11],out[12],
                         list(ncol=1)))
 dev.off()
-
-
-
-theme_set(theme_bw(base_size=12))
-P1<-ggplot(Eco_means,aes(x=Time,y=Aesthetic,group=EcoregionIndex))+geom_line(alpha=0.3)+facet_wrap(~Scenario,nrow=1)
-P2<-P1+geom_line(data=Eco_summary,aes(x=Time,y=Aesthetic_M,group=NULL),size=2)+
-  geom_ribbon(data=Eco_summary,aes(y=Aesthetic_M,ymax=Aesthetic_M+Aesthetic_SD,ymin=Aesthetic_M-Aesthetic_SD,group=NULL),alpha=0.5)
-P3<-P2+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
-P3
