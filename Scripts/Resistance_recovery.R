@@ -37,6 +37,8 @@ for (i in 1:length(Un_Scen)){
 }
 Res_summary$Resistance<-ifelse(Res_summary$Resistance>1,1,Res_summary$Resistance) #set resistance as equal to 1 if variable increases
 Res_summary$Resistance<-ifelse(Res_summary$Scenario=="Scenario 1",1,Res_summary$Resistance)#set Scenario 1 resistance as equal to 1
+Res_summary$Resistance<-ifelse(Res_summary$Resistance<0,0,Res_summary$Resistance)#set resistance as equal to 0 if it is less than 0
+
 
 
 #prepare descriptive labels for different facets
@@ -45,8 +47,8 @@ ES_labeller <- function(var, value){ # lifted bodily from the R Cookbook
   value <- as.character(value)
   if (var=="variable") {
     value[value=="Timber_M"]   <- "Timber volume"
-    value[value=="Nitrogen_flux_M"]   <- "Nitrogen flux"
-    value[value=="Carbon_flux_M"]   <- "Carbon flux"
+    value[value=="Nitrogen_flux_M"]   <- "Nitrogen sequestration"
+    value[value=="Carbon_flux_M"]   <- "Carbon sequestration"
     value[value=="Recreation_M"]   <- "Recreation value"
     value[value=="Aesthetic_M"]   <- "Aesthetic value"
     value[value=="Lichen_M"]   <- "Lichen species \nrichness"
@@ -62,10 +64,53 @@ ES_labeller <- function(var, value){ # lifted bodily from the R Cookbook
 Res_summary$ESLab <- ES_labeller('variable',Res_summary$variable)
 
 
+Scenario_labeller <- function(var, value){ # lifted bodily from the R Cookbook
+  value <- as.character(value)
+  if (var=="Scenario") {
+    value[value=="Scenario 1"]   <- 0
+    value[value=="Scenario 2"]   <- 20
+    value[value=="Scenario 3"]   <- 40
+    value[value=="Scenario 4"]   <- 60
+    value[value=="Scenario 5"]   <- 80
+    value[value=="Scenario 6"]   <- 100
+    value[value=="Scenario 7"]   <- 0
+    value[value=="Scenario 8"]   <- 20
+    value[value=="Scenario 9"]   <- 40
+    value[value=="Scenario 10"]   <- 60
+    value[value=="Scenario 1`"]   <- 80
+    value[value=="Scenario 12"]   <- 100
+  }
+  return(value)
+}
+Res_summary$Scen_lab <- as.numeric(Scenario_labeller('Scenario',Res_summary$Scenario))
+
+Scenario_labeller2 <- function(var, value){ # lifted bodily from the R Cookbook
+  value <- as.character(value)
+  if (var=="Scenario") {
+    value[value=="Scenario 1"]   <- "No disturbance"
+    value[value=="Scenario 2"]   <- "Pulse"
+    value[value=="Scenario 3"]   <- "Pulse"
+    value[value=="Scenario 4"]   <- "Pulse"
+    value[value=="Scenario 5"]   <- "Pulse"
+    value[value=="Scenario 6"]   <- "Pulse"
+    value[value=="Scenario 7"]   <- "No disturbance"
+    value[value=="Scenario 8"]   <- "Pulse + Press"
+    value[value=="Scenario 9"]   <- "Pulse + Press"
+    value[value=="Scenario 10"]   <- "Pulse + Press"
+    value[value=="Scenario 1`"]   <- "Pulse + Press"
+    value[value=="Scenario 12"]   <- "Pulse + Press"
+  }
+  return(value)
+}
+
+Res_summary$Scen_lab2 <- Scenario_labeller2('Scenario',Res_summary$Scenario)
+
+
 #plot results
 theme_set(theme_bw(base_size=12))
-P1<-ggplot(Res_summary,aes(x=Scenario,y=Resistance))+facet_wrap(~ESLab,scales = "free_y")+geom_hline(yintercept=1,lty=2,alpha=0.5,size=0.5)+geom_point(size=2,shape=1)
-P1+theme(axis.text.x = element_text(angle = 90))+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
+P1<-ggplot(Res_summary,aes(x=Scen_lab,y=Resistance))+facet_wrap(~ESLab)+geom_hline(yintercept=1,lty=2,alpha=0.5,size=0.5)+geom_point(size=2,shape=1)
+P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
+P2+xlab("Percentage beech and oak biomass lost in disturbance")+ylab("Resistance of biodivesrity and ecosystem services to disturbance")
 ggsave("Figures/Resistance.pdf",width = 8,height = 6,units = "in",dpi = 400)
 
 #############################################################
