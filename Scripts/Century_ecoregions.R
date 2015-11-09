@@ -2,7 +2,7 @@
 #Elena's Landis-II 'ecoregions' using data from Paul's gradient plots
 
 #author: Phil martin
-#Date 2015/09/24
+#Date 2015/11/04
 
 #open packages
 library(raster)
@@ -16,6 +16,7 @@ library(gtools)
 library(SDMTools)
 library(tidyr)
 library(dplyr)
+library(GGally)
 
 #clear previous R objects
 rm(list=ls())
@@ -50,7 +51,7 @@ for (i in 4:5){
                                  AGB=summary(Mod_average)$coefmat.full[2,1],
                                  AGB_sq=summary(Mod_average)$coefmat.full[3,1]))
 }
-#and then for count data - fungi, ground floa and lichen species richness
+#and then for count data - fungi, ground flora and lichen species richness
 for (i in 6:9){
   M1<-glmer(BM[[i]]~AGB_std+(1|Site),data=BM,family="poisson")
   M2<-glmer(BM[[i]]~AGB_std+I(AGB_std^2)+(1|Site),data=BM,family="poisson")
@@ -92,37 +93,38 @@ Eco_summary<-NULL
 for (i in 1:length(Eco_regions)){#for each file in the list Eco_regions run this code
   EcoR<-read.csv(Eco_regions[i])
   N_col<-ncol(EcoR)
-  EcoR2<-data.frame(EcoR[-c(5:6,(8:N_col))],SRR=NA,Min_rate=NA,Fungi=NA,GF=NA,Lichen=NA,Aesthetic=NA,Recreation=NA,Fungi_val=NA)
+  EcoR2<-data.frame(EcoR[-c(5:6,(8:N_col))],SRR=NA,Min_rate=NA,Fungi=NA,GF=NA,Lichen=NA,Fungi_val=NA,Aesthetic=NA,Recreation=NA)
   Mean_summary<-NULL
 for (j in 1:nrow(Coefficients)){
   if (j<=3){
     Prediction<-((((((EcoR2$AGB)/100)-mean(BM$AGB))/sd(BM$AGB))*Coefficients[j,3]+ #use coefficients to predict ES and biodiversity values
                     (((((EcoR2$AGB)/100)-mean(BM$AGB))/sd(BM$AGB))^2)*Coefficients[j,4])+Coefficients[j,2])
     EcoR2[[5+j]]<-Prediction
-  } else if (j>=7) {
+  } else if (j>3 & j<=6){
+    Prediction<-((((((EcoR2$AGB)/100)-mean(BM$AGB))/sd(BM$AGB))*Coefficients[j,3]+ #use coefficients to predict ES and biodiversity values
+                    (((((EcoR2$AGB)/100)-mean(BM$AGB))/sd(BM$AGB))^2)*Coefficients[j,4])+Coefficients[j,2])
+    EcoR2[[5+j]]<-exp(Prediction)
+  }else{
   Prediction<-(((((EcoR2$AGB/100)*Coefficients[j,3])+ #use coefficients to predict ES and biodiversity values
                   (((EcoR2$AGB/100)^2)*Coefficients[j,4])+Coefficients[j,2])))
   EcoR2[[5+j]]<-((plogis(Prediction))*4)+1  
-} else {
-  Prediction<-((((((EcoR2$AGB)/100)-mean(BM$AGB))/sd(BM$AGB))*Coefficients[j,3]+ #use coefficients to predict ES and biodiversity values
-                  (((((EcoR2$AGB)/100)-mean(BM$AGB))/sd(BM$AGB))^2)*Coefficients[j,4])+Coefficients[j,2])
-  EcoR2[[5+j]]<-exp(Prediction)
 }}
 EcoR2$Scenario<-paste("Scenario ",gsub( "_r.*$", "", gsub("^.*?Century-succession-log","", Eco_regions[i])),sep="")
 EcoR2$Replicate<-as.numeric(gsub( ".csv.*$", "", gsub("^.*?_r","", Eco_regions[i])))
 Eco_summary<-rbind(Eco_summary,EcoR2)
 }
 
-head(Eco_summary)
-#calculate AGB in Mg per Ha
+
+#calculate AGB in Mg per ha
 Eco_summary$AGB<-Eco_summary$AGB/100
 
 Eco_summary2<-ddply(Eco_summary,.(Time,EcoregionName,EcoregionIndex,Scenario),numcolwise(mean,na.rm=T))
+hist(Eco_summary2$Recreation)
 
 #calculate mean of the results for each time step, weighting by number of pixels in each 
 #ecoregion
 
-Eco_summary4<-ddply(Eco_summary,.(Scenario,Time),summarise,
+Eco_summary3<-ddply(Eco_summary,.(Scenario,Time),summarise,
                     AGB_M=weighted.mean(AGB,NumSites,na.rm = T),
                     AGB_SD=wt.sd(AGB,NumSites),
                     SRR_M=weighted.mean(SRR,NumSites,na.rm = T),
@@ -139,16 +141,9 @@ Eco_summary4<-ddply(Eco_summary,.(Scenario,Time),summarise,
                     Aesthetic_SD=wt.sd(Aesthetic,NumSites),
                     Recreation_M=weighted.mean(Recreation,NumSites,na.rm = T),
                     Recreation_SD=wt.sd(Recreation,NumSites),
-                    Fungi_val_m=weighted.mean(Fungi_val,NumSites,na.rm = T),
+                    Fungi_val_M=weighted.mean(Fungi_val,NumSites,na.rm = T),
                     Fungi_val_SD=wt.sd(Fungi_val,NumSites)
                     )
-
-WM_CN<-ddply(CN_ER,.(Scenario,Time),summarise,Mean_C=weighted.mean(C_change,NumSites,na.rm = T),SD_C=wt.sd(C_change,NumSites),
-             Mean_N=weighted.mean(N_change,NumSites,na.rm = T),SD_N=wt.sd(N_change,NumSites))
-
-
-str(Eco_summary4$AGB_M)
-
 
 #################################################
 #run calculations for carbon and nitrogen flux###
@@ -191,12 +186,21 @@ for (i in 1:length(C_N)){
     CN_ER<-rbind(ER_sub,CN_ER)
   }
 }
-
+str(CN_ER)
 #summarise carbon and nitrogen flux
-CN_ER_sum<-ddply(CN_ER,.(Time,EcoregionName,Scenario),summarise,Carbon_flux=mean(C_change),Nitrogen_flux=mean(N_change))
-WM_CN<-ddply(CN_ER,.(Scenario,Time),summarise,Mean_C=weighted.mean(C_change,NumSites,na.rm = T),SD_C=wt.sd(C_change,NumSites),
-             Mean_N=weighted.mean(N_change,NumSites,na.rm = T),SD_N=wt.sd(N_change,NumSites))
+CN_ER_sum<-ddply(CN_ER,.(Time,EcoregionName,Scenario),summarise,Carbon_flux=mean(C_change,na.rm = T),Nitrogen_flux=mean(N_change,na.rm = T))
+WM_CN<-ddply(CN_ER,.(Scenario,Time),summarise,Carbon_flux_M=weighted.mean(C_change,NumSites,na.rm = T),Carbon_flux_SD=wt.sd(C_change,NumSites),
+             Nitrogen_flux_M=weighted.mean(N_change,NumSites,na.rm = T),Nitrogen_flux_SD=wt.sd(N_change,NumSites))
 
+P1<-ggplot(CN_ER_sum,aes(x=Time,y=Nitrogen_flux,group=EcoregionName))+geom_line(alpha=0.1)+facet_wrap(~Scenario,scales="free")
+P1+geom_ribbon(data=WM_CN,aes(x=Time,y=Mean_N,ymax=Mean_N+SD_N,ymin=Mean_N-SD_N,group=NULL),alpha=0.5)+geom_line(data=WM_CN,aes(x=Time,y=Mean_N,ymax=Mean_N+SD_N,ymin=Mean_N-SD_N,group=NULL))
+
+
+P1<-ggplot(CN_ER_sum,aes(x=Time,y=Carbon_flux,group=EcoregionName))+geom_line(alpha=0.1)+facet_wrap(~Scenario,scales="free")
+P1+geom_ribbon(data=WM_CN,aes(x=Time,y=Mean_C,ymax=Mean_C+SD_C,ymin=Mean_C-SD_C,group=NULL),alpha=0.5)+geom_line(data=WM_CN,aes(x=Time,y=Mean_C,ymax=Mean_C+SD_C,ymin=Mean_C-SD_C,group=NULL))
+
+str(CN_ER_sum)
+str(WM_CN)
 ##########################
 #calculate timber value# 
 #########################
@@ -227,19 +231,23 @@ for (i in 1:length(Eco_region_BM)){
 #convert biomass to volume using expansion factor of 0.55 for beech and 0.56 for oak
 BM_ER$Vol<-((BM_ER$SppBiomass_fagusylv/0.55)+(BM_ER$SppBiomass_querrobu/0.56))/100
 
-Timber_sum<-ddply(BM_ER,.(Time,EcoregionName,Scenario),summarise,Timber=mean(Vol))
-Timber<-ddply(BM_ER,.(Scenario,Time),summarise,Mean_vol=weighted.mean(Vol,NumSites,na.rm = T)
-             ,Vol_SD=wt.sd(Vol,NumSites))
+Timber_sum<-ddply(BM_ER,.(Time,EcoregionName,Scenario),summarise,Timber=mean(Vol,na.rm = T))
+Timber<-ddply(BM_ER,.(Scenario,Time),summarise,Timber_M=weighted.mean(Vol,NumSites,na.rm = T)
+             ,Timber_SD=wt.sd(Vol,NumSites))
 ###################################################################################################################
 #merge all different ecosystem services and biodiversity measures together into two dataframes#####################
 ###################################################################################################################
 
 
-Eco_summary3<-merge(merge(Eco_summary2,CN_ER_sum,by=c("EcoregionName","Scenario","Time")),Timber_sum,by=c("EcoregionName","Scenario","Time"))
-write.csv(x=Eco_summary3,"Data/R_output/Ecoregion_means.csv")
+Eco_summary_means<-merge(merge(Eco_summary2,CN_ER_sum,by=c("EcoregionName","Scenario","Time")),Timber_sum,by=c("EcoregionName","Scenario","Time"))
+write.csv(x=Eco_summary_means,"Data/R_output/Ecoregion_means.csv")
 
 #calculate mean of the results for each time step, weighting by number of pixels in each 
 #ecoregion
 
-Eco_summary5<-merge(merge(Eco_summary4,WM_CN,by=c("Scenario","Time")),Timber,by=c("Scenario","Time"))
-write.csv(x=Eco_summary5,"Data/R_output/Ecoregion_summary.csv")
+Eco_summary_weighted<-merge(merge(Eco_summary3,WM_CN,by=c("Scenario","Time")),Timber,by=c("Scenario","Time"))
+write.csv(x=Eco_summary_weighted,"Data/R_output/Ecoregion_summary.csv")
+
+
+P1<-ggplot(Eco_summary_means,aes(x=Time,y=Nitrogen_flux,group=EcoregionName))+geom_line(alpha=0.1)+facet_wrap(~Scenario,scales="free")
+P1+geom_ribbon(data=Eco_summary_weighted,aes(x=Time,y=Mean_N,ymax=Mean_N+SD_N,ymin=Mean_N-SD_N,group=NULL),alpha=0.5)+geom_line(data=Eco_summary_weighted,aes(x=Time,y=Mean_N,ymax=Mean_N+SD_N,ymin=Mean_N-SD_N,group=NULL))
