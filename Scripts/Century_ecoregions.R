@@ -146,7 +146,7 @@ Eco_summary3<-ddply(Eco_summary,.(Scenario,Time),summarise,
                     )
 
 #################################################
-#run calculations for carbon and nitrogen flux###
+#run calculations for carbon and nitrogen stocks###
 #################################################
 
 #find all the century carbon and nitrogen files
@@ -156,36 +156,25 @@ C_N<-list.files(pattern="Century-succession-log",recursive=T)
 #remove columns that are not useful and ass a column to give details of
 #the scenario being run
 CN_ER<-NULL
+CN_ER<-NULL
 for (i in 1:length(C_N)){
   #read in .csv
   File<-read.csv(C_N[i])
-  head(File)
+  head(File_sub)
   #remove blank column
   File_sub<-File[-c(5:12,14,29:ncol(File))]
   #remove rows containing NAs
   File_sub2<-File_sub[complete.cases(File_sub),]
-  head(File_sub2)
   #calculate total carbon
   Total_C<-rowSums (File_sub2[6:ncol(File_sub2)], na.rm = FALSE, dims = 1)/100
   File_sub3<-cbind(File_sub2[,1:5],Total_C)
+  head(File_sub3)
   #insert a column with the scenario number
-  File_sub3$Scenario<-paste("Scenario",gsub(".*-log|_r.*","", C_N[i]))
+  File_sub3$Scenario<-gsub(".*-log|_r.*","", C_N[i])
   File_sub3$Replicate<-sub(".*?_r(.*?).csv.*", "\\1", C_N[i])
-  #
-  File_sub3$C_change<-NA
-  File_sub3$N_change<-NA
-  File_sub3<-File_sub3[with(File_sub3, order(Time)), ]
-  UN_ER<-unique(File_sub3$EcoregionName)
-  
-  for (j in 1:length(UN_ER)){
-    ER_sub<-subset(File_sub3,EcoregionName==UN_ER[j])
-    for (k in 2:nrow(ER_sub)){
-      ER_sub$C_change[k]<-ER_sub$Total_C[k]-ER_sub$Total_C[k-1]
-      ER_sub$N_change[k]<-ER_sub$TotalN[k]-ER_sub$TotalN[k-1]  
-    }
-    CN_ER<-rbind(ER_sub,CN_ER)
-  }
+  CN_ER<-rbind(CN_ER,File_sub3)
 }
+
 str(CN_ER)
 #summarise carbon and nitrogen flux
 CN_ER_sum<-ddply(CN_ER,.(Time,EcoregionName,Scenario),summarise,Carbon_flux=mean(C_change,na.rm = T),Nitrogen_flux=mean(N_change,na.rm = T))
