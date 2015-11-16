@@ -156,11 +156,9 @@ C_N<-list.files(pattern="Century-succession-log",recursive=T)
 #remove columns that are not useful and ass a column to give details of
 #the scenario being run
 CN_ER<-NULL
-CN_ER<-NULL
 for (i in 1:length(C_N)){
   #read in .csv
   File<-read.csv(C_N[i])
-  head(File_sub)
   #remove blank column
   File_sub<-File[-c(5:12,14,29:ncol(File))]
   #remove rows containing NAs
@@ -177,19 +175,11 @@ for (i in 1:length(C_N)){
 
 str(CN_ER)
 #summarise carbon and nitrogen flux
-CN_ER_sum<-ddply(CN_ER,.(Time,EcoregionName,Scenario),summarise,Carbon_flux=mean(C_change,na.rm = T),Nitrogen_flux=mean(N_change,na.rm = T))
-WM_CN<-ddply(CN_ER,.(Scenario,Time),summarise,Carbon_flux_M=weighted.mean(C_change,NumSites,na.rm = T),Carbon_flux_SD=wt.sd(C_change,NumSites),
-             Nitrogen_flux_M=weighted.mean(N_change,NumSites,na.rm = T),Nitrogen_flux_SD=wt.sd(N_change,NumSites))
-
-P1<-ggplot(CN_ER_sum,aes(x=Time,y=Nitrogen_flux,group=EcoregionName))+geom_line(alpha=0.1)+facet_wrap(~Scenario,scales="free")
-P1+geom_ribbon(data=WM_CN,aes(x=Time,y=Mean_N,ymax=Mean_N+SD_N,ymin=Mean_N-SD_N,group=NULL),alpha=0.5)+geom_line(data=WM_CN,aes(x=Time,y=Mean_N,ymax=Mean_N+SD_N,ymin=Mean_N-SD_N,group=NULL))
+CN_ER_sum<-ddply(CN_ER,.(Time,EcoregionName,Scenario),summarise,Carbon_stock=mean(Total_C,na.rm = T),Nitrogen_stock=mean(TotalN,na.rm = T))
+WM_CN<-ddply(CN_ER,.(Scenario,Time),summarise,Carbon_stock_M=weighted.mean(Total_C,NumSites,na.rm = T),Carbon_stock_SD=wt.sd(Total_C,NumSites),
+             Nitrogen_stock_M=weighted.mean(TotalN,NumSites,na.rm = T),Nitrogen_stock_SD=wt.sd(TotalN,NumSites))
 
 
-P1<-ggplot(CN_ER_sum,aes(x=Time,y=Carbon_flux,group=EcoregionName))+geom_line(alpha=0.1)+facet_wrap(~Scenario,scales="free")
-P1+geom_ribbon(data=WM_CN,aes(x=Time,y=Mean_C,ymax=Mean_C+SD_C,ymin=Mean_C-SD_C,group=NULL),alpha=0.5)+geom_line(data=WM_CN,aes(x=Time,y=Mean_C,ymax=Mean_C+SD_C,ymin=Mean_C-SD_C,group=NULL))
-
-str(CN_ER_sum)
-str(WM_CN)
 ##########################
 #calculate timber value# 
 #########################
