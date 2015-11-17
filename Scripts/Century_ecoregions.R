@@ -125,8 +125,6 @@ hist(Eco_summary2$Recreation)
 #ecoregion
 
 Eco_summary3<-ddply(Eco_summary,.(Scenario,Time),summarise,
-                    AGB_M=weighted.mean(AGB,NumSites,na.rm = T),
-                    AGB_SD=wt.sd(AGB,NumSites),
                     SRR_M=weighted.mean(SRR,NumSites,na.rm = T),
                     SRR_SD=wt.sd(SRR,NumSites),
                     Min_rate_M=weighted.mean(Min_rate,NumSites,na.rm = T),
@@ -179,8 +177,9 @@ WM_CN<-ddply(CN_ER,.(Scenario,Time),summarise,Carbon_stock_M=weighted.mean(Total
 
 
 ##########################
-#calculate timber value# 
-#########################
+#calculate timber value### 
+#& tree species richness##
+##########################
 
 #find all the century species biomass files
 Eco_region_BM<-list.files(pattern="spp-biomass-log",recursive=T)
@@ -192,36 +191,39 @@ BM_ER<-NULL
 for (i in 1:length(Eco_region_BM)){
   #read in .csv
   File<-read.csv(Eco_region_BM[i])
-  head(File)
+  File_sub1<-File[-c(1:4,ncol(File))]
   #remove columns that we are not interested in
-  File_sub<-File[-c(5:12,14:25,27:ncol(File))]
-  head(File_sub)
+  File_sub2<-File[-c(5:12,14:25,27:ncol(File))]
   #remove rows containing NAs
-  File_sub2<-File_sub[complete.cases(File_sub),]
+  File_sub1<-File_sub1[complete.cases(File_sub1),]
+  File_sub1[File_sub1 > 0] <- 1 
+  Sp_R<-as.vector(rowSums(x=File_sub1))
+  File_sub2<-File_sub2[complete.cases(File_sub2),]
   #insert a column with the scenario number
   File_sub2$Scenario<-paste("Scenario",gsub(".*-log|_r.*","", Eco_region_BM[i]))
   File_sub2$EcoregionName<-File_sub2$Ecoregion
+  File_sub3<-cbind(File_sub2,Sp_R)
   #bind all these outputs together
-  BM_ER<-rbind(File_sub2,BM_ER)
+  BM_ER<-rbind(File_sub3,BM_ER)
 }
 
 #convert biomass to volume using expansion factor of 0.55 for beech and 0.56 for oak
 BM_ER$Vol<-((BM_ER$SppBiomass_fagusylv/0.55)+(BM_ER$SppBiomass_querrobu/0.56))/100
 
-Timber_sum<-ddply(BM_ER,.(Time,EcoregionName,Scenario),summarise,Timber=mean(Vol,na.rm = T))
-Timber<-ddply(BM_ER,.(Scenario,Time),summarise,Timber_M=weighted.mean(Vol,NumSites,na.rm = T)
-             ,Timber_SD=wt.sd(Vol,NumSites))
+Trees_sum<-ddply(BM_ER,.(Time,EcoregionName,Scenario),summarise,Timber=mean(Vol,na.rm = T),Tree_richness=mean(Sp_R,na.rm = T))
+Trees<-ddply(BM_ER,.(Scenario,Time),summarise,Timber_M=weighted.mean(Vol,NumSites,na.rm = T),Timber_SD=wt.sd(Vol,NumSites),
+             Sp_R_M=weighted.mean(Sp_R,NumSites,na.rm = T),Sp_R_SD=wt.sd(Sp_R,NumSites))
 ###################################################################################################################
 #merge all different ecosystem services and biodiversity measures together into two dataframes#####################
 ###################################################################################################################
 head(Eco_summary2)
 head(CN_ER_sum)
 
-Eco_summary_means<-merge(merge(Eco_summary2,CN_ER_sum,by=c("EcoregionName","Scenario","Time")),Timber_sum,by=c("EcoregionName","Scenario","Time"))
+Eco_summary_means<-merge(merge(Eco_summary2,CN_ER_sum,by=c("EcoregionName","Scenario","Time")),Trees_sum,by=c("EcoregionName","Scenario","Time"))
 write.csv(x=Eco_summary_means,"Data/R_output/Ecoregion_means.csv")
 
 #calculate mean of the results for each time step, weighting by number of pixels in each 
 #ecoregion
 
-Eco_summary_weighted<-merge(merge(Eco_summary3,WM_CN,by=c("Scenario","Time")),Timber,by=c("Scenario","Time"))
+Eco_summary_weighted<-merge(merge(Eco_summary3,WM_CN,by=c("Scenario","Time")),Trees,by=c("Scenario","Time"))
 write.csv(x=Eco_summary_weighted,"Data/R_output/Ecoregion_summary.csv")
