@@ -13,12 +13,12 @@ Eco_summary<-Eco_summary[order(Eco_summary[,3]),]
 
 #functions to make plotting of figures easier
 
-ES_labeller <- function(var, value){ # lifted bodily from the R Cookbook
+ES_labeller <- function(var, value){
   value <- as.character(value)
   if (var=="variable") {
     value[value=="Timber_M"]   <- "Timber volume"
-    value[value=="Nitrogen_flux_M"]   <- "Nitrogen sequestration"
-    value[value=="Carbon_flux_M"]   <- "Carbon sequestration"
+    value[value=="Nitrogen_stock_M"]   <- "Nitrogen stock"
+    value[value=="Carbon_stock_M"]   <- "Carbon stock"
     value[value=="Recreation_M"]   <- "Recreation value"
     value[value=="Aesthetic_M"]   <- "Aesthetic value"
     value[value=="Lichen_M"]   <- "Lichen species \nrichness"

@@ -166,14 +166,12 @@ for (i in 1:length(C_N)){
   #calculate total carbon
   Total_C<-rowSums (File_sub2[6:ncol(File_sub2)], na.rm = FALSE, dims = 1)/100
   File_sub3<-cbind(File_sub2[,1:5],Total_C)
-  head(File_sub3)
   #insert a column with the scenario number
-  File_sub3$Scenario<-gsub(".*-log|_r.*","", C_N[i])
+  File_sub3$Scenario<-paste("Scenario ",gsub(".*-log|_r.*","", C_N[i]),sep="")
   File_sub3$Replicate<-sub(".*?_r(.*?).csv.*", "\\1", C_N[i])
   CN_ER<-rbind(CN_ER,File_sub3)
 }
 
-str(CN_ER)
 #summarise carbon and nitrogen flux
 CN_ER_sum<-ddply(CN_ER,.(Time,EcoregionName,Scenario),summarise,Carbon_stock=mean(Total_C,na.rm = T),Nitrogen_stock=mean(TotalN,na.rm = T))
 WM_CN<-ddply(CN_ER,.(Scenario,Time),summarise,Carbon_stock_M=weighted.mean(Total_C,NumSites,na.rm = T),Carbon_stock_SD=wt.sd(Total_C,NumSites),
@@ -216,7 +214,8 @@ Timber<-ddply(BM_ER,.(Scenario,Time),summarise,Timber_M=weighted.mean(Vol,NumSit
 ###################################################################################################################
 #merge all different ecosystem services and biodiversity measures together into two dataframes#####################
 ###################################################################################################################
-
+head(Eco_summary2)
+head(CN_ER_sum)
 
 Eco_summary_means<-merge(merge(Eco_summary2,CN_ER_sum,by=c("EcoregionName","Scenario","Time")),Timber_sum,by=c("EcoregionName","Scenario","Time"))
 write.csv(x=Eco_summary_means,"Data/R_output/Ecoregion_means.csv")
