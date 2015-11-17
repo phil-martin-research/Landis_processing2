@@ -116,7 +116,7 @@ Eco_summary<-rbind(Eco_summary,EcoR2)
 
 
 #calculate AGB in Mg per ha
-Eco_summary$AGB<-Eco_summary$AGB/100
+Eco_summary<-Eco_summary[-5]
 
 Eco_summary2<-ddply(Eco_summary,.(Time,EcoregionName,EcoregionIndex,Scenario),numcolwise(mean,na.rm=T))
 hist(Eco_summary2$Recreation)
@@ -212,12 +212,10 @@ BM_ER$Vol<-((BM_ER$SppBiomass_fagusylv/0.55)+(BM_ER$SppBiomass_querrobu/0.56))/1
 
 Trees_sum<-ddply(BM_ER,.(Time,EcoregionName,Scenario),summarise,Timber=mean(Vol,na.rm = T),Tree_richness=mean(Sp_R,na.rm = T))
 Trees<-ddply(BM_ER,.(Scenario,Time),summarise,Timber_M=weighted.mean(Vol,NumSites,na.rm = T),Timber_SD=wt.sd(Vol,NumSites),
-             Sp_R_M=weighted.mean(Sp_R,NumSites,na.rm = T),Sp_R_SD=wt.sd(Sp_R,NumSites))
+             Tree_richness_M=weighted.mean(Sp_R,NumSites,na.rm = T),Tree_richness_SD=wt.sd(Sp_R,NumSites))
 ###################################################################################################################
 #merge all different ecosystem services and biodiversity measures together into two dataframes#####################
 ###################################################################################################################
-head(Eco_summary2)
-head(CN_ER_sum)
 
 Eco_summary_means<-merge(merge(Eco_summary2,CN_ER_sum,by=c("EcoregionName","Scenario","Time")),Trees_sum,by=c("EcoregionName","Scenario","Time"))
 write.csv(x=Eco_summary_means,"Data/R_output/Ecoregion_means.csv")
