@@ -26,7 +26,7 @@ ES_labeller <- function(var, value){
     value[value=="Fungi_M"]   <- "Fungi species richness"
     value[value=="Min_rate_M"]   <- "Nitrogen mineralistation \nrate"
     value[value=="SRR_M"]   <- "Soil respiration rate"
-    value[value=="AGB_M"]   <- "Above ground biomass"
+    value[value=="Tree_richness_M"]   <- "Tree species richness"
     value[value=="Fungi_val_M"]   <- "Commercially valuable \nfungi richness"
   }
   return(value)
