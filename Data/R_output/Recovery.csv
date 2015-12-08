@@ -1,0 +1,121 @@
+Scenario,Variable,Time,ESLab,Scen_lab,Scen_lab2
+Scenario 10,AGB_M,100,Aboveground biomass,60,Pulse + Press
+Scenario 11,AGB_M,100,Aboveground biomass,80,Pulse + Press
+Scenario 12,AGB_M,100,Aboveground biomass,100,Pulse + Press
+Scenario 2,AGB_M,16,Aboveground biomass,20,Pulse
+Scenario 3,AGB_M,30,Aboveground biomass,40,Pulse
+Scenario 4,AGB_M,51,Aboveground biomass,60,Pulse
+Scenario 5,AGB_M,65,Aboveground biomass,80,Pulse
+Scenario 6,AGB_M,84,Aboveground biomass,100,Pulse
+Scenario 8,AGB_M,15,Aboveground biomass,20,Pulse + Press
+Scenario 9,AGB_M,48,Aboveground biomass,40,Pulse + Press
+Scenario 10,SRR_M,100,Soil respiration rate,60,Pulse + Press
+Scenario 11,SRR_M,100,Soil respiration rate,80,Pulse + Press
+Scenario 12,SRR_M,100,Soil respiration rate,100,Pulse + Press
+Scenario 2,SRR_M,17,Soil respiration rate,20,Pulse
+Scenario 3,SRR_M,30,Soil respiration rate,40,Pulse
+Scenario 4,SRR_M,51,Soil respiration rate,60,Pulse
+Scenario 5,SRR_M,65,Soil respiration rate,80,Pulse
+Scenario 6,SRR_M,84,Soil respiration rate,100,Pulse
+Scenario 8,SRR_M,15,Soil respiration rate,20,Pulse + Press
+Scenario 9,SRR_M,48,Soil respiration rate,40,Pulse + Press
+Scenario 10,Fungi_M,100,Fungi species richness,60,Pulse + Press
+Scenario 11,Fungi_M,100,Fungi species richness,80,Pulse + Press
+Scenario 12,Fungi_M,100,Fungi species richness,100,Pulse + Press
+Scenario 2,Fungi_M,16,Fungi species richness,20,Pulse
+Scenario 3,Fungi_M,29,Fungi species richness,40,Pulse
+Scenario 4,Fungi_M,49,Fungi species richness,60,Pulse
+Scenario 5,Fungi_M,64,Fungi species richness,80,Pulse
+Scenario 6,Fungi_M,82,Fungi species richness,100,Pulse
+Scenario 8,Fungi_M,14,Fungi species richness,20,Pulse + Press
+Scenario 9,Fungi_M,43,Fungi species richness,40,Pulse + Press
+Scenario 10,Lichen_M,100,"Lichen species 
+richness",60,Pulse + Press
+Scenario 11,Lichen_M,100,"Lichen species 
+richness",80,Pulse + Press
+Scenario 12,Lichen_M,100,"Lichen species 
+richness",100,Pulse + Press
+Scenario 2,Lichen_M,15,"Lichen species 
+richness",20,Pulse
+Scenario 3,Lichen_M,28,"Lichen species 
+richness",40,Pulse
+Scenario 4,Lichen_M,48,"Lichen species 
+richness",60,Pulse
+Scenario 5,Lichen_M,63,"Lichen species 
+richness",80,Pulse
+Scenario 6,Lichen_M,81,"Lichen species 
+richness",100,Pulse
+Scenario 8,Lichen_M,14,"Lichen species 
+richness",20,Pulse + Press
+Scenario 9,Lichen_M,40,"Lichen species 
+richness",40,Pulse + Press
+Scenario 10,Aesthetic_M,100,Aesthetic value,60,Pulse + Press
+Scenario 11,Aesthetic_M,100,Aesthetic value,80,Pulse + Press
+Scenario 12,Aesthetic_M,100,Aesthetic value,100,Pulse + Press
+Scenario 2,Aesthetic_M,16,Aesthetic value,20,Pulse
+Scenario 3,Aesthetic_M,29,Aesthetic value,40,Pulse
+Scenario 4,Aesthetic_M,50,Aesthetic value,60,Pulse
+Scenario 5,Aesthetic_M,65,Aesthetic value,80,Pulse
+Scenario 6,Aesthetic_M,83,Aesthetic value,100,Pulse
+Scenario 8,Aesthetic_M,15,Aesthetic value,20,Pulse + Press
+Scenario 9,Aesthetic_M,45,Aesthetic value,40,Pulse + Press
+Scenario 10,Recreation_M,100,Recreation value,60,Pulse + Press
+Scenario 11,Recreation_M,100,Recreation value,80,Pulse + Press
+Scenario 12,Recreation_M,100,Recreation value,100,Pulse + Press
+Scenario 2,Recreation_M,15,Recreation value,20,Pulse
+Scenario 3,Recreation_M,28,Recreation value,40,Pulse
+Scenario 4,Recreation_M,49,Recreation value,60,Pulse
+Scenario 5,Recreation_M,64,Recreation value,80,Pulse
+Scenario 6,Recreation_M,82,Recreation value,100,Pulse
+Scenario 8,Recreation_M,14,Recreation value,20,Pulse + Press
+Scenario 9,Recreation_M,42,Recreation value,40,Pulse + Press
+Scenario 10,Fungi_val_M,100,"Commercially valuable 
+fungi richness",60,Pulse + Press
+Scenario 11,Fungi_val_M,100,"Commercially valuable 
+fungi richness",80,Pulse + Press
+Scenario 12,Fungi_val_M,100,"Commercially valuable 
+fungi richness",100,Pulse + Press
+Scenario 2,Fungi_val_M,17,"Commercially valuable 
+fungi richness",20,Pulse
+Scenario 3,Fungi_val_M,31,"Commercially valuable 
+fungi richness",40,Pulse
+Scenario 4,Fungi_val_M,53,"Commercially valuable 
+fungi richness",60,Pulse
+Scenario 5,Fungi_val_M,67,"Commercially valuable 
+fungi richness",80,Pulse
+Scenario 6,Fungi_val_M,85,"Commercially valuable 
+fungi richness",100,Pulse
+Scenario 8,Fungi_val_M,16,"Commercially valuable 
+fungi richness",20,Pulse + Press
+Scenario 9,Fungi_val_M,52,"Commercially valuable 
+fungi richness",40,Pulse + Press
+Scenario 10,Carbon_stock_M,100,Carbon stock,60,Pulse + Press
+Scenario 11,Carbon_stock_M,100,Carbon stock,80,Pulse + Press
+Scenario 12,Carbon_stock_M,100,Carbon stock,100,Pulse + Press
+Scenario 2,Carbon_stock_M,16,Carbon stock,20,Pulse
+Scenario 3,Carbon_stock_M,30,Carbon stock,40,Pulse
+Scenario 4,Carbon_stock_M,50,Carbon stock,60,Pulse
+Scenario 5,Carbon_stock_M,63,Carbon stock,80,Pulse
+Scenario 6,Carbon_stock_M,80,Carbon stock,100,Pulse
+Scenario 8,Carbon_stock_M,14,Carbon stock,20,Pulse + Press
+Scenario 9,Carbon_stock_M,45,Carbon stock,40,Pulse + Press
+Scenario 10,Nitrogen_stock_M,7,Nitrogen stock,60,Pulse + Press
+Scenario 11,Nitrogen_stock_M,9,Nitrogen stock,80,Pulse + Press
+Scenario 12,Nitrogen_stock_M,14,Nitrogen stock,100,Pulse + Press
+Scenario 2,Nitrogen_stock_M,100,Nitrogen stock,20,Pulse
+Scenario 3,Nitrogen_stock_M,100,Nitrogen stock,40,Pulse
+Scenario 4,Nitrogen_stock_M,7,Nitrogen stock,60,Pulse
+Scenario 5,Nitrogen_stock_M,9,Nitrogen stock,80,Pulse
+Scenario 6,Nitrogen_stock_M,13,Nitrogen stock,100,Pulse
+Scenario 8,Nitrogen_stock_M,100,Nitrogen stock,20,Pulse + Press
+Scenario 9,Nitrogen_stock_M,100,Nitrogen stock,40,Pulse + Press
+Scenario 10,Timber_M,100,Timber volume,60,Pulse + Press
+Scenario 11,Timber_M,100,Timber volume,80,Pulse + Press
+Scenario 12,Timber_M,100,Timber volume,100,Pulse + Press
+Scenario 2,Timber_M,25,Timber volume,20,Pulse
+Scenario 3,Timber_M,58,Timber volume,40,Pulse
+Scenario 4,Timber_M,100,Timber volume,60,Pulse
+Scenario 5,Timber_M,100,Timber volume,80,Pulse
+Scenario 6,Timber_M,100,Timber volume,100,Pulse
+Scenario 8,Timber_M,20,Timber volume,20,Pulse + Press
+Scenario 9,Timber_M,74,Timber volume,40,Pulse + Press
