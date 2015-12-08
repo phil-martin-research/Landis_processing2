@@ -158,7 +158,6 @@ C_N<-list.files(pattern="Century-succession-log",recursive=T)
 CN_ER<-NULL
 for (i in 1:length(C_N)){
   #read in .csv
-  i<-1
   File<-read.csv(C_N[i])
   #remove blank column
   File_sub<-File[-c(5:12,14,29:ncol(File))]
