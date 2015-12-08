@@ -116,15 +116,17 @@ Eco_summary<-rbind(Eco_summary,EcoR2)
 
 
 #calculate AGB in Mg per ha
-Eco_summary<-Eco_summary[-5]
+Eco_summary$AGB<-Eco_summary$AGB/100
 
 Eco_summary2<-ddply(Eco_summary,.(Time,EcoregionName,EcoregionIndex,Scenario),numcolwise(mean,na.rm=T))
-hist(Eco_summary2$Recreation)
+
 
 #calculate mean of the results for each time step, weighting by number of pixels in each 
 #ecoregion
 
 Eco_summary3<-ddply(Eco_summary,.(Scenario,Time),summarise,
+                    AGB_M=weighted.mean(AGB,NumSites,na.rm = T),
+                    AGB_SD=wt.sd(AGB,NumSites),
                     SRR_M=weighted.mean(SRR,NumSites,na.rm = T),
                     SRR_SD=wt.sd(SRR,NumSites),
                     Min_rate_M=weighted.mean(Min_rate,NumSites,na.rm = T),
@@ -156,6 +158,7 @@ C_N<-list.files(pattern="Century-succession-log",recursive=T)
 CN_ER<-NULL
 for (i in 1:length(C_N)){
   #read in .csv
+  i<-1
   File<-read.csv(C_N[i])
   #remove blank column
   File_sub<-File[-c(5:12,14,29:ncol(File))]
