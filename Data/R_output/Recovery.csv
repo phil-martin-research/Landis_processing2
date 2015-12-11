@@ -1,121 +1,121 @@
-Scenario,Variable,Time,ESLab,Scen_lab,Scen_lab2
-Scenario 10,AGB_M,100,Aboveground biomass,60,Pulse + Press
-Scenario 11,AGB_M,100,Aboveground biomass,80,Pulse + Press
-Scenario 12,AGB_M,100,Aboveground biomass,100,Pulse + Press
-Scenario 2,AGB_M,16,Aboveground biomass,20,Pulse
-Scenario 3,AGB_M,30,Aboveground biomass,40,Pulse
-Scenario 4,AGB_M,51,Aboveground biomass,60,Pulse
-Scenario 5,AGB_M,65,Aboveground biomass,80,Pulse
-Scenario 6,AGB_M,84,Aboveground biomass,100,Pulse
-Scenario 8,AGB_M,15,Aboveground biomass,20,Pulse + Press
-Scenario 9,AGB_M,48,Aboveground biomass,40,Pulse + Press
-Scenario 10,SRR_M,100,Soil respiration rate,60,Pulse + Press
-Scenario 11,SRR_M,100,Soil respiration rate,80,Pulse + Press
-Scenario 12,SRR_M,100,Soil respiration rate,100,Pulse + Press
-Scenario 2,SRR_M,17,Soil respiration rate,20,Pulse
-Scenario 3,SRR_M,30,Soil respiration rate,40,Pulse
-Scenario 4,SRR_M,51,Soil respiration rate,60,Pulse
-Scenario 5,SRR_M,65,Soil respiration rate,80,Pulse
-Scenario 6,SRR_M,84,Soil respiration rate,100,Pulse
-Scenario 8,SRR_M,15,Soil respiration rate,20,Pulse + Press
-Scenario 9,SRR_M,48,Soil respiration rate,40,Pulse + Press
-Scenario 10,Fungi_M,100,Fungi species richness,60,Pulse + Press
-Scenario 11,Fungi_M,100,Fungi species richness,80,Pulse + Press
-Scenario 12,Fungi_M,100,Fungi species richness,100,Pulse + Press
-Scenario 2,Fungi_M,16,Fungi species richness,20,Pulse
-Scenario 3,Fungi_M,29,Fungi species richness,40,Pulse
-Scenario 4,Fungi_M,49,Fungi species richness,60,Pulse
-Scenario 5,Fungi_M,64,Fungi species richness,80,Pulse
-Scenario 6,Fungi_M,82,Fungi species richness,100,Pulse
-Scenario 8,Fungi_M,14,Fungi species richness,20,Pulse + Press
-Scenario 9,Fungi_M,43,Fungi species richness,40,Pulse + Press
-Scenario 10,Lichen_M,100,"Lichen species 
-richness",60,Pulse + Press
-Scenario 11,Lichen_M,100,"Lichen species 
-richness",80,Pulse + Press
-Scenario 12,Lichen_M,100,"Lichen species 
-richness",100,Pulse + Press
-Scenario 2,Lichen_M,15,"Lichen species 
-richness",20,Pulse
-Scenario 3,Lichen_M,28,"Lichen species 
-richness",40,Pulse
-Scenario 4,Lichen_M,48,"Lichen species 
-richness",60,Pulse
-Scenario 5,Lichen_M,63,"Lichen species 
-richness",80,Pulse
-Scenario 6,Lichen_M,81,"Lichen species 
-richness",100,Pulse
-Scenario 8,Lichen_M,14,"Lichen species 
-richness",20,Pulse + Press
-Scenario 9,Lichen_M,40,"Lichen species 
-richness",40,Pulse + Press
-Scenario 10,Aesthetic_M,100,Aesthetic value,60,Pulse + Press
-Scenario 11,Aesthetic_M,100,Aesthetic value,80,Pulse + Press
-Scenario 12,Aesthetic_M,100,Aesthetic value,100,Pulse + Press
-Scenario 2,Aesthetic_M,16,Aesthetic value,20,Pulse
-Scenario 3,Aesthetic_M,29,Aesthetic value,40,Pulse
-Scenario 4,Aesthetic_M,50,Aesthetic value,60,Pulse
-Scenario 5,Aesthetic_M,65,Aesthetic value,80,Pulse
-Scenario 6,Aesthetic_M,83,Aesthetic value,100,Pulse
-Scenario 8,Aesthetic_M,15,Aesthetic value,20,Pulse + Press
-Scenario 9,Aesthetic_M,45,Aesthetic value,40,Pulse + Press
-Scenario 10,Recreation_M,100,Recreation value,60,Pulse + Press
-Scenario 11,Recreation_M,100,Recreation value,80,Pulse + Press
-Scenario 12,Recreation_M,100,Recreation value,100,Pulse + Press
-Scenario 2,Recreation_M,15,Recreation value,20,Pulse
-Scenario 3,Recreation_M,28,Recreation value,40,Pulse
-Scenario 4,Recreation_M,49,Recreation value,60,Pulse
-Scenario 5,Recreation_M,64,Recreation value,80,Pulse
-Scenario 6,Recreation_M,82,Recreation value,100,Pulse
-Scenario 8,Recreation_M,14,Recreation value,20,Pulse + Press
-Scenario 9,Recreation_M,42,Recreation value,40,Pulse + Press
-Scenario 10,Fungi_val_M,100,"Commercially valuable 
-fungi richness",60,Pulse + Press
-Scenario 11,Fungi_val_M,100,"Commercially valuable 
-fungi richness",80,Pulse + Press
-Scenario 12,Fungi_val_M,100,"Commercially valuable 
-fungi richness",100,Pulse + Press
-Scenario 2,Fungi_val_M,17,"Commercially valuable 
-fungi richness",20,Pulse
-Scenario 3,Fungi_val_M,31,"Commercially valuable 
-fungi richness",40,Pulse
-Scenario 4,Fungi_val_M,53,"Commercially valuable 
-fungi richness",60,Pulse
-Scenario 5,Fungi_val_M,67,"Commercially valuable 
-fungi richness",80,Pulse
-Scenario 6,Fungi_val_M,85,"Commercially valuable 
-fungi richness",100,Pulse
-Scenario 8,Fungi_val_M,16,"Commercially valuable 
-fungi richness",20,Pulse + Press
-Scenario 9,Fungi_val_M,52,"Commercially valuable 
-fungi richness",40,Pulse + Press
-Scenario 10,Carbon_stock_M,100,Carbon stock,60,Pulse + Press
-Scenario 11,Carbon_stock_M,100,Carbon stock,80,Pulse + Press
-Scenario 12,Carbon_stock_M,100,Carbon stock,100,Pulse + Press
-Scenario 2,Carbon_stock_M,16,Carbon stock,20,Pulse
-Scenario 3,Carbon_stock_M,30,Carbon stock,40,Pulse
-Scenario 4,Carbon_stock_M,50,Carbon stock,60,Pulse
-Scenario 5,Carbon_stock_M,63,Carbon stock,80,Pulse
-Scenario 6,Carbon_stock_M,80,Carbon stock,100,Pulse
-Scenario 8,Carbon_stock_M,14,Carbon stock,20,Pulse + Press
-Scenario 9,Carbon_stock_M,45,Carbon stock,40,Pulse + Press
-Scenario 10,Nitrogen_stock_M,7,Nitrogen stock,60,Pulse + Press
-Scenario 11,Nitrogen_stock_M,9,Nitrogen stock,80,Pulse + Press
-Scenario 12,Nitrogen_stock_M,14,Nitrogen stock,100,Pulse + Press
-Scenario 2,Nitrogen_stock_M,100,Nitrogen stock,20,Pulse
-Scenario 3,Nitrogen_stock_M,100,Nitrogen stock,40,Pulse
-Scenario 4,Nitrogen_stock_M,7,Nitrogen stock,60,Pulse
-Scenario 5,Nitrogen_stock_M,9,Nitrogen stock,80,Pulse
-Scenario 6,Nitrogen_stock_M,13,Nitrogen stock,100,Pulse
-Scenario 8,Nitrogen_stock_M,100,Nitrogen stock,20,Pulse + Press
-Scenario 9,Nitrogen_stock_M,100,Nitrogen stock,40,Pulse + Press
-Scenario 10,Timber_M,100,Timber volume,60,Pulse + Press
-Scenario 11,Timber_M,100,Timber volume,80,Pulse + Press
-Scenario 12,Timber_M,100,Timber volume,100,Pulse + Press
-Scenario 2,Timber_M,25,Timber volume,20,Pulse
-Scenario 3,Timber_M,58,Timber volume,40,Pulse
-Scenario 4,Timber_M,100,Timber volume,60,Pulse
-Scenario 5,Timber_M,100,Timber volume,80,Pulse
-Scenario 6,Timber_M,100,Timber volume,100,Pulse
-Scenario 8,Timber_M,20,Timber volume,20,Pulse + Press
-Scenario 9,Timber_M,74,Timber volume,40,Pulse + Press
+"Scenario","Variable","Time","Resistance","Resistance2","Recovery","value","variable","ESLab","Scen_lab","Scen_lab2"
+"Scenario 10","AGB_M",100,NA,NA,NA,NA,"AGB_M","Aboveground biomass",60,"Pulse + Press"
+"Scenario 11","AGB_M",100,NA,NA,NA,NA,"AGB_M","Aboveground biomass",80,"Pulse + Press"
+"Scenario 12","AGB_M",100,NA,NA,NA,NA,"AGB_M","Aboveground biomass",100,"Pulse + Press"
+"Scenario 2","AGB_M",16,0.7727650286555,1.00062941114082,0.0913564418261742,242.327446277802,"AGB_M","Aboveground biomass",20,"Pulse"
+"Scenario 3","AGB_M",30,0.57698167569889,1.00854755682399,0.0412896220445407,243.282154605104,"AGB_M","Aboveground biomass",40,"Pulse"
+"Scenario 4","AGB_M",51,0.381632960714383,1.00658399488511,0.022060234875115,243.046106165871,"AGB_M","Aboveground biomass",60,"Pulse"
+"Scenario 5","AGB_M",65,0.256696572558598,1.00324147196388,0.0167581078311922,242.643222427269,"AGB_M","Aboveground biomass",80,"Pulse"
+"Scenario 6","AGB_M",84,0.133758354505446,1.01664736166135,0.0129347421384643,244.251008889371,"AGB_M","Aboveground biomass",100,"Pulse"
+"Scenario 8","AGB_M",15,0.832976878591516,1.00827620853551,0.109473659985719,243.249562117045,"AGB_M","Aboveground biomass",20,"Pulse + Press"
+"Scenario 9","AGB_M",48,0.565164740029096,1.00762236476004,0.0239002510960301,243.170990712597,"AGB_M","Aboveground biomass",40,"Pulse + Press"
+"Scenario 10","SRR_M",100,NA,NA,NA,NA,"SRR_M","Soil respiration rate",60,"Pulse + Press"
+"Scenario 11","SRR_M",100,NA,NA,NA,NA,"SRR_M","Soil respiration rate",80,"Pulse + Press"
+"Scenario 12","SRR_M",100,NA,NA,NA,NA,"SRR_M","Soil respiration rate",100,"Pulse + Press"
+"Scenario 2","SRR_M",17,0.966666491269321,1.00280821254945,0.0983644003197196,4.41295824337696,"SRR_M","Soil respiration rate",20,"Pulse"
+"Scenario 3","SRR_M",30,0.931928664601524,1.00086030301508,0.0409882884360596,4.40867410044796,"SRR_M","Soil respiration rate",40,"Pulse"
+"Scenario 4","SRR_M",51,0.889578212663442,1.00052611033789,0.0219356807514781,4.40793825393345,"SRR_M","Soil respiration rate",60,"Pulse"
+"Scenario 5","SRR_M",65,0.857307405366544,1.00017479393595,0.0167046255817687,4.40716443820696,"SRR_M","Soil respiration rate",80,"Pulse"
+"Scenario 6","SRR_M",84,0.820345430317193,1.00193435348843,0.0129085373472739,4.41103734894501,"SRR_M","Soil respiration rate",100,"Pulse"
+"Scenario 8","SRR_M",15,0.976174820628548,1.00096263581733,0.10831241811945,4.40889937411028,"SRR_M","Soil respiration rate",20,"Pulse + Press"
+"Scenario 9","SRR_M",48,0.929448866969422,1.00064057271969,0.0236666890498318,4.40819031210546,"SRR_M","Soil respiration rate",40,"Pulse + Press"
+"Scenario 10","Fungi_M",100,NA,NA,NA,NA,"Fungi_M","Fungi species richness",60,"Pulse + Press"
+"Scenario 11","Fungi_M",100,NA,NA,NA,NA,"Fungi_M","Fungi species richness",80,"Pulse + Press"
+"Scenario 12","Fungi_M",100,NA,NA,NA,NA,"Fungi_M","Fungi species richness",100,"Pulse + Press"
+"Scenario 2","Fungi_M",16,0.940217892385449,1.00539947780573,0.108318306686235,2.30702714321078,"Fungi_M","Fungi species richness",20,"Pulse"
+"Scenario 3","Fungi_M",29,0.868664901740584,1.00388545648004,0.0440308884404269,2.30529344640903,"Fungi_M","Fungi species richness",40,"Pulse"
+"Scenario 4","Fungi_M",49,0.776281288367931,1.00157767125339,0.0230135304966432,2.30264576946023,"Fungi_M","Fungi species richness",60,"Pulse"
+"Scenario 5","Fungi_M",64,0.700214823833117,1.00276367094214,0.0172165396700091,2.30400720589485,"Fungi_M","Fungi species richness",80,"Pulse"
+"Scenario 6","Fungi_M",82,0.611128607108232,1.0015499550326,0.0130706140388647,2.30261393407735,"Fungi_M","Fungi species richness",100,"Pulse"
+"Scenario 8","Fungi_M",14,0.957479515109734,1.00062749533215,0.114366833385688,2.30155387594611,"Fungi_M","Fungi species richness",20,"Pulse + Press"
+"Scenario 9","Fungi_M",43,0.867424582998178,1.00100081414003,0.0266892142300477,2.30198299847765,"Fungi_M","Fungi species richness",40,"Pulse + Press"
+"Scenario 10","Lichen_M",100,NA,NA,NA,NA,"Lichen_M","Lichen species 
+richness",60,"Pulse + Press"
+"Scenario 11","Lichen_M",100,NA,NA,NA,NA,"Lichen_M","Lichen species 
+richness",80,"Pulse + Press"
+"Scenario 12","Lichen_M",100,NA,NA,NA,NA,"Lichen_M","Lichen species 
+richness",100,"Pulse + Press"
+"Scenario 2","Lichen_M",15,0.955095580345956,1.00310570192603,0.114478321366497,33.7218387696981,"Lichen_M","Lichen species 
+richness",20,"Pulse"
+"Scenario 3","Lichen_M",28,0.894219633982946,1.0029137412059,0.0458040999498792,33.7186168502899,"Lichen_M","Lichen species 
+richness",40,"Pulse"
+"Scenario 4","Lichen_M",48,0.811966426340568,1.00295268189863,0.0239260625729943,33.7192704910903,"Lichen_M","Lichen species 
+richness",60,"Pulse"
+"Scenario 5","Lichen_M",63,0.74245885129255,1.00259506615777,0.0175463777540211,33.7132667602895,"Lichen_M","Lichen species 
+richness",80,"Pulse"
+"Scenario 6","Lichen_M",81,0.661492128574434,1.0011451013507,0.0132320142837859,33.6889024481286,"Lichen_M","Lichen species 
+richness",100,"Pulse"
+"Scenario 8","Lichen_M",14,0.968528198823973,1.00267794058778,0.131394048404604,33.714658265107,"Lichen_M","Lichen species 
+richness",20,"Pulse + Press"
+"Scenario 9","Lichen_M",40,0.894205232646473,1.00111419490333,0.0291468225361481,33.6883827309767,"Lichen_M","Lichen species 
+richness",40,"Pulse + Press"
+"Scenario 10","Aesthetic_M",100,NA,NA,NA,NA,"Aesthetic_M","Aesthetic value",60,"Pulse + Press"
+"Scenario 11","Aesthetic_M",100,NA,NA,NA,NA,"Aesthetic_M","Aesthetic value",80,"Pulse + Press"
+"Scenario 12","Aesthetic_M",100,NA,NA,NA,NA,"Aesthetic_M","Aesthetic value",100,"Pulse + Press"
+"Scenario 2","Aesthetic_M",16,0.970641642111212,1.00131895116551,0.0993245056063445,4.12012727056505,"Aesthetic_M","Aesthetic value",20,"Pulse"
+"Scenario 3","Aesthetic_M",29,0.936952965533222,1.00030943540518,0.0420646042100283,4.1180506645114,"Aesthetic_M","Aesthetic value",40,"Pulse"
+"Scenario 4","Aesthetic_M",50,0.893325835038761,1.00073838488605,0.0225152644351231,4.11893328328826,"Aesthetic_M","Aesthetic value",60,"Pulse"
+"Scenario 5","Aesthetic_M",65,0.85747656840715,1.00186375022546,0.0170760883178457,4.12124706944789,"Aesthetic_M","Aesthetic value",80,"Pulse"
+"Scenario 6","Aesthetic_M",83,0.814644626822416,1.00137539885372,0.012994194380593,4.12024332341205,"Aesthetic_M","Aesthetic value",100,"Pulse"
+"Scenario 8","Aesthetic_M",15,0.979126634167911,1.00171228510223,0.117653073366667,4.1209358039557,"Aesthetic_M","Aesthetic value",20,"Pulse + Press"
+"Scenario 9","Aesthetic_M",45,0.935560403017099,1.00024135241143,0.0251818737525766,4.1179105401769,"Aesthetic_M","Aesthetic value",40,"Pulse + Press"
+"Scenario 10","Recreation_M",100,NA,NA,NA,NA,"Recreation_M","Recreation value",60,"Pulse + Press"
+"Scenario 11","Recreation_M",100,NA,NA,NA,NA,"Recreation_M","Recreation value",80,"Pulse + Press"
+"Scenario 12","Recreation_M",100,NA,NA,NA,NA,"Recreation_M","Recreation value",100,"Pulse + Press"
+"Scenario 2","Recreation_M",15,0.940158146761611,1.00078196974128,0.102566791122412,4.16294258663147,"Recreation_M","Recreation value",20,"Pulse"
+"Scenario 3","Recreation_M",28,0.86658544691287,1.00030568171746,0.0436645765739633,4.16195213278768,"Recreation_M","Recreation value",40,"Pulse"
+"Scenario 4","Recreation_M",49,0.77080353184317,1.00339997244825,0.0233311930721224,4.16837838547249,"Recreation_M","Recreation value",60,"Pulse"
+"Scenario 5","Recreation_M",64,0.692167668462685,1.0040449136838,0.0173294771461813,4.16971530647291,"Recreation_M","Recreation value",80,"Pulse"
+"Scenario 6","Recreation_M",82,0.602847984612515,1.00265945032846,0.0131269696097136,4.16684226958193,"Recreation_M","Recreation value",100,"Pulse"
+"Scenario 8","Recreation_M",14,0.957481525772395,1.00124200680254,0.117647251069699,4.16389879856436,"Recreation_M","Recreation value",20,"Pulse + Press"
+"Scenario 9","Recreation_M",42,0.86584762798743,1.00077530022879,0.0273199305871964,4.16292872045504,"Recreation_M","Recreation value",40,"Pulse + Press"
+"Scenario 10","Fungi_val_M",100,NA,NA,NA,NA,"Fungi_val_M","Commercially valuable 
+fungi richness",60,"Pulse + Press"
+"Scenario 11","Fungi_val_M",100,NA,NA,NA,NA,"Fungi_val_M","Commercially valuable 
+fungi richness",80,"Pulse + Press"
+"Scenario 12","Fungi_val_M",100,NA,NA,NA,NA,"Fungi_val_M","Commercially valuable 
+fungi richness",100,"Pulse + Press"
+"Scenario 2","Fungi_val_M",17,0.787243183641736,1.00197764372865,0.0847279559060603,0.790731003451306,"Fungi_val_M","Commercially valuable 
+fungi richness",20,"Pulse"
+"Scenario 3","Fungi_val_M",31,0.626972829585924,1.00223002915747,0.0388370366912456,0.790830480076431,"Fungi_val_M","Commercially valuable 
+fungi richness",40,"Pulse"
+"Scenario 4","Fungi_val_M",53,0.476001111900326,1.0082085859079,0.0213186597847894,0.793179591003009,"Fungi_val_M","Commercially valuable 
+fungi richness",60,"Pulse"
+"Scenario 5","Fungi_val_M",67,0.388483128692354,1.01259566105316,0.0165940296650646,0.794894494479607,"Fungi_val_M","Commercially valuable 
+fungi richness",80,"Pulse"
+"Scenario 6","Fungi_val_M",85,0.305305239888049,1.00858474571549,0.0127023937636931,0.793326925135052,"Fungi_val_M","Commercially valuable 
+fungi richness",100,"Pulse"
+"Scenario 8","Fungi_val_M",16,0.84252769010675,1.01201281402606,0.104564743814912,0.79466709091387,"Fungi_val_M","Commercially valuable 
+fungi richness",20,"Pulse + Press"
+"Scenario 9","Fungi_val_M",52,0.609401366677421,1.00225044672982,0.0214745806380898,0.790838526477805,"Fungi_val_M","Commercially valuable 
+fungi richness",40,"Pulse + Press"
+"Scenario 10","Carbon_stock_M",100,NA,NA,NA,NA,"Carbon_stock_M","Carbon stock",60,"Pulse + Press"
+"Scenario 11","Carbon_stock_M",100,NA,NA,NA,NA,"Carbon_stock_M","Carbon stock",80,"Pulse + Press"
+"Scenario 12","Carbon_stock_M",100,NA,NA,NA,NA,"Carbon_stock_M","Carbon stock",100,"Pulse + Press"
+"Scenario 2","Carbon_stock_M",16,0.915176962713114,1.0046212127778,0.100892307725717,262.261898610508,"Carbon_stock_M","Carbon stock",20,"Pulse"
+"Scenario 3","Carbon_stock_M",30,0.822416171193302,1.00768918798144,0.0432728929131042,262.660820825493,"Carbon_stock_M","Carbon stock",40,"Pulse"
+"Scenario 4","Carbon_stock_M",50,0.715567488265947,1.00897271268246,0.0234526485684232,262.827353283157,"Carbon_stock_M","Carbon stock",60,"Pulse"
+"Scenario 5","Carbon_stock_M",63,0.638800365262391,1.00844956250929,0.0179123813407755,262.759502231389,"Carbon_stock_M","Carbon stock",80,"Pulse"
+"Scenario 6","Carbon_stock_M",80,0.555082123839739,1.01496329519191,0.0140439307480173,263.601802696965,"Carbon_stock_M","Carbon stock",100,"Pulse"
+"Scenario 8","Carbon_stock_M",14,0.941610126913161,1.00046722772961,0.112850494177878,261.719814915328,"Carbon_stock_M","Carbon stock",20,"Pulse + Press"
+"Scenario 9","Carbon_stock_M",45,0.81665511192805,1.00347358564341,0.0258739642137395,262.112361135234,"Carbon_stock_M","Carbon stock",40,"Pulse + Press"
+"Scenario 10","Nitrogen_stock_M",7,0.988430839513192,1.00037347560553,0.533153126571387,601.145841173349,"Nitrogen_stock_M","Nitrogen stock",60,"Pulse + Press"
+"Scenario 11","Nitrogen_stock_M",9,0.978553499530386,1.00033542115881,0.257856332642099,601.134409224683,"Nitrogen_stock_M","Nitrogen stock",80,"Pulse + Press"
+"Scenario 12","Nitrogen_stock_M",14,0.963191220393662,1.00380960506945,0.136186945308468,602.176300236407,"Nitrogen_stock_M","Nitrogen stock",100,"Pulse + Press"
+"Scenario 2","Nitrogen_stock_M",100,NA,NA,NA,NA,"Nitrogen_stock_M","Nitrogen stock",20,"Pulse"
+"Scenario 3","Nitrogen_stock_M",100,NA,NA,NA,NA,"Nitrogen_stock_M","Nitrogen stock",40,"Pulse"
+"Scenario 4","Nitrogen_stock_M",7,0.989265339624585,1.00167545356824,0.683587701251586,601.536706952284,"Nitrogen_stock_M","Nitrogen stock",60,"Pulse"
+"Scenario 5","Nitrogen_stock_M",9,0.97734036522748,1.00007715251942,0.251688753474683,601.056811164182,"Nitrogen_stock_M","Nitrogen stock",80,"Pulse"
+"Scenario 6","Nitrogen_stock_M",13,0.96319935321203,1.00142796025636,0.134891855839095,601.462446326048,"Nitrogen_stock_M","Nitrogen stock",100,"Pulse"
+"Scenario 8","Nitrogen_stock_M",100,NA,NA,NA,NA,"Nitrogen_stock_M","Nitrogen stock",20,"Pulse + Press"
+"Scenario 9","Nitrogen_stock_M",100,NA,NA,NA,NA,"Nitrogen_stock_M","Nitrogen stock",40,"Pulse + Press"
+"Scenario 10","Timber_M",100,NA,NA,NA,NA,"Timber_M","Timber volume",60,"Pulse + Press"
+"Scenario 11","Timber_M",100,NA,NA,NA,NA,"Timber_M","Timber volume",80,"Pulse + Press"
+"Scenario 12","Timber_M",100,NA,NA,NA,NA,"Timber_M","Timber volume",100,"Pulse + Press"
+"Scenario 2","Timber_M",25,0.691892626052609,1.00297576372596,0.0508225286647567,349.18572984135,"Timber_M","Timber volume",20,"Pulse"
+"Scenario 3","Timber_M",58,0.471342915133146,1.00216521356661,0.0189818455626396,349.044786023165,"Timber_M","Timber volume",40,"Pulse"
+"Scenario 4","Timber_M",100,NA,NA,NA,NA,"Timber_M","Timber volume",60,"Pulse"
+"Scenario 5","Timber_M",100,NA,NA,NA,NA,"Timber_M","Timber volume",80,"Pulse"
+"Scenario 6","Timber_M",100,NA,NA,NA,NA,"Timber_M","Timber volume",100,"Pulse"
+"Scenario 8","Timber_M",20,0.762066122426967,1.00371753123508,0.0685241773785389,349.314613351872,"Timber_M","Timber volume",20,"Pulse + Press"
+"Scenario 9","Timber_M",74,0.458053291060619,1.00050894224138,0.0145126064830495,348.756427483632,"Timber_M","Timber volume",40,"Pulse + Press"

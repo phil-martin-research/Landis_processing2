@@ -6,16 +6,21 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 library(vegan)
+library(grid)
+library(gridExtra)
 
 #organise data
 Eco_summary<-read.csv("Data/R_output/Ecoregion_summary.csv")
 Eco_summary<-Eco_summary[order(Eco_summary[,3]),]
+head(Eco_summary)
+
 
 #functions to make plotting of figures easier
 
 ES_labeller <- function(var, value){
   value <- as.character(value)
   if (var=="variable") {
+    value[value=="AGB_M"]   <- "Aboveground biomass"
     value[value=="Timber_M"]   <- "Timber volume"
     value[value=="Nitrogen_stock_M"]   <- "Nitrogen stock"
     value[value=="Carbon_stock_M"]   <- "Carbon stock"
@@ -86,7 +91,7 @@ Un_Scen<-unique(Sc)
 Res_summary<-NULL
 for (i in 1:length(Un_Scen)){
   Scen_sub<-subset(Eco_summary,Scenario==Un_Scen[i])#subset data to only inlude data from one scenario
-  for (y in seq(4,26,by = 2)){
+  for (y in seq(4,ncol(Eco_summary)-1,by = 2)){
     #produce data frame with details of scenario, the variable assessed and its resistance
     Resistance<-data.frame(Scenario=unique(Scen_sub$Scenario),variable=colnames(Scen_sub[y]),
                              Resistance=1-((2*(Scen_sub[2,y]-Scen_sub[6,y]))/(Scen_sub[2,y]+(Scen_sub[2,y]-Scen_sub[6,y]))))
@@ -94,6 +99,7 @@ for (i in 1:length(Un_Scen)){
     Res_summary<-rbind(Resistance,Res_summary)
   }
 }
+
 
 #set resistance as equal to 1 if variable increases
 Res_summary$Resistance<-ifelse(Res_summary$Resistance>1,1,Res_summary$Resistance) 
@@ -106,6 +112,9 @@ Res_summary$Resistance<-ifelse(Res_summary$Resistance<0,0,Res_summary$Resistance
 Res_summary$ESLab <- ES_labeller('variable',Res_summary$variable)
 Res_summary$Scen_lab <- as.numeric(Scenario_labeller('Scenario',Res_summary$Scenario))
 Res_summary$Scen_lab2 <- Scenario_labeller2('Scenario',Res_summary$Scenario)
+
+#output this as a .csv file for Elena
+write.csv(Res_summary,"Data/R_output/Resistence.csv",row.names=F)
 
 
 #plot results
@@ -127,7 +136,7 @@ ggsave("Figures/Resistance.pdf",width = 8,height = 6,units = "in",dpi = 400)
 Recovery_summary<-NULL
 for (i in 1:length(Un_Scen)){#run this part of loop for all scenarios
   Scen_sub<-subset(Eco_summary,Scenario==Un_Scen[i])#subset to give different scenarios
-  for (j in seq(4,26,by = 2)){#for each variable (e.g. Aboveground biomass) run this part of the loop
+  for (j in seq(4,ncol(Eco_summary)-1,by = 2)){#for each variable (e.g. Aboveground biomass) run this part of the loop
     for (k in 7:nrow(Scen_sub)){#for each row after time==5 run this loop
       #produce dataframe with all the resistance and recovery information we are interested in
     Recovery<-data.frame(Scenario=unique(Un_Scen[i]),#name of scenario
@@ -186,6 +195,9 @@ R_summ$Scen_lab <- as.numeric(Scenario_labeller('Scenario',R_summ$Scenario))
 R_summ$Scen_lab2 <- Scenario_labeller2('Scenario',R_summ$Scenario)
 R_summ<-subset(R_summ,Scen_lab2!="Press")
 
+#output this as a .csv file for Elena
+write.csv(R_summ,"Data/R_output/Recovery.csv",row.names=F)
+
 
 #plot of time taken for recovery
 P1<-ggplot(R_summ,aes(x=Scen_lab,y=Time,colour=Scen_lab2,shape=Scen_lab2))+geom_point(size=2,alpha=0.5)+facet_wrap(~ESLab,ncol=5)
@@ -225,6 +237,9 @@ Pers_summ$Scen_lab <- as.numeric(Scenario_labeller('Scenario',Pers_summ$Scenario
 Pers_summ$Scen_lab2 <- Scenario_labeller2('Scenario',Pers_summ$Scenario)
 Pers_summ<-subset(Pers_summ,Scen_lab2!="Press"&Scenario!="Scenario 1")
 
+
+#output this as a .csv for elena
+write.csv(Pers_summ,"Data/R_output/Persistence.csv",row.names=F)
 
 P1<-ggplot(Pers_summ,aes(x=Scen_lab,y=Resistance2,colour=Scen_lab2,shape=Scen_lab2))+geom_point(size=2,alpha=0.5)+facet_wrap(~ESLab,ncol=4)
 P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
