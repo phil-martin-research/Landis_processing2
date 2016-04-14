@@ -11,6 +11,7 @@ library(reshape)
 library(reshape2)
 library(plyr)
 library(MuMIn)
+library(gridExtra)
 
 
 #clear previous R objects
@@ -36,6 +37,7 @@ Rec_aes$Aes_transM<-qlogis(Rec_aes$Aes_transM)
 #first using SRR and mineralisation rate
 Coefficients<-NULL
 Sel_table_summary<-NULL
+pdf("Biomass_regressions.pdf")
 for (i in 4:5){
   M1<-lmer(BM[[i]]~AGB_std+(1|Site),data=BM)
   M2<-lmer(BM[[i]]~AGB_std+I(AGB_std^2)+(1|Site),data=BM)
@@ -61,8 +63,16 @@ for (i in 4:5){
   Sel_table$AIC_w<-round((exp(-0.5*(Sel_table$delta)))/(sum(exp(-0.5*(Sel_table$delta)))),2)
   Sel_table<-Sel_table[with(Sel_table, order(AICc)), ]
   Sel_table_summary<-rbind(Sel_table_summary,Sel_table)
-  
+  new.data<-data.frame(AGB=seq(min(BM$AGB),max(BM$AGB)))
+  new.data$AGB_std<-(new.data$AGB-mean(BM$AGB))/sd(BM$AGB)
+  new.data$Pred<-predict(Mod_average,se.fit = T,re.form=NA,type = "response",newdata=new.data)$fit
+  new.data$SE<-predict(Mod_average,se.fit = T,re.form=NA,type = "response",newdata=new.data)$se.fit
+  P1<-ggplot(BM,aes(x=AGB,y=BM[[i]]))+geom_point()
+  P2<-P1+geom_line(data=new.data,aes(y=Pred))+geom_ribbon(alpha=0.4,data=new.data,aes(y=Pred,ymax=Pred+(2*SE),ymin=Pred-(2*SE)))
+  print(P2+xlab("Aboveground biomass")+ylab(colnames(BM[i])))
   }
+
+grid.arrange(plots)
 
 #and then for count data - fungi, ground flora and lichen species richness
 for (i in 6:9){
@@ -90,6 +100,13 @@ for (i in 6:9){
   Sel_table$AIC_w<-round((exp(-0.5*(Sel_table$delta)))/(sum(exp(-0.5*(Sel_table$delta)))),2)
   Sel_table<-Sel_table[with(Sel_table, order(AICc)), ]
   Sel_table_summary<-rbind(Sel_table_summary,Sel_table)
+  new.data<-data.frame(AGB=seq(min(BM$AGB),max(BM$AGB)))
+  new.data$AGB_std<-(new.data$AGB-mean(BM$AGB))/sd(BM$AGB)
+  new.data$Pred<-predict(Mod_average,se.fit = T,re.form=NA,type = "response",newdata=new.data)$fit
+  new.data$SE<-predict(Mod_average,se.fit = T,re.form=NA,type = "response",newdata=new.data)$se.fit
+  P1<-ggplot(BM,aes(x=AGB,y=BM[[i]]))+geom_point()
+  P2<-P1+geom_line(data=new.data,aes(y=Pred))+geom_ribbon(alpha=0.4,data=new.data,aes(y=Pred,ymax=Pred+(2*SE),ymin=Pred-(2*SE)))
+  print(P2+xlab("Aboveground biomass")+ylab(colnames(BM[i])))
   
 }
 
@@ -118,9 +135,15 @@ for (i in c(7,9)){
   Sel_table$AIC_w<-round((exp(-0.5*(Sel_table$delta)))/(sum(exp(-0.5*(Sel_table$delta)))),2)
   Sel_table<-Sel_table[with(Sel_table, order(AICc)), ]
   Sel_table_summary<-rbind(Sel_table_summary,Sel_table)
-  
+  new.data<-data.frame(AGB=seq(min(BM$AGB),max(BM$AGB)))
+  new.data$AGB_std<-(new.data$AGB-mean(BM$AGB))/sd(BM$AGB)
+  new.data$Pred<-predict(Mod_average,se.fit = T,re.form=NA,type = "response",newdata=new.data)$fit
+  new.data$SE<-predict(Mod_average,se.fit = T,re.form=NA,type = "response",newdata=new.data)$se.fit
+  P1<-ggplot(BM,aes(x=AGB,y=BM[[i]]))+geom_point()
+  P2<-P1+geom_line(data=new.data,aes(y=Pred))+geom_ribbon(alpha=0.4,data=new.data,aes(y=Pred,ymax=Pred+(2*SE),ymin=Pred-(2*SE)))
+  print(P2+xlab("Aboveground biomass")+ylab(colnames(BM[i])))
 }
-
+dev.off()
 
 
 #tidy data
