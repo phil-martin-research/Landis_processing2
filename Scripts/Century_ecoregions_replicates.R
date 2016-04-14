@@ -118,31 +118,22 @@ Eco_summary<-rbind(Eco_summary,EcoR2)
 #calculate AGB in Mg per ha
 Eco_summary$AGB<-Eco_summary$AGB/100
 
-Eco_summary2<-ddply(Eco_summary,.(Time,EcoregionName,EcoregionIndex,Scenario),numcolwise(mean,na.rm=T))
+Eco_summary2<-ddply(Eco_summary,.(Time,EcoregionName,EcoregionIndex,Scenario,Replicate),numcolwise(mean,na.rm=T))
 
 
 #calculate mean of the results for each time step, weighting by number of pixels in each 
 #ecoregion
 
-Eco_summary3<-ddply(Eco_summary,.(Scenario,Time),summarise,
+Eco_summary3<-ddply(Eco_summary,.(Scenario,Time,Replicate),summarise,
                     AGB_M=weighted.mean(AGB,NumSites,na.rm = T),
-                    AGB_SD=wt.sd(AGB,NumSites),
                     SRR_M=weighted.mean(SRR,NumSites,na.rm = T),
-                    SRR_SD=wt.sd(SRR,NumSites),
                     Min_rate_M=weighted.mean(Min_rate,NumSites,na.rm = T),
-                    Min_rate_SD=wt.sd(Min_rate,NumSites),
                     Fungi_M=weighted.mean(Fungi,NumSites,na.rm = T),
-                    Fungi_SD=wt.sd(Fungi,NumSites),
                     GF_M=weighted.mean(GF,NumSites,na.rm = T),
-                    GF_SD=wt.sd(GF,NumSites),
                     Lichen_M=weighted.mean(Lichen,NumSites,na.rm = T),
-                    Lichen_SD=wt.sd(Lichen,NumSites),
                     Aesthetic_M=weighted.mean(Aesthetic,NumSites,na.rm = T),
-                    Aesthetic_SD=wt.sd(Aesthetic,NumSites),
                     Recreation_M=weighted.mean(Recreation,NumSites,na.rm = T),
-                    Recreation_SD=wt.sd(Recreation,NumSites),
-                    Fungi_val_M=weighted.mean(Fungi_val,NumSites,na.rm = T),
-                    Fungi_val_SD=wt.sd(Fungi_val,NumSites)
+                    Fungi_val_M=weighted.mean(Fungi_val,NumSites,na.rm = T)
                     )
 
 #################################################
@@ -220,10 +211,10 @@ Trees<-ddply(BM_ER,.(Scenario,Time,Replicate),summarise,Timber_M=weighted.mean(V
 ###################################################################################################################
 
 Eco_summary_means<-merge(merge(Eco_summary2,CN_ER_sum,by=c("EcoregionName","Scenario","Time")),Trees_sum,by=c("EcoregionName","Scenario","Time"))
-write.csv(x=Eco_summary_means,"Data/R_output/Ecoregion_means.csv")
+write.csv(x=Eco_summary_means,"Data/R_output/Ecoregion_means_replicates.csv")
 
 #calculate mean of the results for each time step, weighting by number of pixels in each 
 #ecoregion
 
-Eco_summary_weighted<-merge(merge(Eco_summary3,WM_CN,by=c("Scenario","Time")),Trees,by=c("Scenario","Time"))
-write.csv(x=Eco_summary_weighted,"Data/R_output/Ecoregion_summary.csv")
+Eco_summary_weighted<-merge(merge(Eco_summary3,WM_CN,by=c("Scenario","Time","Replicate")),Trees,by=c("Scenario","Time","Replicate"))
+write.csv(x=Eco_summary_weighted,"Data/R_output/Ecoregion_summary_replicates.csv")
