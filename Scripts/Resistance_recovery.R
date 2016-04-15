@@ -14,7 +14,6 @@ Eco_summary<-read.csv("Data/R_output/Ecoregion_summary.csv")
 Eco_summary<-Eco_summary[order(Eco_summary[,3]),]
 head(Eco_summary)
 
-
 #functions to make plotting of figures easier
 
 ES_labeller <- function(var, value){
@@ -168,6 +167,9 @@ Recovery_sub<-subset(Recovery_sub,Variable!="Min_rate_M"&Variable!="GF_M")
 
 #not sure what is going on with carbon here - this will need fixing
 ggplot(Recovery_sub,aes(x=Time,y=Resistance2,colour=Scenario))+geom_line()+facet_wrap(~Variable,scales="free_y")
+ggplot(Recovery_sub,aes(x=Time,y=Recovery,colour=Scenario))+geom_line()+facet_wrap(~Variable,scales="free_y")
+
+
 
 #now work out the first time point at which Resistance2>=1, thereby working out the time
 #taken for each ecosystem service/biodiversity variable to recover
@@ -247,23 +249,3 @@ P3<-P2+ylab("Value after 100 years relative to year 0")+ theme(strip.text.x = el
 P4<-P3+scale_colour_manual("Disturbance type",values = c("blue","red"))+scale_shape_manual("Disturbance type",values = c(15, 16))
 P4+xlab("Percentage beech and oak biomass lost in disturbance")+ theme(panel.margin = unit(1, "lines"))
 ggsave("Figures/Persistence.pdf",width = 8,height = 6,units = "in",dpi = 400)
-
-#now if we treat each variable as if it was a species we can produce a similarity index to see summarise which 
-#scenario is most similar to year==0 after 100 years
-
-#names(Eco_summ_clean)[3:ncol(Eco_summ_clean)]
-
-#Sor_sim_sum<-NULL
-#Eco_summ_clean<-Eco_summary[-c(1,seq(5,27,by=2),22,24)]
-#head(Eco_summary)
-#Uni_Scen<-unique(Eco_summ_clean$Scenario)
-#for (i in 1:length(Uni_Scen)){
-  #Eco_sum_sub<-subset(Eco_summ_clean,Scenario==Uni_Scen[i])
-  #Eco_sum_sub2<-(Eco_sum_sub)[-c(1:2)]
-  #Eco_sum_sub3<-(Eco_sum_sub2)[-1,]
-  #Eco_sum_sub[101,]
-  #Sor_sim<-data.frame(Scenario=Uni_Scen[i],Sim=1-vegdist(Eco_sum_sub3)[100])
-  #Sor_sim_sum<-rbind(Sor_sim_sum,Sor_sim)
-#}
-          
-#ggplot(Sor_sim_sum,aes(x=Scenario,y=Sim))+geom_point(shape=1,size=2)+geom_hline(yintercept=1,lty=2,alpha=0.5)
