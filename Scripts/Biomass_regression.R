@@ -23,6 +23,7 @@ Rec_aes<-read.csv("Data/Rec_aes_reorg.csv",header = T)
 BM<-subset(BM,AGB<600)#subset to remove one site with extreme AGB value from Paul's data
 BM$AGB_std<-(BM$AGB-mean(BM$AGB))/sd(BM$AGB) #standardise biomass
 #tranform recreation data
+head(Rec_aes)
 Rec_aes$Rec_trans<-((Rec_aes$Recreation-1)/4)
 Rec_aes$Rec_transM<-ifelse(Rec_aes$Rec_trans==0,Rec_aes$Rec_trans+0.01,Rec_aes$Rec_trans)
 Rec_aes$Rec_transM<-ifelse(Rec_aes$Rec_transM==1,Rec_aes$Rec_transM-0.01,Rec_aes$Rec_transM)
@@ -31,13 +32,13 @@ Rec_aes$Aes_trans<-((Rec_aes$Aesthetic-1)/4)
 Rec_aes$Aes_transM<-ifelse(Rec_aes$Aes_trans==0,Rec_aes$Aes_trans+0.01,Rec_aes$Aes_trans)
 Rec_aes$Aes_transM<-ifelse(Rec_aes$Aes_transM==1,Rec_aes$Aes_transM-0.01,Rec_aes$Aes_transM)
 Rec_aes$Aes_transM<-qlogis(Rec_aes$Aes_transM)
-
+Rec_aes$AGB_std<-(Rec_aes$mean_AGB-mean(Rec_aes$mean_AGB))/sd(Rec_aes$mean_AGB)
 #run a loop to test each model and produce a coefficient for each 
 #variable
 #first using SRR and mineralisation rate
 Coefficients<-NULL
 Sel_table_summary<-NULL
-pdf("Biomass_regressions.pdf")
+pdf("Figures/Biomass_regressions.pdf")
 for (i in 4:5){
   M1<-lmer(BM[[i]]~AGB_std+(1|Site),data=BM)
   M2<-lmer(BM[[i]]~AGB_std+I(AGB_std^2)+(1|Site),data=BM)
@@ -111,8 +112,9 @@ for (i in 6:9){
 }
 
 for (i in c(7,9)){
-  M1<-lmer(Rec_aes[[i]]~mean_AGB+(1|ID),data=Rec_aes)
-  M2<-lmer(Rec_aes[[i]]~mean_AGB+I(mean_AGB^2)+(1|ID),data=Rec_aes)
+  i<-7
+  M1<-lmer(Rec_aes[[i]]~AGB_std+(1|ID),data=Rec_aes)
+  M2<-lmer(Rec_aes[[i]]~AGB_std+I(AGB_std^2)+(1|ID),data=Rec_aes)
   M0<-lmer(Rec_aes[[i]]~1+(1|ID),data=Rec_aes)
   Mod_average<-model.avg(M1,M2,M0)
   Coefficients<-rbind(Coefficients,
@@ -135,11 +137,11 @@ for (i in c(7,9)){
   Sel_table$AIC_w<-round((exp(-0.5*(Sel_table$delta)))/(sum(exp(-0.5*(Sel_table$delta)))),2)
   Sel_table<-Sel_table[with(Sel_table, order(AICc)), ]
   Sel_table_summary<-rbind(Sel_table_summary,Sel_table)
-  new.data<-data.frame(AGB=seq(min(BM$AGB),max(BM$AGB)))
-  new.data$AGB_std<-(new.data$AGB-mean(BM$AGB))/sd(BM$AGB)
+  new.data<-data.frame(mean_AGB=seq(min(Rec_aes$mean_AGB),max(Rec_aes$mean_AGB)))
+  new.data$AGB_std<-(new.data$mean_AGB-mean(Rec_aes$mean_AGB))/sd(Rec_aes$mean_AGB)
   new.data$Pred<-predict(Mod_average,se.fit = T,re.form=NA,type = "response",newdata=new.data)$fit
   new.data$SE<-predict(Mod_average,se.fit = T,re.form=NA,type = "response",newdata=new.data)$se.fit
-  P1<-ggplot(BM,aes(x=AGB,y=BM[[i]]))+geom_point()
+  P1<-ggplot(Rec_aes,aes(x=mean_AGB,y=(Rec_aes[[i-1]]*5)))+geom_point()
   P2<-P1+geom_line(data=new.data,aes(y=Pred))+geom_ribbon(alpha=0.4,data=new.data,aes(y=Pred,ymax=Pred+(2*SE),ymin=Pred-(2*SE)))
   print(P2+xlab("Aboveground biomass")+ylab(colnames(BM[i])))
 }
