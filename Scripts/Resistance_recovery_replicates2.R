@@ -29,7 +29,7 @@ ES_labeller <- function(var, value){
     value[value=="Lichen_M"]   <- "Lichen species \nrichness"
     value[value=="GF_M"]   <- "Ground flora \nspecies richness"
     value[value=="Fungi_M"]   <- "Fungi species richness"
-    value[value=="Min_rate_M"]   <- "Nitrogen mineralistation \nrate"
+    value[value=="Min_rate_M"]   <- "Nitrogen mineralisation \nrate"
     value[value=="SRR_M"]   <- "Soil respiration rate"
     value[value=="Tree_richness_M"]   <- "Tree species richness"
     value[value=="Fungi_val_M"]   <- "Commercially valuable \nfungi richness"
@@ -136,7 +136,7 @@ P1<-ggplot(Res_summary2,aes(x=Scen_lab,y=m_Res,ymax=m_Res+sd_Res,ymin=m_Res-sd_R
 P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))+geom_line(data=Res_summary2,aes(group=Scen_lab2),alpha=0.5)
 P3<-P2+ylab("Resistance")+scale_x_continuous(breaks=c(0,20,40,60,80,100))+scale_y_continuous(limits=c(0,1.1),breaks=c(0,0.2,0.4,0.6,0.8,1))
 P4<-P3+scale_colour_manual("Disturbance type",values = c("black","red"))+scale_shape_manual("Disturbance type",values = c(15, 17))
-P4+xlab("Degree of disturbance")+theme(strip.text.x = element_text(size = 8))
+P4+xlab("Degree of disturbance")+theme(strip.text.x = element_text(size = 8))+guides(color = guide_legend(override.aes = list(linetype = 0)))
 ggsave("Figures/Resistance_replicates.pdf",width = 10,height = 5,units = "in",dpi = 400)
 
 #############################################################
@@ -188,7 +188,7 @@ Recovery_sub<-subset(Recovery_summary,Time>5&Scenario!="Scenario 1"|Variable!="M
 
 
 #not sure what is going on with carbon here - this will need fixing
-ggplot(Recovery_sub,aes(x=Time,y=Resistance2,colour=Scenario,group=Replicate))+geom_line()+facet_wrap(~Variable,scales="free_y")
+ggplot(Recovery_sub,aes(x=Time,y=Resistance2,colour=Scenario,group=interaction(Replicate,Scenario)))+geom_line()+facet_wrap(~Variable,scales="free_y")
 
 #now work out the first time point at which Resistance2>=1, thereby working out the time
 #taken for each ecosystem service/biodiversity variable to recover
@@ -211,38 +211,36 @@ for (i in 1:nrow(Un_Sce_ES)){
   R_summ<-rbind(R_summ,Recov_summary)
 }
 
+head(R_summ)
+
 R_summ$variable<-R_summ$Variable#tidy data
 R_summ$ESLab <- ES_labeller('variable',R_summ$variable)#relabel variables for ease of plotting
 R_summ$Scen_lab <- as.numeric(Scenario_labeller('Scenario',R_summ$Scenario))
 R_summ$Scen_lab2 <- Scenario_labeller2('Scenario',R_summ$Scenario)
-R_summ<-subset(R_summ,Scen_lab2!="Press")
-
-R_summ<-subset(R_summ,ESLab=="Carbon stock"|ESLab=="Nitrogen stock"|ESLab=="Recreation value"|ESLab=="Timber volume"|ESLab=="Fungi species richness"|ESLab=="Ground flora \nspecies richness"|ESLab=="Lichen species \nrichness"|ESLab=="Tree species richness")
-R_summ$ESLab <- factor(R_summ$ESLab, c("Carbon stock", "Nitrogen stock", "Recreation value", "Timber volume",
-                                       "Fungi species richness","Ground flora \nspecies richness",
-                                       "Lichen species \nrichness","Tree species richness"))
 
 
-unique(R_summ$Variable)
-R_summ2<-ddply(R_summ,.(Scenario,Variable),transform,m_time=mean(Time),sd_time=sd(Time))
-R_summ2$m_time<-ifelse(R_summ2$Variable=="GF_M"|R_summ2$Variable=="Tree_richness_M",NA,R_summ2$m_time)
+R_summ2<-ddply(R_summ,.(Scenario,ESLab,Scen_lab,Scen_lab2),summarise,m_time=mean(Time),sd_time=sd(Time))
+R_summ2$m_time<-ifelse(R_summ2$ESLab=="Ground flora \nspecies richness"|
+                         R_summ2$ESLab=="Nitrogen mineralisation \nrate"|
+                         R_summ2$ESLab=="Tree species richness"
+                         ,NA,R_summ2$m_time)
+
+R_summ2$ESLab2<-factor(as.factor(R_summ2$ESLab), c("Aboveground biomass","Carbon stock","Nitrogen stock","Soil respiration rate","Nitrogen mineralisation \nrate",
+                                                             "Commercially valuable \nfungi richness","Timber volume","Aesthetic value","Recreation value","Fungi species richness",
+                                                             "Ground flora \nspecies richness","Lichen species \nrichness","Tree species richness"))
+
 
 
 #output this as a .csv file for Elena
 write.csv(R_summ,"Data/R_output/Recovery_replicates.csv",row.names=F)
 
 
-P1<-ggplot(Res_summary2,aes(x=Scen_lab,y=m_Res,ymax=m_Res+sd_Res,ymin=m_Res-sd_Res,shape=Scen_lab2,colour=Scen_lab2))+facet_wrap(~ESLab,ncol=4)+geom_hline(yintercept=1,lty=2,alpha=0.5,size=0.5)+geom_pointrange(alpha=0.5)
-P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))+geom_line(data=Res_summary2,aes(group=Scen_lab2))
-P3<-P2+xlab("Degree of disturbance")+ylab("Resistance")
-P3+scale_colour_manual("Disturbance type",values = c("black","red"))+scale_shape_manual("Disturbance type",values = c(15, 17))
-
 #plot of time taken for recovery
-P1<-ggplot(R_summ2,aes(x=Scen_lab,y=m_time,ymax=m_time+sd_time,ymin=m_time-sd_time,colour=Scen_lab2,shape=Scen_lab2))+geom_pointrange(alpha=0.5)+geom_line(aes(group=Scen_lab2))+facet_wrap(~ESLab,ncol=4)
+P1<-ggplot(R_summ2,aes(x=Scen_lab,y=m_time,ymax=m_time+sd_time,ymin=m_time-sd_time,colour=Scen_lab2,shape=Scen_lab2))+geom_pointrange(alpha=0.5)+geom_line(aes(group=Scen_lab2))+facet_wrap(~ESLab,ncol=5)
 P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
 P3<-P2+ylab("Time taken for recovery (Years)")+ theme(strip.text.x = element_text(size = 8))+xlab("Degree of disturbance")
 P4<-P3+scale_colour_manual("Disturbance type",values = c("black","red"))+scale_shape_manual("Disturbance type",values = c(15, 17))
-P4
+P4+guides(color = guide_legend(override.aes = list(linetype = 0)))
 ggsave("Figures/Recovery_time_replicates.pdf",width = 10,height = 5,units = "in",dpi = 400)
 
 
