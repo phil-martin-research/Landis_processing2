@@ -271,22 +271,23 @@ Pers_summ$variable<-Pers_summ$Variable
 Pers_summ$ESLab <- ES_labeller('variable',Pers_summ$variable)
 Pers_summ$Scen_lab <- as.numeric(Scenario_labeller('Scenario',Pers_summ$Scenario))
 Pers_summ$Scen_lab2 <- Scenario_labeller2('Scenario',Pers_summ$Scenario)
-Pers_summ<-subset(Pers_summ,Scen_lab2!="Press"&Scenario!="Scenario 1")
 
 
-Pers_summ<-subset(Pers_summ,ESLab=="Carbon stock"|ESLab=="Nitrogen stock"|ESLab=="Recreation value"|ESLab=="Timber volume"|ESLab=="Fungi species richness"|ESLab=="Ground flora \nspecies richness"|ESLab=="Lichen species \nrichness"|ESLab=="Tree species richness")
-Pers_summ$ESLab <- factor(Pers_summ$ESLab, c("Carbon stock", "Nitrogen stock", "Recreation value", "Timber volume",
-                                             "Fungi species richness","Ground flora \nspecies richness",
-                                             "Lichen species \nrichness","Tree species richness"))
 head(Pers_summ)
-Pers_summ2<-ddply(Pers_summ,.(Scenario,Variable),transform,m_var=mean(Resistance2),sd_var=sd(Resistance2))
+Pers_summ2<-ddply(Pers_summ,.(Scenario,ESLab,Scen_lab,Scen_lab2),summarise,m_var=mean(Resistance2),sd_var=sd(Resistance2))
+
+
+Pers_summ2$ESLab2<-factor(as.factor(Pers_summ2$ESLab), c("Aboveground biomass","Carbon stock","Nitrogen stock","Soil respiration rate","Nitrogen mineralisation \nrate",
+                                                   "Commercially valuable \nfungi richness","Timber volume","Aesthetic value","Recreation value","Fungi species richness",
+                                                   "Ground flora \nspecies richness","Lichen species \nrichness","Tree species richness"))
+
 
 #output this as a .csv for elena
 write.csv(Pers_summ,"Data/R_output/Persistence_replicates.csv",row.names=F)
 
-P1<-ggplot(Pers_summ2,aes(x=Scen_lab,y=m_var,ymax=m_var+sd_var,ymin=m_var-sd_var,colour=Scen_lab2,shape=Scen_lab2))+geom_pointrange(alpha=0.5)+facet_wrap(~ESLab,ncol=4)+geom_line(aes(group=Scen_lab2))
+P1<-ggplot(Pers_summ2,aes(x=Scen_lab,y=m_var,ymax=m_var+sd_var,ymin=m_var-sd_var,colour=Scen_lab2,shape=Scen_lab2))+geom_pointrange(alpha=0.5)+facet_wrap(~ESLab2,ncol=5)+geom_line(aes(group=Scen_lab2))
 P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
 P3<-P2+ylab("Persistance")+ theme(strip.text.x = element_text(size = 8))+geom_hline(yintercept=1,lty=2,alpha=0.5,size=0.5)
 P4<-P3+scale_colour_manual("Disturbance type",values = c("black","red"))+scale_shape_manual("Disturbance type",values = c(15, 17))
-P4+xlab("Degree of disturbance")
-ggsave("Figures/Persistence_replicates.pdf",width = 8,height = 6,units = "in",dpi = 400)
+P4+xlab("Degree of disturbance")+guides(color = guide_legend(override.aes = list(linetype = 0)))
+ggsave("Figures/Persistence_replicates.pdf",width = 10,height = 5,units = "in",dpi = 400)
