@@ -289,5 +289,5 @@ P1<-ggplot(Pers_summ2,aes(x=Scen_lab,y=m_var,ymax=m_var+sd_var,ymin=m_var-sd_var
 P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
 P3<-P2+ylab("Persistance")+ theme(strip.text.x = element_text(size = 8))+geom_hline(yintercept=1,lty=2,alpha=0.5,size=0.5)
 P4<-P3+scale_colour_manual("Disturbance type",values = c("black","red"))+scale_shape_manual("Disturbance type",values = c(15, 17))
-P4+xlab("Degree of disturbance")+guides(color = guide_legend(override.aes = list(linetype = 0)))
+P4+xlab("Degree of disturbance")+guides(color = guide_legend(override.aes = list(linetype = 0)))+scale_x_continuous(breaks=c(0,20,40,60,80,100))+scale_y_continuous(limits=c(0,1.1),breaks=c(0,0.2,0.4,0.6,0.8,1))
 ggsave("Figures/Persistence_replicates.pdf",width = 10,height = 5,units = "in",dpi = 400)
