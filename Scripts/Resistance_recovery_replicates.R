@@ -119,7 +119,7 @@ Res_summary2<-ddply(Res_summary,.(Scenario,ESLab,Scen_lab,Scen_lab2),summarise,m
 Res_summary2<-subset(Res_summary2,ESLab!="Replicate")
 
 
-Res_summary2$ESLab2<-factor(as.factor(Res_summary2$ESLab), c("Aboveground biomass","Carbon stock","Nitrogen stock","Soil respiration rate","Nitrogen mineralistation \nrate",
+Res_summary2$ESLab2<-factor(as.factor(Res_summary2$ESLab), c("Aboveground biomass","Carbon stock","Nitrogen stock","Soil respiration rate","Nitrogen mineralisation \nrate",
                                "Commercially valuable \nfungi richness","Timber volume","Aesthetic value","Recreation value","Fungi species richness",
                                "Ground flora \nspecies richness","Lichen species \nrichness","Tree species richness"))
 
