@@ -28,9 +28,9 @@ for (i in 1:length(scenarios)){
   saveVideo(for(j in 1:length(scen_sub))
   {
     map.p <- rasterToPoints((raster(scen_sub[j])))
-    df <- data.frame(map.p)  
+    df <- data.frame(map.p)
     colnames(df) <- c("x", "y", "SpR")
-    head(df)
+    year<-unique(na.omit(as.numeric(unlist(strsplit(unlist(scen_sub[j]), "[^0-9]+")))))
     P1<-ggplot(data=df, aes(y=y, x=x)) +
       geom_raster(aes(fill=SpR))+
       scale_fill_gradient("Species richness",low="white",high="green",limits=c(0, 15))+
@@ -44,23 +44,13 @@ for (i in 1:length(scenarios)){
             axis.title.y=element_blank(),
             panel.background=element_blank(),
             panel.grid.major=element_blank(),
-            panel.grid.minor=element_blank(),plot.background=element_blank())
+            panel.grid.minor=element_blank(),plot.background=element_blank())+
+      ggtitle(label = paste(year,"years"))
     print(P1)
-    ani.options(interval = 5)   
   }
   ,video.name=paste("Videos/",scenarios[i],".mp4",sep=""),
-  ffmpeg="C:/Program Files/ffmpeg/bin/ffmpeg.exe")
+  ffmpeg="C:/Program Files/ffmpeg/bin/ffmpeg.exe",
+  interval=2,
+  title = "Change in New Forest")
 }
  
-?saveVideo
-
-## usually Linux users do not need to worry about the ffmpeg path as long as
-## FFmpeg or avconv has been installed
-saveVideo({
-  par(mar = c(3, 3, 1, 0.5), mgp = c(2, 0.5, 0), tcl = -0.3, cex.axis = 0.8,
-      cex.lab = 0.8, cex.main = 1)
-  ani.options(interval = 0.05, nmax = 300)
-  brownian.motion(pch = 21, cex = 5, col = "red", bg = "yellow")
-}, video.name = "BM.mp4", other.opts = "-pix_fmt yuv420p -b 300k")
-# higher bitrate, better quality
-ani.options(oopts)
