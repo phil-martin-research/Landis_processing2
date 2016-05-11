@@ -240,7 +240,7 @@ P1<-ggplot(R_summ2,aes(x=Scen_lab,y=m_time,ymax=m_time+sd_time,ymin=m_time-sd_ti
 P2<-P1+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(),panel.border = element_rect(size=1.5,colour="black",fill=NA))
 P3<-P2+ylab("Time taken for recovery (Years)")+ theme(strip.text.x = element_text(size = 8))+xlab("Degree of disturbance")
 P4<-P3+scale_colour_manual("Disturbance type",values = c("black","red"))+scale_shape_manual("Disturbance type",values = c(15, 17))
-P4+guides(color = guide_legend(override.aes = list(linetype = 0)))
+P4+guides(color = guide_legend(override.aes = list(linetype = 0)))+scale_x_continuous(breaks=c(0,20,40,60,80,100))
 ggsave("Figures/Recovery_time_replicates.pdf",width = 10,height = 5,units = "in",dpi = 400)
 
 
