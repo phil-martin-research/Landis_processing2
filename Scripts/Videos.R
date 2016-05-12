@@ -1,19 +1,13 @@
 #script to produce animations of maps from landis outputs
 
+
 library(raster)
 library(animation)
 library(gtools)
 library(ggplot2)
 library(ggmap)
-?get_map
+library(gganimate)
 
-M1<-get_map(location = c(lat = 50.8633459, lon = -1.6207238), zoom = 11, maptype = 'terrain')
-
-ggmap(M1)
-
-oopts<-if (.Platform$OS.type == "windows") {
-  ani.options(ffmpeg = "C:/Program Files/ffmpeg/bin/ffmpeg.exe")
-}
 
 #find rasters for species richness
 File_names<-list.files(pattern="*.img",recursive=T)
@@ -23,9 +17,10 @@ File_names<-mixedsort(File_names,decreasing = T)
 #produce a list of the unique scenarios
 scenarios<-unique(sub(".*?Species_ric/(.*?)/.*", "\\1", File_names))
 
+df_all<-NULL
 for (i in 1:length(scenarios)){
   scen_sub<-File_names[grepl(scenarios[i],File_names)]
-  saveVideo(for(j in 1:length(scen_sub))
+  for(j in 1:length(scen_sub))
   {
     map.p <- rasterToPoints((raster(scen_sub[j])))
     df <- data.frame(map.p)
@@ -33,7 +28,7 @@ for (i in 1:length(scenarios)){
     year<-unique(na.omit(as.numeric(unlist(strsplit(unlist(scen_sub[j]), "[^0-9]+")))))
     P1<-ggplot(data=df, aes(y=y, x=x)) +
       geom_raster(aes(fill=SpR))+
-      scale_fill_gradient("Species richness",low="white",high="green",limits=c(0, 15))+
+      scale_fill_gradient("Number of tree species",low="white",high="dark green",limits=c(0, 15))+
       coord_equal()+
       theme_bw()+ 
       theme(axis.line=element_blank(),
@@ -47,10 +42,10 @@ for (i in 1:length(scenarios)){
             panel.grid.minor=element_blank(),plot.background=element_blank())+
       ggtitle(label = paste(year,"years"))
     print(P1)
+    ggsave(paste("Videos/pngs/",scenarios[i],
+                 ifelse(j<10,"_00","_0")
+                 ,j,".png",sep=""))
+    #df$year<-unique(na.omit(as.numeric(unlist(strsplit(unlist(scen_sub[j]), "[^0-9]+")))))
   }
-  ,video.name=paste("Videos/",scenarios[i],".mp4",sep=""),
-  ffmpeg="C:/Program Files/ffmpeg/bin/ffmpeg.exe",
-  interval=2,
-  title = "Change in New Forest")
 }
  
