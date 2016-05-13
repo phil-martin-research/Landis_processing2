@@ -4,4 +4,10 @@
 Inital_comm_sac_reclass.img
 Inital_comm_sac_reclass.img.aux.xml
 init_comm_sac.img
+<<<<<<< HEAD
 Figures/Resistance_replicates_FoL.pdf
+=======
+Ecoregion_means_replicates.csv
+Landis_processing2\data\R_output\Ecoregion_means_replicates.csv
+Landis_processing2/data/R_output/Ecoregion_means_replicates.csv
+>>>>>>> 9216d0a194dfcf245f7aa0a101eafecaa40690a5
