@@ -41,7 +41,7 @@ for (i in 1:length(scenarios)){
             panel.background=element_blank(),
             panel.grid.major=element_blank(),
             panel.grid.minor=element_blank(),plot.background=element_blank())+
-      ggtitle(label = paste(year,"years"))
+      ggtitle(label = paste(year,"years")))
     print(P1)
     ggsave(paste("Videos/pngs/",scenarios[i],
                  ifelse(j<10,"_00","_0")
