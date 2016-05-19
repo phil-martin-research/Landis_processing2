@@ -29,7 +29,7 @@ for (i in 1:length(scenarios)){
     year<-unique(na.omit(as.numeric(unlist(strsplit(unlist(scen_sub[j]), "[^0-9]+")))))
     P1<-ggplot(data=df, aes(y=y, x=x)) +
       geom_raster(aes(fill=SpR))+
-      scale_fill_gradient("Tree biomass",low="white",high="dark green",limits=c(0, 50000))+
+      scale_fill_gradient(expression(paste("Total biomass (g ", m^-2,")",sep="")),low="white",high="dark green",limits=c(0, 50000))+
       coord_equal()+
       theme_bw()+ 
       theme(axis.line=element_blank(),
