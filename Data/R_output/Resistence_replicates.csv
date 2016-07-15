@@ -3,36 +3,36 @@
 "Scenario 9",3,"Timber_M",0.442215465624737,"Timber volume",40,"Pulse + Press"
 "Scenario 9",3,"Nitrogen_stock_M",1,"Nitrogen stock",40,"Pulse + Press"
 "Scenario 9",3,"Carbon_stock_M",0.809325953056996,"Carbon stock",40,"Pulse + Press"
-"Scenario 9",3,"Fungi_val_M",0.597514401988439,"Commercially valuable 
+"Scenario 9",3,"Fungi_val_M",0.597514402008081,"Commercially valuable 
 fungi richness",40,"Pulse + Press"
 "Scenario 9",3,"Recreation_M",0.859952451305962,"Recreation value",40,"Pulse + Press"
-"Scenario 9",3,"Aesthetic_M",0.93283795215339,"Aesthetic value",40,"Pulse + Press"
-"Scenario 9",3,"Lichen_M",0.889273368379226,"Lichen species 
+"Scenario 9",3,"Aesthetic_M",0.932837953662688,"Aesthetic value",40,"Pulse + Press"
+"Scenario 9",3,"Lichen_M",0.889273368370354,"Lichen species 
 richness",40,"Pulse + Press"
 "Scenario 9",3,"GF_M",1,"Ground flora 
 species richness",40,"Pulse + Press"
-"Scenario 9",3,"Fungi_M",0.861856081189814,"Fungi species richness",40,"Pulse + Press"
+"Scenario 9",3,"Fungi_M",0.718092218983847,"Fungi species richness",40,"Pulse + Press"
 "Scenario 9",3,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",40,"Pulse + Press"
-"Scenario 9",3,"SRR_M",0.931067348452395,"Soil respiration rate",40,"Pulse + Press"
+"Scenario 9",3,"SRR_M",0.953778457861098,"Soil respiration rate",40,"Pulse + Press"
 "Scenario 9",3,"AGB_M",0.55101291193579,"Aboveground biomass",40,"Pulse + Press"
 "Scenario 9",3,"Replicate",1,"Replicate",40,"Pulse + Press"
 "Scenario 8",3,"Tree_richness_M",1,"Tree species richness",20,"Pulse + Press"
 "Scenario 8",3,"Timber_M",0.82161410603676,"Timber volume",20,"Pulse + Press"
 "Scenario 8",3,"Nitrogen_stock_M",1,"Nitrogen stock",20,"Pulse + Press"
 "Scenario 8",3,"Carbon_stock_M",0.962727570800404,"Carbon stock",20,"Pulse + Press"
-"Scenario 8",3,"Fungi_val_M",0.886492344159541,"Commercially valuable 
+"Scenario 8",3,"Fungi_val_M",0.886492344169722,"Commercially valuable 
 fungi richness",20,"Pulse + Press"
 "Scenario 8",3,"Recreation_M",0.97209884685694,"Recreation value",20,"Pulse + Press"
-"Scenario 8",3,"Aesthetic_M",0.986006517782104,"Aesthetic value",20,"Pulse + Press"
-"Scenario 8",3,"Lichen_M",0.979968276844814,"Lichen species 
+"Scenario 8",3,"Aesthetic_M",0.986006518117547,"Aesthetic value",20,"Pulse + Press"
+"Scenario 8",3,"Lichen_M",0.97996827684206,"Lichen species 
 richness",20,"Pulse + Press"
 "Scenario 8",3,"GF_M",1,"Ground flora 
 species richness",20,"Pulse + Press"
-"Scenario 8",3,"Fungi_M",0.971966875282598,"Fungi species richness",20,"Pulse + Press"
+"Scenario 8",3,"Fungi_M",0.935716230063158,"Fungi species richness",20,"Pulse + Press"
 "Scenario 8",3,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",20,"Pulse + Press"
-"Scenario 8",3,"SRR_M",0.984702143314819,"Soil respiration rate",20,"Pulse + Press"
+"Scenario 8",3,"SRR_M",0.989835314771181,"Soil respiration rate",20,"Pulse + Press"
 "Scenario 8",3,"AGB_M",0.883185652060475,"Aboveground biomass",20,"Pulse + Press"
 "Scenario 8",3,"Replicate",1,"Replicate",20,"Pulse + Press"
 "Scenario 7",3,"Tree_richness_M",1,"Tree species richness",0,"Pulse + Press"
@@ -45,10 +45,10 @@ fungi richness",0,"Pulse + Press"
 "Scenario 7",3,"Aesthetic_M",1,"Aesthetic value",0,"Pulse + Press"
 "Scenario 7",3,"Lichen_M",1,"Lichen species 
 richness",0,"Pulse + Press"
-"Scenario 7",3,"GF_M",0.94378107663398,"Ground flora 
+"Scenario 7",3,"GF_M",0.943781076633995,"Ground flora 
 species richness",0,"Pulse + Press"
 "Scenario 7",3,"Fungi_M",1,"Fungi species richness",0,"Pulse + Press"
-"Scenario 7",3,"Min_rate_M",0.958689468710852,"Nitrogen mineralisation 
+"Scenario 7",3,"Min_rate_M",0.960123342562379,"Nitrogen mineralisation 
 rate",0,"Pulse + Press"
 "Scenario 7",3,"SRR_M",1,"Soil respiration rate",0,"Pulse + Press"
 "Scenario 7",3,"AGB_M",1,"Aboveground biomass",0,"Pulse + Press"
@@ -57,144 +57,144 @@ rate",0,"Pulse + Press"
 "Scenario 6",3,"Timber_M",0.0073316472181123,"Timber volume",100,"Pulse"
 "Scenario 6",3,"Nitrogen_stock_M",0.963169892851939,"Nitrogen stock",100,"Pulse"
 "Scenario 6",3,"Carbon_stock_M",0.555088835517731,"Carbon stock",100,"Pulse"
-"Scenario 6",3,"Fungi_val_M",0.305306890319629,"Commercially valuable 
+"Scenario 6",3,"Fungi_val_M",0.305306890328019,"Commercially valuable 
 fungi richness",100,"Pulse"
 "Scenario 6",3,"Recreation_M",0.602849186858822,"Recreation value",100,"Pulse"
-"Scenario 6",3,"Aesthetic_M",0.814645179970568,"Aesthetic value",100,"Pulse"
-"Scenario 6",3,"Lichen_M",0.661493130300829,"Lichen species 
+"Scenario 6",3,"Aesthetic_M",0.814645183429724,"Aesthetic value",100,"Pulse"
+"Scenario 6",3,"Lichen_M",0.661493130294101,"Lichen species 
 richness",100,"Pulse"
 "Scenario 6",3,"GF_M",1,"Ground flora 
 species richness",100,"Pulse"
-"Scenario 6",3,"Fungi_M",0.611129548571,"Fungi species richness",100,"Pulse"
+"Scenario 6",3,"Fungi_M",0.395047383845073,"Fungi species richness",100,"Pulse"
 "Scenario 6",3,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",100,"Pulse"
-"Scenario 6",3,"SRR_M",0.830450861815575,"Soil respiration rate",100,"Pulse"
+"Scenario 6",3,"SRR_M",0.884326163263879,"Soil respiration rate",100,"Pulse"
 "Scenario 6",3,"AGB_M",0.13376004336649,"Aboveground biomass",100,"Pulse"
 "Scenario 6",3,"Replicate",1,"Replicate",100,"Pulse"
 "Scenario 5",3,"Tree_richness_M",1,"Tree species richness",80,"Pulse"
 "Scenario 5",3,"Timber_M",0.125056658356577,"Timber volume",80,"Pulse"
 "Scenario 5",3,"Nitrogen_stock_M",0.976629274909147,"Nitrogen stock",80,"Pulse"
 "Scenario 5",3,"Carbon_stock_M",0.634733850534706,"Carbon stock",80,"Pulse"
-"Scenario 5",3,"Fungi_val_M",0.384246676850704,"Commercially valuable 
+"Scenario 5",3,"Fungi_val_M",0.384246676862897,"Commercially valuable 
 fungi richness",80,"Pulse"
 "Scenario 5",3,"Recreation_M",0.687453248448002,"Recreation value",80,"Pulse"
-"Scenario 5",3,"Aesthetic_M",0.855405628532725,"Aesthetic value",80,"Pulse"
-"Scenario 5",3,"Lichen_M",0.738318006927871,"Lichen species 
+"Scenario 5",3,"Aesthetic_M",0.855405631400245,"Aesthetic value",80,"Pulse"
+"Scenario 5",3,"Lichen_M",0.738318006919556,"Lichen species 
 richness",80,"Pulse"
 "Scenario 5",3,"GF_M",1,"Ground flora 
 species richness",80,"Pulse"
-"Scenario 5",3,"Fungi_M",0.695874002301818,"Fungi species richness",80,"Pulse"
+"Scenario 5",3,"Fungi_M",0.488527101391731,"Fungi species richness",80,"Pulse"
 "Scenario 5",3,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",80,"Pulse"
-"Scenario 5",3,"SRR_M",0.863835509488273,"Soil respiration rate",80,"Pulse"
+"Scenario 5",3,"SRR_M",0.907637904461643,"Soil respiration rate",80,"Pulse"
 "Scenario 5",3,"AGB_M",0.250236732525008,"Aboveground biomass",80,"Pulse"
 "Scenario 5",3,"Replicate",1,"Replicate",80,"Pulse"
 "Scenario 4",3,"Tree_richness_M",1,"Tree species richness",60,"Pulse"
 "Scenario 4",3,"Timber_M",0.250259192014751,"Timber volume",60,"Pulse"
 "Scenario 4",3,"Nitrogen_stock_M",0.988288379769501,"Nitrogen stock",60,"Pulse"
 "Scenario 4",3,"Carbon_stock_M",0.70845207369668,"Carbon stock",60,"Pulse"
-"Scenario 4",3,"Fungi_val_M",0.470834895700986,"Commercially valuable 
+"Scenario 4",3,"Fungi_val_M",0.470834895716289,"Commercially valuable 
 fungi richness",60,"Pulse"
 "Scenario 4",3,"Recreation_M",0.762753647812498,"Recreation value",60,"Pulse"
-"Scenario 4",3,"Aesthetic_M",0.889947262801271,"Aesthetic value",60,"Pulse"
-"Scenario 4",3,"Lichen_M",0.804644505846871,"Lichen species 
+"Scenario 4",3,"Aesthetic_M",0.889947265086943,"Aesthetic value",60,"Pulse"
+"Scenario 4",3,"Lichen_M",0.804644505838066,"Lichen species 
 richness",60,"Pulse"
 "Scenario 4",3,"GF_M",1,"Ground flora 
 species richness",60,"Pulse"
-"Scenario 4",3,"Fungi_M",0.768337506970825,"Fungi species richness",60,"Pulse"
+"Scenario 4",3,"Fungi_M",0.583527071151478,"Fungi species richness",60,"Pulse"
 "Scenario 4",3,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",60,"Pulse"
-"Scenario 4",3,"SRR_M",0.893571403412328,"Soil respiration rate",60,"Pulse"
+"Scenario 4",3,"SRR_M",0.928176751812956,"Soil respiration rate",60,"Pulse"
 "Scenario 4",3,"AGB_M",0.370298977839964,"Aboveground biomass",60,"Pulse"
 "Scenario 4",3,"Replicate",1,"Replicate",60,"Pulse"
 "Scenario 3",3,"Tree_richness_M",1,"Tree species richness",40,"Pulse"
 "Scenario 3",3,"Timber_M",0.446296486863339,"Timber volume",40,"Pulse"
 "Scenario 3",3,"Nitrogen_stock_M",1,"Nitrogen stock",40,"Pulse"
 "Scenario 3",3,"Carbon_stock_M",0.810991420677827,"Carbon stock",40,"Pulse"
-"Scenario 3",3,"Fungi_val_M",0.602801693249748,"Commercially valuable 
+"Scenario 3",3,"Fungi_val_M",0.602801693268899,"Commercially valuable 
 fungi richness",40,"Pulse"
 "Scenario 3",3,"Recreation_M",0.860307405142214,"Recreation value",40,"Pulse"
-"Scenario 3",3,"Aesthetic_M",0.933269448180006,"Aesthetic value",40,"Pulse"
-"Scenario 3",3,"Lichen_M",0.889347044389094,"Lichen species 
+"Scenario 3",3,"Aesthetic_M",0.933269449673384,"Aesthetic value",40,"Pulse"
+"Scenario 3",3,"Lichen_M",0.889347044380485,"Lichen species 
 richness",40,"Pulse"
 "Scenario 3",3,"GF_M",1,"Ground flora 
 species richness",40,"Pulse"
-"Scenario 3",3,"Fungi_M",0.862218177014224,"Fungi species richness",40,"Pulse"
+"Scenario 3",3,"Fungi_M",0.720690701172437,"Fungi species richness",40,"Pulse"
 "Scenario 3",3,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",40,"Pulse"
-"Scenario 3",3,"SRR_M",0.931785056655873,"Soil respiration rate",40,"Pulse"
+"Scenario 3",3,"SRR_M",0.954265304388603,"Soil respiration rate",40,"Pulse"
 "Scenario 3",3,"AGB_M",0.554586842664786,"Aboveground biomass",40,"Pulse"
 "Scenario 3",3,"Replicate",1,"Replicate",40,"Pulse"
 "Scenario 2",3,"Tree_richness_M",1,"Tree species richness",20,"Pulse"
 "Scenario 2",3,"Timber_M",0.659439445994187,"Timber volume",20,"Pulse"
 "Scenario 2",3,"Nitrogen_stock_M",1,"Nitrogen stock",20,"Pulse"
 "Scenario 2",3,"Carbon_stock_M",0.902676695242789,"Carbon stock",20,"Pulse"
-"Scenario 2",3,"Fungi_val_M",0.761035557347932,"Commercially valuable 
+"Scenario 2",3,"Fungi_val_M",0.761035557365254,"Commercially valuable 
 fungi richness",20,"Pulse"
 "Scenario 2",3,"Recreation_M",0.93189765581775,"Recreation value",20,"Pulse"
-"Scenario 2",3,"Aesthetic_M",0.966494543504737,"Aesthetic value",20,"Pulse"
-"Scenario 2",3,"Lichen_M",0.948902832728745,"Lichen species 
+"Scenario 2",3,"Aesthetic_M",0.966494544283566,"Aesthetic value",20,"Pulse"
+"Scenario 2",3,"Lichen_M",0.948902832723087,"Lichen species 
 richness",20,"Pulse"
 "Scenario 2",3,"GF_M",1,"Ground flora 
 species richness",20,"Pulse"
-"Scenario 2",3,"Fungi_M",0.931727124977276,"Fungi species richness",20,"Pulse"
+"Scenario 2",3,"Fungi_M",0.852127331382321,"Fungi species richness",20,"Pulse"
 "Scenario 2",3,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",20,"Pulse"
-"Scenario 2",3,"SRR_M",0.964406228881746,"Soil respiration rate",20,"Pulse"
+"Scenario 2",3,"SRR_M",0.976268229457338,"Soil respiration rate",20,"Pulse"
 "Scenario 2",3,"AGB_M",0.744704646885223,"Aboveground biomass",20,"Pulse"
 "Scenario 2",3,"Replicate",1,"Replicate",20,"Pulse"
 "Scenario 12",3,"Tree_richness_M",1,"Tree species richness",100,"Pulse + Press"
 "Scenario 12",3,"Timber_M",0.00733424508396174,"Timber volume",100,"Pulse + Press"
 "Scenario 12",3,"Nitrogen_stock_M",0.963169800040441,"Nitrogen stock",100,"Pulse + Press"
 "Scenario 12",3,"Carbon_stock_M",0.555082340657423,"Carbon stock",100,"Pulse + Press"
-"Scenario 12",3,"Fungi_val_M",0.30530427869961,"Commercially valuable 
+"Scenario 12",3,"Fungi_val_M",0.305304278707999,"Commercially valuable 
 fungi richness",100,"Pulse + Press"
 "Scenario 12",3,"Recreation_M",0.602847514196002,"Recreation value",100,"Pulse + Press"
-"Scenario 12",3,"Aesthetic_M",0.814644438262665,"Aesthetic value",100,"Pulse + Press"
-"Scenario 12",3,"Lichen_M",0.661491799772791,"Lichen species 
+"Scenario 12",3,"Aesthetic_M",0.814644441721838,"Aesthetic value",100,"Pulse + Press"
+"Scenario 12",3,"Lichen_M",0.661491799766062,"Lichen species 
 richness",100,"Pulse + Press"
 "Scenario 12",3,"GF_M",1,"Ground flora 
 species richness",100,"Pulse + Press"
-"Scenario 12",3,"Fungi_M",0.61112840048705,"Fungi species richness",100,"Pulse + Press"
+"Scenario 12",3,"Fungi_M",0.395044793511957,"Fungi species richness",100,"Pulse + Press"
 "Scenario 12",3,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",100,"Pulse + Press"
-"Scenario 12",3,"SRR_M",0.830450083799257,"Soil respiration rate",100,"Pulse + Press"
+"Scenario 12",3,"SRR_M",0.884325616844218,"Soil respiration rate",100,"Pulse + Press"
 "Scenario 12",3,"AGB_M",0.133757636556228,"Aboveground biomass",100,"Pulse + Press"
 "Scenario 12",3,"Replicate",1,"Replicate",100,"Pulse + Press"
 "Scenario 11",3,"Tree_richness_M",1,"Tree species richness",80,"Pulse + Press"
 "Scenario 11",3,"Timber_M",0.145445409173169,"Timber volume",80,"Pulse + Press"
 "Scenario 11",3,"Nitrogen_stock_M",0.978698515843166,"Nitrogen stock",80,"Pulse + Press"
 "Scenario 11",3,"Carbon_stock_M",0.646671890389765,"Carbon stock",80,"Pulse + Press"
-"Scenario 11",3,"Fungi_val_M",0.395625056541221,"Commercially valuable 
+"Scenario 11",3,"Fungi_val_M",0.395625056554306,"Commercially valuable 
 fungi richness",80,"Pulse + Press"
 "Scenario 11",3,"Recreation_M",0.701596668436953,"Recreation value",80,"Pulse + Press"
-"Scenario 11",3,"Aesthetic_M",0.861730087521162,"Aesthetic value",80,"Pulse + Press"
-"Scenario 11",3,"Lichen_M",0.751010312152812,"Lichen species 
+"Scenario 11",3,"Aesthetic_M",0.861730090295985,"Aesthetic value",80,"Pulse + Press"
+"Scenario 11",3,"Lichen_M",0.751010312144109,"Lichen species 
 richness",80,"Pulse + Press"
 "Scenario 11",3,"GF_M",1,"Ground flora 
 species richness",80,"Pulse + Press"
-"Scenario 11",3,"Fungi_M",0.709635741116606,"Fungi species richness",80,"Pulse + Press"
+"Scenario 11",3,"Fungi_M",0.503589812977274,"Fungi species richness",80,"Pulse + Press"
 "Scenario 11",3,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",80,"Pulse + Press"
-"Scenario 11",3,"SRR_M",0.868847520256202,"Soil respiration rate",80,"Pulse + Press"
+"Scenario 11",3,"SRR_M",0.911114504637063,"Soil respiration rate",80,"Pulse + Press"
 "Scenario 11",3,"AGB_M",0.269492286190051,"Aboveground biomass",80,"Pulse + Press"
 "Scenario 11",3,"Replicate",1,"Replicate",80,"Pulse + Press"
 "Scenario 10",3,"Tree_richness_M",1,"Tree species richness",60,"Pulse + Press"
 "Scenario 10",3,"Timber_M",0.253983419128099,"Timber volume",60,"Pulse + Press"
 "Scenario 10",3,"Nitrogen_stock_M",0.988583334640288,"Nitrogen stock",60,"Pulse + Press"
 "Scenario 10",3,"Carbon_stock_M",0.711564907863173,"Carbon stock",60,"Pulse + Press"
-"Scenario 10",3,"Fungi_val_M",0.472360002236859,"Commercially valuable 
+"Scenario 10",3,"Fungi_val_M",0.472360002252961,"Commercially valuable 
 fungi richness",60,"Pulse + Press"
 "Scenario 10",3,"Recreation_M",0.766599305213293,"Recreation value",60,"Pulse + Press"
-"Scenario 10",3,"Aesthetic_M",0.891356185794793,"Aesthetic value",60,"Pulse + Press"
-"Scenario 10",3,"Lichen_M",0.808232564983094,"Lichen species 
+"Scenario 10",3,"Aesthetic_M",0.891356188056295,"Aesthetic value",60,"Pulse + Press"
+"Scenario 10",3,"Lichen_M",0.808232564974096,"Lichen species 
 richness",60,"Pulse + Press"
 "Scenario 10",3,"GF_M",1,"Ground flora 
 species richness",60,"Pulse + Press"
-"Scenario 10",3,"Fungi_M",0.77155660354817,"Fungi species richness",60,"Pulse + Press"
+"Scenario 10",3,"Fungi_M",0.588048123209118,"Fungi species richness",60,"Pulse + Press"
 "Scenario 10",3,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",60,"Pulse + Press"
-"Scenario 10",3,"SRR_M",0.894609370238868,"Soil respiration rate",60,"Pulse + Press"
+"Scenario 10",3,"SRR_M",0.928889896970949,"Soil respiration rate",60,"Pulse + Press"
 "Scenario 10",3,"AGB_M",0.374931383315989,"Aboveground biomass",60,"Pulse + Press"
 "Scenario 10",3,"Replicate",1,"Replicate",60,"Pulse + Press"
 "Scenario 1",3,"Tree_richness_M",1,"Tree species richness",0,"Pulse"
@@ -219,36 +219,36 @@ rate",0,"Pulse"
 "Scenario 9",2,"Timber_M",0.501813425700401,"Timber volume",40,"Pulse + Press"
 "Scenario 9",2,"Nitrogen_stock_M",1,"Nitrogen stock",40,"Pulse + Press"
 "Scenario 9",2,"Carbon_stock_M",0.836509693303042,"Carbon stock",40,"Pulse + Press"
-"Scenario 9",2,"Fungi_val_M",0.638430507373433,"Commercially valuable 
+"Scenario 9",2,"Fungi_val_M",0.638430507393678,"Commercially valuable 
 fungi richness",40,"Pulse + Press"
 "Scenario 9",2,"Recreation_M",0.883399537920446,"Recreation value",40,"Pulse + Press"
-"Scenario 9",2,"Aesthetic_M",0.943297783795173,"Aesthetic value",40,"Pulse + Press"
-"Scenario 9",2,"Lichen_M",0.909274443105744,"Lichen species 
+"Scenario 9",2,"Aesthetic_M",0.943297785091035,"Aesthetic value",40,"Pulse + Press"
+"Scenario 9",2,"Lichen_M",0.909274443097362,"Lichen species 
 richness",40,"Pulse + Press"
 "Scenario 9",2,"GF_M",1,"Ground flora 
 species richness",40,"Pulse + Press"
-"Scenario 9",2,"Fungi_M",0.884236538234729,"Fungi species richness",40,"Pulse + Press"
+"Scenario 9",2,"Fungi_M",0.756777621565475,"Fungi species richness",40,"Pulse + Press"
 "Scenario 9",2,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",40,"Pulse + Press"
-"Scenario 9",2,"SRR_M",0.940857923354738,"Soil respiration rate",40,"Pulse + Press"
+"Scenario 9",2,"SRR_M",0.960409483254693,"Soil respiration rate",40,"Pulse + Press"
 "Scenario 9",2,"AGB_M",0.604350259497794,"Aboveground biomass",40,"Pulse + Press"
 "Scenario 9",2,"Replicate",1,"Replicate",40,"Pulse + Press"
 "Scenario 8",2,"Tree_richness_M",1,"Tree species richness",20,"Pulse + Press"
 "Scenario 8",2,"Timber_M",0.681319159449391,"Timber volume",20,"Pulse + Press"
 "Scenario 8",2,"Nitrogen_stock_M",1,"Nitrogen stock",20,"Pulse + Press"
 "Scenario 8",2,"Carbon_stock_M",0.911100819536689,"Carbon stock",20,"Pulse + Press"
-"Scenario 8",2,"Fungi_val_M",0.775473069854007,"Commercially valuable 
+"Scenario 8",2,"Fungi_val_M",0.77547306987118,"Commercially valuable 
 fungi richness",20,"Pulse + Press"
 "Scenario 8",2,"Recreation_M",0.938909053591351,"Recreation value",20,"Pulse + Press"
-"Scenario 8",2,"Aesthetic_M",0.969577145235042,"Aesthetic value",20,"Pulse + Press"
-"Scenario 8",2,"Lichen_M",0.954702886484909,"Lichen species 
+"Scenario 8",2,"Aesthetic_M",0.969577145950044,"Aesthetic value",20,"Pulse + Press"
+"Scenario 8",2,"Lichen_M",0.95470288647945,"Lichen species 
 richness",20,"Pulse + Press"
 "Scenario 8",2,"GF_M",1,"Ground flora 
 species richness",20,"Pulse + Press"
-"Scenario 8",2,"Fungi_M",0.9385609511334,"Fungi species richness",20,"Pulse + Press"
+"Scenario 8",2,"Fungi_M",0.864294949969781,"Fungi species richness",20,"Pulse + Press"
 "Scenario 8",2,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",20,"Pulse + Press"
-"Scenario 8",2,"SRR_M",0.967307048430579,"Soil respiration rate",20,"Pulse + Press"
+"Scenario 8",2,"SRR_M",0.978213042075061,"Soil respiration rate",20,"Pulse + Press"
 "Scenario 8",2,"AGB_M",0.763649818783267,"Aboveground biomass",20,"Pulse + Press"
 "Scenario 8",2,"Replicate",1,"Replicate",20,"Pulse + Press"
 "Scenario 7",2,"Tree_richness_M",1,"Tree species richness",0,"Pulse + Press"
@@ -261,10 +261,10 @@ fungi richness",0,"Pulse + Press"
 "Scenario 7",2,"Aesthetic_M",1,"Aesthetic value",0,"Pulse + Press"
 "Scenario 7",2,"Lichen_M",1,"Lichen species 
 richness",0,"Pulse + Press"
-"Scenario 7",2,"GF_M",0.94374965641525,"Ground flora 
+"Scenario 7",2,"GF_M",0.943749656415265,"Ground flora 
 species richness",0,"Pulse + Press"
 "Scenario 7",2,"Fungi_M",1,"Fungi species richness",0,"Pulse + Press"
-"Scenario 7",2,"Min_rate_M",0.95866176043795,"Nitrogen mineralisation 
+"Scenario 7",2,"Min_rate_M",0.96009657644063,"Nitrogen mineralisation 
 rate",0,"Pulse + Press"
 "Scenario 7",2,"SRR_M",1,"Soil respiration rate",0,"Pulse + Press"
 "Scenario 7",2,"AGB_M",1,"Aboveground biomass",0,"Pulse + Press"
@@ -273,144 +273,144 @@ rate",0,"Pulse + Press"
 "Scenario 6",2,"Timber_M",0.00733857377746727,"Timber volume",100,"Pulse"
 "Scenario 6",2,"Nitrogen_stock_M",0.963221543812415,"Nitrogen stock",100,"Pulse"
 "Scenario 6",2,"Carbon_stock_M",0.555116145224838,"Carbon stock",100,"Pulse"
-"Scenario 6",2,"Fungi_val_M",0.305321776828592,"Commercially valuable 
+"Scenario 6",2,"Fungi_val_M",0.305321776836981,"Commercially valuable 
 fungi richness",100,"Pulse"
 "Scenario 6",2,"Recreation_M",0.602869095450719,"Recreation value",100,"Pulse"
-"Scenario 6",2,"Aesthetic_M",0.814654995233534,"Aesthetic value",100,"Pulse"
-"Scenario 6",2,"Lichen_M",0.661511622837991,"Lichen species 
+"Scenario 6",2,"Aesthetic_M",0.814654998692563,"Aesthetic value",100,"Pulse"
+"Scenario 6",2,"Lichen_M",0.661511622831261,"Lichen species 
 richness",100,"Pulse"
 "Scenario 6",2,"GF_M",1,"Ground flora 
 species richness",100,"Pulse"
-"Scenario 6",2,"Fungi_M",0.611150171763652,"Fungi species richness",100,"Pulse"
+"Scenario 6",2,"Fungi_M",0.395066909760075,"Fungi species richness",100,"Pulse"
 "Scenario 6",2,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",100,"Pulse"
-"Scenario 6",2,"SRR_M",0.830458485907809,"Soil respiration rate",100,"Pulse"
+"Scenario 6",2,"SRR_M",0.884331517840344,"Soil respiration rate",100,"Pulse"
 "Scenario 6",2,"AGB_M",0.133784854046946,"Aboveground biomass",100,"Pulse"
 "Scenario 6",2,"Replicate",1,"Replicate",100,"Pulse"
 "Scenario 5",2,"Tree_richness_M",1,"Tree species richness",80,"Pulse"
 "Scenario 5",2,"Timber_M",0.137176620944038,"Timber volume",80,"Pulse"
 "Scenario 5",2,"Nitrogen_stock_M",0.977865853256293,"Nitrogen stock",80,"Pulse"
 "Scenario 5",2,"Carbon_stock_M",0.642056374801135,"Carbon stock",80,"Pulse"
-"Scenario 5",2,"Fungi_val_M",0.389089252474145,"Commercially valuable 
+"Scenario 5",2,"Fungi_val_M",0.389089252487314,"Commercially valuable 
 fungi richness",80,"Pulse"
 "Scenario 5",2,"Recreation_M",0.697484933651971,"Recreation value",80,"Pulse"
-"Scenario 5",2,"Aesthetic_M",0.859547140059481,"Aesthetic value",80,"Pulse"
-"Scenario 5",2,"Lichen_M",0.747337898300955,"Lichen species 
+"Scenario 5",2,"Aesthetic_M",0.859547142871237,"Aesthetic value",80,"Pulse"
+"Scenario 5",2,"Lichen_M",0.747337898292174,"Lichen species 
 richness",80,"Pulse"
 "Scenario 5",2,"GF_M",1,"Ground flora 
 species richness",80,"Pulse"
-"Scenario 5",2,"Fungi_M",0.705244459821559,"Fungi species richness",80,"Pulse"
+"Scenario 5",2,"Fungi_M",0.497798057949012,"Fungi species richness",80,"Pulse"
 "Scenario 5",2,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",80,"Pulse"
-"Scenario 5",2,"SRR_M",0.866843567187768,"Soil respiration rate",80,"Pulse"
+"Scenario 5",2,"SRR_M",0.909725176334389,"Soil respiration rate",80,"Pulse"
 "Scenario 5",2,"AGB_M",0.261898290264745,"Aboveground biomass",80,"Pulse"
 "Scenario 5",2,"Replicate",1,"Replicate",80,"Pulse"
 "Scenario 4",2,"Tree_richness_M",1,"Tree species richness",60,"Pulse"
 "Scenario 4",2,"Timber_M",0.30958174805691,"Timber volume",60,"Pulse"
 "Scenario 4",2,"Nitrogen_stock_M",0.993277812478455,"Nitrogen stock",60,"Pulse"
 "Scenario 4",2,"Carbon_stock_M",0.741922654940111,"Carbon stock",60,"Pulse"
-"Scenario 4",2,"Fungi_val_M",0.50481806603384,"Commercially valuable 
+"Scenario 4",2,"Fungi_val_M",0.504818066051553,"Commercially valuable 
 fungi richness",60,"Pulse"
 "Scenario 4",2,"Recreation_M",0.798230751591902,"Recreation value",60,"Pulse"
-"Scenario 4",2,"Aesthetic_M",0.905237895574879,"Aesthetic value",60,"Pulse"
-"Scenario 4",2,"Lichen_M",0.836148236139625,"Lichen species 
+"Scenario 4",2,"Aesthetic_M",0.905237897612352,"Aesthetic value",60,"Pulse"
+"Scenario 4",2,"Lichen_M",0.836148236130116,"Lichen species 
 richness",60,"Pulse"
 "Scenario 4",2,"GF_M",1,"Ground flora 
 species richness",60,"Pulse"
-"Scenario 4",2,"Fungi_M",0.802706857034545,"Fungi species richness",60,"Pulse"
+"Scenario 4",2,"Fungi_M",0.625977300070084,"Fungi species richness",60,"Pulse"
 "Scenario 4",2,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",60,"Pulse"
-"Scenario 4",2,"SRR_M",0.906029309156187,"Soil respiration rate",60,"Pulse"
+"Scenario 4",2,"SRR_M",0.936719327976882,"Soil respiration rate",60,"Pulse"
 "Scenario 4",2,"AGB_M",0.426890985470967,"Aboveground biomass",60,"Pulse"
 "Scenario 4",2,"Replicate",1,"Replicate",60,"Pulse"
 "Scenario 3",2,"Tree_richness_M",1,"Tree species richness",40,"Pulse"
 "Scenario 3",2,"Timber_M",0.556233867998424,"Timber volume",40,"Pulse"
 "Scenario 3",2,"Nitrogen_stock_M",1,"Nitrogen stock",40,"Pulse"
 "Scenario 3",2,"Carbon_stock_M",0.859949297889921,"Carbon stock",40,"Pulse"
-"Scenario 3",2,"Fungi_val_M",0.695273218118745,"Commercially valuable 
+"Scenario 3",2,"Fungi_val_M",0.695273218134446,"Commercially valuable 
 fungi richness",40,"Pulse"
 "Scenario 3",2,"Recreation_M",0.893507385108575,"Recreation value",40,"Pulse"
-"Scenario 3",2,"Aesthetic_M",0.950216638211186,"Aesthetic value",40,"Pulse"
-"Scenario 3",2,"Lichen_M",0.916155878257027,"Lichen species 
+"Scenario 3",2,"Aesthetic_M",0.950216639323097,"Aesthetic value",40,"Pulse"
+"Scenario 3",2,"Lichen_M",0.916155878250829,"Lichen species 
 richness",40,"Pulse"
 "Scenario 3",2,"GF_M",1,"Ground flora 
 species richness",40,"Pulse"
-"Scenario 3",2,"Fungi_M",0.895477487915331,"Fungi species richness",40,"Pulse"
+"Scenario 3",2,"Fungi_M",0.788273768981732,"Fungi species richness",40,"Pulse"
 "Scenario 3",2,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",40,"Pulse"
-"Scenario 3",2,"SRR_M",0.949549589604309,"Soil respiration rate",40,"Pulse"
+"Scenario 3",2,"SRR_M",0.96627772795877,"Soil respiration rate",40,"Pulse"
 "Scenario 3",2,"AGB_M",0.652600987117547,"Aboveground biomass",40,"Pulse"
 "Scenario 3",2,"Replicate",1,"Replicate",40,"Pulse"
 "Scenario 2",2,"Tree_richness_M",1,"Tree species richness",20,"Pulse"
 "Scenario 2",2,"Timber_M",0.717711768013051,"Timber volume",20,"Pulse"
 "Scenario 2",2,"Nitrogen_stock_M",1,"Nitrogen stock",20,"Pulse"
 "Scenario 2",2,"Carbon_stock_M",0.925001558024199,"Carbon stock",20,"Pulse"
-"Scenario 2",2,"Fungi_val_M",0.808295830211408,"Commercially valuable 
+"Scenario 2",2,"Fungi_val_M",0.808295830225351,"Commercially valuable 
 fungi richness",20,"Pulse"
 "Scenario 2",2,"Recreation_M",0.946359237640078,"Recreation value",20,"Pulse"
-"Scenario 2",2,"Aesthetic_M",0.973790879282278,"Aesthetic value",20,"Pulse"
-"Scenario 2",2,"Lichen_M",0.959726165021394,"Lichen species 
+"Scenario 2",2,"Aesthetic_M",0.973790879898189,"Aesthetic value",20,"Pulse"
+"Scenario 2",2,"Lichen_M",0.95972616501692,"Lichen species 
 richness",20,"Pulse"
 "Scenario 2",2,"GF_M",1,"Ground flora 
 species richness",20,"Pulse"
-"Scenario 2",2,"Fungi_M",0.946581896493028,"Fungi species richness",20,"Pulse"
+"Scenario 2",2,"Fungi_M",0.881613920306601,"Fungi species richness",20,"Pulse"
 "Scenario 2",2,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",20,"Pulse"
-"Scenario 2",2,"SRR_M",0.972088539616408,"Soil respiration rate",20,"Pulse"
+"Scenario 2",2,"SRR_M",0.981414551332164,"Soil respiration rate",20,"Pulse"
 "Scenario 2",2,"AGB_M",0.794923834937833,"Aboveground biomass",20,"Pulse"
 "Scenario 2",2,"Replicate",1,"Replicate",20,"Pulse"
 "Scenario 12",2,"Tree_richness_M",1,"Tree species richness",100,"Pulse + Press"
 "Scenario 12",2,"Timber_M",0.00733114539793167,"Timber volume",100,"Pulse + Press"
 "Scenario 12",2,"Nitrogen_stock_M",0.963182097640498,"Nitrogen stock",100,"Pulse + Press"
 "Scenario 12",2,"Carbon_stock_M",0.555074991073256,"Carbon stock",100,"Pulse + Press"
-"Scenario 12",2,"Fungi_val_M",0.305302391364304,"Commercially valuable 
+"Scenario 12",2,"Fungi_val_M",0.305302391372693,"Commercially valuable 
 fungi richness",100,"Pulse + Press"
 "Scenario 12",2,"Recreation_M",0.60284397240464,"Recreation value",100,"Pulse + Press"
-"Scenario 12",2,"Aesthetic_M",0.814642634562709,"Aesthetic value",100,"Pulse + Press"
-"Scenario 12",2,"Lichen_M",0.661488371130561,"Lichen species 
+"Scenario 12",2,"Aesthetic_M",0.814642638021897,"Aesthetic value",100,"Pulse + Press"
+"Scenario 12",2,"Lichen_M",0.661488371123834,"Lichen species 
 richness",100,"Pulse + Press"
 "Scenario 12",2,"GF_M",1,"Ground flora 
 species richness",100,"Pulse + Press"
-"Scenario 12",2,"Fungi_M",0.611124371045763,"Fungi species richness",100,"Pulse + Press"
+"Scenario 12",2,"Fungi_M",0.395041853773434,"Fungi species richness",100,"Pulse + Press"
 "Scenario 12",2,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",100,"Pulse + Press"
-"Scenario 12",2,"SRR_M",0.830448798215244,"Soil respiration rate",100,"Pulse + Press"
+"Scenario 12",2,"SRR_M",0.884324713947166,"Soil respiration rate",100,"Pulse + Press"
 "Scenario 12",2,"AGB_M",0.133753380911381,"Aboveground biomass",100,"Pulse + Press"
 "Scenario 12",2,"Replicate",1,"Replicate",100,"Pulse + Press"
 "Scenario 11",2,"Tree_richness_M",1,"Tree species richness",80,"Pulse + Press"
 "Scenario 11",2,"Timber_M",0.13697721194666,"Timber volume",80,"Pulse + Press"
 "Scenario 11",2,"Nitrogen_stock_M",0.977985702640007,"Nitrogen stock",80,"Pulse + Press"
 "Scenario 11",2,"Carbon_stock_M",0.642382522118975,"Carbon stock",80,"Pulse + Press"
-"Scenario 11",2,"Fungi_val_M",0.389782629999007,"Commercially valuable 
+"Scenario 11",2,"Fungi_val_M",0.389782630012173,"Commercially valuable 
 fungi richness",80,"Pulse + Press"
 "Scenario 11",2,"Recreation_M",0.697675817982936,"Recreation value",80,"Pulse + Press"
-"Scenario 11",2,"Aesthetic_M",0.859622587714725,"Aesthetic value",80,"Pulse + Press"
-"Scenario 11",2,"Lichen_M",0.747445504596979,"Lichen species 
+"Scenario 11",2,"Aesthetic_M",0.859622590522805,"Aesthetic value",80,"Pulse + Press"
+"Scenario 11",2,"Lichen_M",0.747445504588229,"Lichen species 
 richness",80,"Pulse + Press"
 "Scenario 11",2,"GF_M",1,"Ground flora 
 species richness",80,"Pulse + Press"
-"Scenario 11",2,"Fungi_M",0.705267989891095,"Fungi species richness",80,"Pulse + Press"
+"Scenario 11",2,"Fungi_M",0.498362096310026,"Fungi species richness",80,"Pulse + Press"
 "Scenario 11",2,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",80,"Pulse + Press"
-"Scenario 11",2,"SRR_M",0.866971561446835,"Soil respiration rate",80,"Pulse + Press"
+"Scenario 11",2,"SRR_M",0.909813942680679,"Soil respiration rate",80,"Pulse + Press"
 "Scenario 11",2,"AGB_M",0.262343994399469,"Aboveground biomass",80,"Pulse + Press"
 "Scenario 11",2,"Replicate",1,"Replicate",80,"Pulse + Press"
 "Scenario 10",2,"Tree_richness_M",1,"Tree species richness",60,"Pulse + Press"
 "Scenario 10",2,"Timber_M",0.269534704302374,"Timber volume",60,"Pulse + Press"
 "Scenario 10",2,"Nitrogen_stock_M",0.989970504701516,"Nitrogen stock",60,"Pulse + Press"
 "Scenario 10",2,"Carbon_stock_M",0.720575171813797,"Carbon stock",60,"Pulse + Press"
-"Scenario 10",2,"Fungi_val_M",0.478525411163715,"Commercially valuable 
+"Scenario 10",2,"Fungi_val_M",0.478525411180566,"Commercially valuable 
 fungi richness",60,"Pulse + Press"
 "Scenario 10",2,"Recreation_M",0.777233773332083,"Recreation value",60,"Pulse + Press"
-"Scenario 10",2,"Aesthetic_M",0.895835290051951,"Aesthetic value",60,"Pulse + Press"
-"Scenario 10",2,"Lichen_M",0.817800661211398,"Lichen species 
+"Scenario 10",2,"Aesthetic_M",0.895835292255461,"Aesthetic value",60,"Pulse + Press"
+"Scenario 10",2,"Lichen_M",0.817800661201941,"Lichen species 
 richness",60,"Pulse + Press"
 "Scenario 10",2,"GF_M",1,"Ground flora 
 species richness",60,"Pulse + Press"
-"Scenario 10",2,"Fungi_M",0.782381426460641,"Fungi species richness",60,"Pulse + Press"
+"Scenario 10",2,"Fungi_M",0.597869605221312,"Fungi species richness",60,"Pulse + Press"
 "Scenario 10",2,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",60,"Pulse + Press"
-"Scenario 10",2,"SRR_M",0.897845880800785,"Soil respiration rate",60,"Pulse + Press"
+"Scenario 10",2,"SRR_M",0.931111941945019,"Soil respiration rate",60,"Pulse + Press"
 "Scenario 10",2,"AGB_M",0.389663570365373,"Aboveground biomass",60,"Pulse + Press"
 "Scenario 10",2,"Replicate",1,"Replicate",60,"Pulse + Press"
 "Scenario 1",2,"Tree_richness_M",1,"Tree species richness",0,"Pulse"
@@ -435,36 +435,36 @@ rate",0,"Pulse"
 "Scenario 9",1,"Timber_M",0.432052091268491,"Timber volume",40,"Pulse + Press"
 "Scenario 9",1,"Nitrogen_stock_M",1,"Nitrogen stock",40,"Pulse + Press"
 "Scenario 9",1,"Carbon_stock_M",0.804456492833304,"Carbon stock",40,"Pulse + Press"
-"Scenario 9",1,"Fungi_val_M",0.593030210827943,"Commercially valuable 
+"Scenario 9",1,"Fungi_val_M",0.593030210846924,"Commercially valuable 
 fungi richness",40,"Pulse + Press"
 "Scenario 9",1,"Recreation_M",0.854443284423231,"Recreation value",40,"Pulse + Press"
-"Scenario 9",1,"Aesthetic_M",0.930592896314179,"Aesthetic value",40,"Pulse + Press"
-"Scenario 9",1,"Lichen_M",0.884252270033639,"Lichen species 
+"Scenario 9",1,"Aesthetic_M",0.930592897859717,"Aesthetic value",40,"Pulse + Press"
+"Scenario 9",1,"Lichen_M",0.884252270024924,"Lichen species 
 richness",40,"Pulse + Press"
 "Scenario 9",1,"GF_M",1,"Ground flora 
 species richness",40,"Pulse + Press"
-"Scenario 9",1,"Fungi_M",0.856413102983479,"Fungi species richness",40,"Pulse + Press"
+"Scenario 9",1,"Fungi_M",0.711341085520003,"Fungi species richness",40,"Pulse + Press"
 "Scenario 9",1,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",40,"Pulse + Press"
-"Scenario 9",1,"SRR_M",0.929327759709329,"Soil respiration rate",40,"Pulse + Press"
+"Scenario 9",1,"SRR_M",0.952597939220325,"Soil respiration rate",40,"Pulse + Press"
 "Scenario 9",1,"AGB_M",0.541578143626067,"Aboveground biomass",40,"Pulse + Press"
 "Scenario 9",1,"Replicate",1,"Replicate",40,"Pulse + Press"
 "Scenario 8",1,"Tree_richness_M",1,"Tree species richness",20,"Pulse + Press"
 "Scenario 8",1,"Timber_M",0.789510551978934,"Timber volume",20,"Pulse + Press"
 "Scenario 8",1,"Nitrogen_stock_M",1,"Nitrogen stock",20,"Pulse + Press"
 "Scenario 8",1,"Carbon_stock_M",0.951769134264352,"Carbon stock",20,"Pulse + Press"
-"Scenario 8",1,"Fungi_val_M",0.869565745750608,"Commercially valuable 
+"Scenario 8",1,"Fungi_val_M",0.869565745760031,"Commercially valuable 
 fungi richness",20,"Pulse + Press"
 "Scenario 8",1,"Recreation_M",0.961732133911304,"Recreation value",20,"Pulse + Press"
-"Scenario 8",1,"Aesthetic_M",0.981870171234648,"Aesthetic value",20,"Pulse + Press"
-"Scenario 8",1,"Lichen_M",0.9710806224102,"Lichen species 
+"Scenario 8",1,"Aesthetic_M",0.981870171654201,"Aesthetic value",20,"Pulse + Press"
+"Scenario 8",1,"Lichen_M",0.971080622407398,"Lichen species 
 richness",20,"Pulse + Press"
 "Scenario 8",1,"GF_M",1,"Ground flora 
 species richness",20,"Pulse + Press"
-"Scenario 8",1,"Fungi_M",0.9622131998978,"Fungi species richness",20,"Pulse + Press"
+"Scenario 8",1,"Fungi_M",0.918394286657757,"Fungi species richness",20,"Pulse + Press"
 "Scenario 8",1,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",20,"Pulse + Press"
-"Scenario 8",1,"SRR_M",0.981072150464366,"Soil respiration rate",20,"Pulse + Press"
+"Scenario 8",1,"SRR_M",0.987415637050396,"Soil respiration rate",20,"Pulse + Press"
 "Scenario 8",1,"AGB_M",0.856455924681758,"Aboveground biomass",20,"Pulse + Press"
 "Scenario 8",1,"Replicate",1,"Replicate",20,"Pulse + Press"
 "Scenario 7",1,"Tree_richness_M",1,"Tree species richness",0,"Pulse + Press"
@@ -477,10 +477,10 @@ fungi richness",0,"Pulse + Press"
 "Scenario 7",1,"Aesthetic_M",1,"Aesthetic value",0,"Pulse + Press"
 "Scenario 7",1,"Lichen_M",1,"Lichen species 
 richness",0,"Pulse + Press"
-"Scenario 7",1,"GF_M",0.943766987143735,"Ground flora 
+"Scenario 7",1,"GF_M",0.94376698714375,"Ground flora 
 species richness",0,"Pulse + Press"
 "Scenario 7",1,"Fungi_M",1,"Fungi species richness",0,"Pulse + Press"
-"Scenario 7",1,"Min_rate_M",0.958665217233786,"Nitrogen mineralisation 
+"Scenario 7",1,"Min_rate_M",0.960099915698136,"Nitrogen mineralisation 
 rate",0,"Pulse + Press"
 "Scenario 7",1,"SRR_M",1,"Soil respiration rate",0,"Pulse + Press"
 "Scenario 7",1,"AGB_M",1,"Aboveground biomass",0,"Pulse + Press"
@@ -489,144 +489,144 @@ rate",0,"Pulse + Press"
 "Scenario 6",1,"Timber_M",0.00730582564090143,"Timber volume",100,"Pulse"
 "Scenario 6",1,"Nitrogen_stock_M",0.963206623691582,"Nitrogen stock",100,"Pulse"
 "Scenario 6",1,"Carbon_stock_M",0.555041392616781,"Carbon stock",100,"Pulse"
-"Scenario 6",1,"Fungi_val_M",0.30528705298092,"Commercially valuable 
+"Scenario 6",1,"Fungi_val_M",0.305287052989307,"Commercially valuable 
 fungi richness",100,"Pulse"
 "Scenario 6",1,"Recreation_M",0.602825672117551,"Recreation value",100,"Pulse"
-"Scenario 6",1,"Aesthetic_M",0.814633705388292,"Aesthetic value",100,"Pulse"
-"Scenario 6",1,"Lichen_M",0.661471633066633,"Lichen species 
+"Scenario 6",1,"Aesthetic_M",0.814633708847606,"Aesthetic value",100,"Pulse"
+"Scenario 6",1,"Lichen_M",0.661471633059909,"Lichen species 
 richness",100,"Pulse"
 "Scenario 6",1,"GF_M",1,"Ground flora 
 species richness",100,"Pulse"
-"Scenario 6",1,"Fungi_M",0.611106101593608,"Fungi species richness",100,"Pulse"
+"Scenario 6",1,"Fungi_M",0.395022747465958,"Fungi species richness",100,"Pulse"
 "Scenario 6",1,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",100,"Pulse"
-"Scenario 6",1,"SRR_M",0.83044161836045,"Soil respiration rate",100,"Pulse"
+"Scenario 6",1,"SRR_M",0.884319671352367,"Soil respiration rate",100,"Pulse"
 "Scenario 6",1,"AGB_M",0.133730167425578,"Aboveground biomass",100,"Pulse"
 "Scenario 6",1,"Replicate",1,"Replicate",100,"Pulse"
 "Scenario 5",1,"Tree_richness_M",1,"Tree species richness",80,"Pulse"
 "Scenario 5",1,"Timber_M",0.133114700842947,"Timber volume",80,"Pulse"
 "Scenario 5",1,"Nitrogen_stock_M",0.977526380442393,"Nitrogen stock",80,"Pulse"
 "Scenario 5",1,"Carbon_stock_M",0.639627860108474,"Carbon stock",80,"Pulse"
-"Scenario 5",1,"Fungi_val_M",0.392136273105628,"Commercially valuable 
+"Scenario 5",1,"Fungi_val_M",0.392136273117714,"Commercially valuable 
 fungi richness",80,"Pulse"
 "Scenario 5",1,"Recreation_M",0.691594844446567,"Recreation value",80,"Pulse"
-"Scenario 5",1,"Aesthetic_M",0.857481553697981,"Aesthetic value",80,"Pulse"
-"Scenario 5",1,"Lichen_M",0.741744429224463,"Lichen species 
+"Scenario 5",1,"Aesthetic_M",0.857481556521644,"Aesthetic value",80,"Pulse"
+"Scenario 5",1,"Lichen_M",0.741744429216328,"Lichen species 
 richness",80,"Pulse"
 "Scenario 5",1,"GF_M",1,"Ground flora 
 species richness",80,"Pulse"
-"Scenario 5",1,"Fungi_M",0.699552213599525,"Fungi species richness",80,"Pulse"
+"Scenario 5",1,"Fungi_M",0.495309536885783,"Fungi species richness",80,"Pulse"
 "Scenario 5",1,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",80,"Pulse"
-"Scenario 5",1,"SRR_M",0.865954181394055,"Soil respiration rate",80,"Pulse"
+"Scenario 5",1,"SRR_M",0.909108262844878,"Soil respiration rate",80,"Pulse"
 "Scenario 5",1,"AGB_M",0.25801088752379,"Aboveground biomass",80,"Pulse"
 "Scenario 5",1,"Replicate",1,"Replicate",80,"Pulse"
 "Scenario 4",1,"Tree_richness_M",1,"Tree species richness",60,"Pulse"
 "Scenario 4",1,"Timber_M",0.227691915462918,"Timber volume",60,"Pulse"
 "Scenario 4",1,"Nitrogen_stock_M",0.986242982733765,"Nitrogen stock",60,"Pulse"
 "Scenario 4",1,"Carbon_stock_M",0.696960153719851,"Carbon stock",60,"Pulse"
-"Scenario 4",1,"Fungi_val_M",0.453275723641236,"Commercially valuable 
+"Scenario 4",1,"Fungi_val_M",0.4532757236565,"Commercially valuable 
 fungi richness",60,"Pulse"
 "Scenario 4",1,"Recreation_M",0.752081345674101,"Recreation value",60,"Pulse"
-"Scenario 4",1,"Aesthetic_M",0.88491043539092,"Aesthetic value",60,"Pulse"
-"Scenario 4",1,"Lichen_M",0.795603820737587,"Lichen species 
+"Scenario 4",1,"Aesthetic_M",0.884910437776043,"Aesthetic value",60,"Pulse"
+"Scenario 4",1,"Lichen_M",0.795603820728539,"Lichen species 
 richness",60,"Pulse"
 "Scenario 4",1,"GF_M",1,"Ground flora 
 species richness",60,"Pulse"
-"Scenario 4",1,"Fungi_M",0.758404302346491,"Fungi species richness",60,"Pulse"
+"Scenario 4",1,"Fungi_M",0.567245500362361,"Fungi species richness",60,"Pulse"
 "Scenario 4",1,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",60,"Pulse"
-"Scenario 4",1,"SRR_M",0.888774533874082,"Soil respiration rate",60,"Pulse"
+"Scenario 4",1,"SRR_M",0.924877711375634,"Soil respiration rate",60,"Pulse"
 "Scenario 4",1,"AGB_M",0.349980306869523,"Aboveground biomass",60,"Pulse"
 "Scenario 4",1,"Replicate",1,"Replicate",60,"Pulse"
 "Scenario 3",1,"Tree_richness_M",1,"Tree species richness",40,"Pulse"
 "Scenario 3",1,"Timber_M",0.418529175486149,"Timber volume",40,"Pulse"
 "Scenario 3",1,"Nitrogen_stock_M",1,"Nitrogen stock",40,"Pulse"
 "Scenario 3",1,"Carbon_stock_M",0.797483122666482,"Carbon stock",40,"Pulse"
-"Scenario 3",1,"Fungi_val_M",0.586968268409299,"Commercially valuable 
+"Scenario 3",1,"Fungi_val_M",0.586968268427911,"Commercially valuable 
 fungi richness",40,"Pulse"
 "Scenario 3",1,"Recreation_M",0.84656262733579,"Recreation value",40,"Pulse"
-"Scenario 3",1,"Aesthetic_M",0.92751623677126,"Aesthetic value",40,"Pulse"
-"Scenario 3",1,"Lichen_M",0.877567362903388,"Lichen species 
+"Scenario 3",1,"Aesthetic_M",0.927516238363066,"Aesthetic value",40,"Pulse"
+"Scenario 3",1,"Lichen_M",0.877567362894934,"Lichen species 
 richness",40,"Pulse"
 "Scenario 3",1,"GF_M",1,"Ground flora 
 species richness",40,"Pulse"
-"Scenario 3",1,"Fungi_M",0.848911674542734,"Fungi species richness",40,"Pulse"
+"Scenario 3",1,"Fungi_M",0.703310860509961,"Fungi species richness",40,"Pulse"
 "Scenario 3",1,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",40,"Pulse"
-"Scenario 3",1,"SRR_M",0.926996448007507,"Soil respiration rate",40,"Pulse"
+"Scenario 3",1,"SRR_M",0.951014766309831,"Soil respiration rate",40,"Pulse"
 "Scenario 3",1,"AGB_M",0.529042959083177,"Aboveground biomass",40,"Pulse"
 "Scenario 3",1,"Replicate",1,"Replicate",40,"Pulse"
 "Scenario 2",1,"Tree_richness_M",1,"Tree species richness",20,"Pulse"
 "Scenario 2",1,"Timber_M",0.699584241506816,"Timber volume",20,"Pulse"
 "Scenario 2",1,"Nitrogen_stock_M",1,"Nitrogen stock",20,"Pulse"
 "Scenario 2",1,"Carbon_stock_M",0.917989024051691,"Carbon stock",20,"Pulse"
-"Scenario 2",1,"Fungi_val_M",0.793052103096829,"Commercially valuable 
+"Scenario 2",1,"Fungi_val_M",0.793052103111853,"Commercially valuable 
 fungi richness",20,"Pulse"
 "Scenario 2",1,"Recreation_M",0.942274931006485,"Recreation value",20,"Pulse"
-"Scenario 2",1,"Aesthetic_M",0.971653793558109,"Aesthetic value",20,"Pulse"
-"Scenario 2",1,"Lichen_M",0.956689661244084,"Lichen species 
+"Scenario 2",1,"Aesthetic_M",0.971653794224727,"Aesthetic value",20,"Pulse"
+"Scenario 2",1,"Lichen_M",0.956689661239195,"Lichen species 
 richness",20,"Pulse"
 "Scenario 2",1,"GF_M",1,"Ground flora 
 species richness",20,"Pulse"
-"Scenario 2",1,"Fungi_M",0.942405245414713,"Fungi species richness",20,"Pulse"
+"Scenario 2",1,"Fungi_M",0.872276833855996,"Fungi species richness",20,"Pulse"
 "Scenario 2",1,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",20,"Pulse"
-"Scenario 2",1,"SRR_M",0.969743823335924,"Soil respiration rate",20,"Pulse"
+"Scenario 2",1,"SRR_M",0.979845264645392,"Soil respiration rate",20,"Pulse"
 "Scenario 2",1,"AGB_M",0.779416322244021,"Aboveground biomass",20,"Pulse"
 "Scenario 2",1,"Replicate",1,"Replicate",20,"Pulse"
 "Scenario 12",1,"Tree_richness_M",1,"Tree species richness",100,"Pulse + Press"
 "Scenario 12",1,"Timber_M",0.00733063410105794,"Timber volume",100,"Pulse + Press"
 "Scenario 12",1,"Nitrogen_stock_M",0.963221764251361,"Nitrogen stock",100,"Pulse + Press"
 "Scenario 12",1,"Carbon_stock_M",0.555059392039295,"Carbon stock",100,"Pulse + Press"
-"Scenario 12",1,"Fungi_val_M",0.305291149104639,"Commercially valuable 
+"Scenario 12",1,"Fungi_val_M",0.305291149113027,"Commercially valuable 
 fungi richness",100,"Pulse + Press"
 "Scenario 12",1,"Recreation_M",0.602831780242427,"Recreation value",100,"Pulse + Press"
-"Scenario 12",1,"Aesthetic_M",0.814636711927487,"Aesthetic value",100,"Pulse + Press"
-"Scenario 12",1,"Lichen_M",0.66147734386692,"Lichen species 
+"Scenario 12",1,"Aesthetic_M",0.814636715386765,"Aesthetic value",100,"Pulse + Press"
+"Scenario 12",1,"Lichen_M",0.661477343860193,"Lichen species 
 richness",100,"Pulse + Press"
 "Scenario 12",1,"GF_M",1,"Ground flora 
 species richness",100,"Pulse + Press"
-"Scenario 12",1,"Fungi_M",0.611112530259565,"Fungi species richness",100,"Pulse + Press"
+"Scenario 12",1,"Fungi_M",0.395028425920899,"Fungi species richness",100,"Pulse + Press"
 "Scenario 12",1,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",100,"Pulse + Press"
-"Scenario 12",1,"SRR_M",0.830443892052631,"Soil respiration rate",100,"Pulse + Press"
+"Scenario 12",1,"SRR_M",0.884321268225626,"Soil respiration rate",100,"Pulse + Press"
 "Scenario 12",1,"AGB_M",0.133737602568534,"Aboveground biomass",100,"Pulse + Press"
 "Scenario 12",1,"Replicate",1,"Replicate",100,"Pulse + Press"
 "Scenario 11",1,"Tree_richness_M",1,"Tree species richness",80,"Pulse + Press"
 "Scenario 11",1,"Timber_M",0.147252533254818,"Timber volume",80,"Pulse + Press"
 "Scenario 11",1,"Nitrogen_stock_M",0.978976544160758,"Nitrogen stock",80,"Pulse + Press"
 "Scenario 11",1,"Carbon_stock_M",0.648282796706102,"Carbon stock",80,"Pulse + Press"
-"Scenario 11",1,"Fungi_val_M",0.396797202081601,"Commercially valuable 
+"Scenario 11",1,"Fungi_val_M",0.396797202095025,"Commercially valuable 
 fungi richness",80,"Pulse + Press"
 "Scenario 11",1,"Recreation_M",0.703710408526781,"Recreation value",80,"Pulse + Press"
-"Scenario 11",1,"Aesthetic_M",0.86245003760646,"Aesthetic value",80,"Pulse + Press"
-"Scenario 11",1,"Lichen_M",0.752801189611949,"Lichen species 
+"Scenario 11",1,"Aesthetic_M",0.862450040366739,"Aesthetic value",80,"Pulse + Press"
+"Scenario 11",1,"Lichen_M",0.752801189603175,"Lichen species 
 richness",80,"Pulse + Press"
 "Scenario 11",1,"GF_M",1,"Ground flora 
 species richness",80,"Pulse + Press"
-"Scenario 11",1,"Fungi_M",0.711071376332919,"Fungi species richness",80,"Pulse + Press"
+"Scenario 11",1,"Fungi_M",0.506056237163251,"Fungi species richness",80,"Pulse + Press"
 "Scenario 11",1,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",80,"Pulse + Press"
-"Scenario 11",1,"SRR_M",0.869431978468088,"Soil respiration rate",80,"Pulse + Press"
+"Scenario 11",1,"SRR_M",0.911519525063678,"Soil respiration rate",80,"Pulse + Press"
 "Scenario 11",1,"AGB_M",0.271743468931217,"Aboveground biomass",80,"Pulse + Press"
 "Scenario 11",1,"Replicate",1,"Replicate",80,"Pulse + Press"
 "Scenario 10",1,"Tree_richness_M",1,"Tree species richness",60,"Pulse + Press"
 "Scenario 10",1,"Timber_M",0.233022582925486,"Timber volume",60,"Pulse + Press"
 "Scenario 10",1,"Nitrogen_stock_M",0.986741318914943,"Nitrogen stock",60,"Pulse + Press"
 "Scenario 10",1,"Carbon_stock_M",0.699560332006241,"Carbon stock",60,"Pulse + Press"
-"Scenario 10",1,"Fungi_val_M",0.454866355435726,"Commercially valuable 
+"Scenario 10",1,"Fungi_val_M",0.454866355451472,"Commercially valuable 
 fungi richness",60,"Pulse + Press"
 "Scenario 10",1,"Recreation_M",0.756001227758161,"Recreation value",60,"Pulse + Press"
-"Scenario 10",1,"Aesthetic_M",0.886462572982785,"Aesthetic value",60,"Pulse + Press"
-"Scenario 10",1,"Lichen_M",0.799181168383462,"Lichen species 
+"Scenario 10",1,"Aesthetic_M",0.886462575346772,"Aesthetic value",60,"Pulse + Press"
+"Scenario 10",1,"Lichen_M",0.799181168374208,"Lichen species 
 richness",60,"Pulse + Press"
 "Scenario 10",1,"GF_M",1,"Ground flora 
 species richness",60,"Pulse + Press"
-"Scenario 10",1,"Fungi_M",0.762113702150579,"Fungi species richness",60,"Pulse + Press"
+"Scenario 10",1,"Fungi_M",0.570953759748374,"Fungi species richness",60,"Pulse + Press"
 "Scenario 10",1,"Min_rate_M",1,"Nitrogen mineralisation 
 rate",60,"Pulse + Press"
-"Scenario 10",1,"SRR_M",0.889866424678713,"Soil respiration rate",60,"Pulse + Press"
+"Scenario 10",1,"SRR_M",0.925629135828029,"Soil respiration rate",60,"Pulse + Press"
 "Scenario 10",1,"AGB_M",0.35478814681469,"Aboveground biomass",60,"Pulse + Press"
 "Scenario 10",1,"Replicate",1,"Replicate",60,"Pulse + Press"
 "Scenario 1",1,"Tree_richness_M",1,"Tree species richness",0,"Pulse"
