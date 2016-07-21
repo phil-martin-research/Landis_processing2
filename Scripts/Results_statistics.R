@@ -9,7 +9,7 @@ library(lme4)
 #load functions
 std <- function(x) sd(x)/sqrt(length(x))
 
-#load data and transform resistence variable to conform to model assumptions 
+#load data on resistance and transform resistence variable to conform to model assumptions 
 Resistence_data<-read.csv("Data/R_output/Resistence_replicates.csv")
 Resistence_data$logis_Res<-plogis(Resistence_data$Resistance)
 
@@ -34,10 +34,11 @@ for(i in 1:length(ES_BD_unique)){
 
 write.csv(Top_model_summary,"Tables/Resistance_top_models.csv",row.names = F)
 
+################################################################
+#this section does the same as above but for persistence results
+################################################################
 
-#now do the same for persistence data
-
-#load data and transform resistence variable to conform to model assumptions 
+#load data on persistence and transform persistence variable to conform to model assumptions 
 Persistence_data<-read.csv("Data/R_output/Persistence_replicates.csv")
 Persistence_data$logis_Per<-plogis(Persistence_data$Resistance2)
 
