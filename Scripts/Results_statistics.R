@@ -9,49 +9,55 @@ library(lme4)
 #load functions
 std <- function(x) sd(x)/sqrt(length(x))
 
-
+#load data and transform resistence variable to conform to model assumptions 
 Resistence_data<-read.csv("Data/R_output/Resistence_replicates.csv")
-
-colnames(Resistence)
-head(Resistence_data)
-
-Resistence_summary<-ddply(Resistence,.(Scen_lab,Replicate,Scen_lab2,variable),summarise,m_value=mean(Resistance))
-Pulse<-subset(Resistence_summary,Scen_lab2=="Pulse")
-Pulse_press<-subset(Resistence_summary,Scen_lab2=="Pulse + Press")
-
-Pulse$Diff<-Pulse$m_value-Pulse_press$m_value
-
-(mean(Pulse$Diff))*100
-std(Pulse$Diff)*100
-
-
-#run regressions for all the variables for resistance to see if the slopes of pulse and pulse+presss are the same
-ggplot(Resistence_data,aes(x=Scen_lab,y=Resistance,colour=as.factor(Scen_lab2)))+geom_point()+facet_wrap(~variable)
-
-
-Aesthetic_sub<-subset(Resistence_data,variable=="Aesthetic_M")
-Aesthetic_sub$logis_Res<-plogis(Aesthetic_sub$Resistance)
-
-M0<-lmer(logis_Res~1+(1|Replicate),data=Aesthetic_sub)
-M1<-lmer(logis_Res~Scen_lab+(1|Replicate),data=Aesthetic_sub)
-M2<-lmer(logis_Res~Scen_lab+I(Scen_lab^2)+(1|Replicate),data=Aesthetic_sub)
-M3<-lmer(logis_Res~Scen_lab*Scen_lab2+(1|Replicate),data=Aesthetic_sub)
-M4<-lmer(logis_Res~Scen_lab*Scen_lab2+I(Scen_lab^2)*Scen_lab2+(1|Replicate),data=Aesthetic_sub)
-
-AICc(M0,M1,M2,M3,M4)
-
+Resistence_data$logis_Res<-plogis(Resistence_data$Resistance)
 
 #to do this I need to run all models for each of the different variables reporting the the model with the lowest AICc value
 
 ES_BD_unique<-unique(Resistence_data$variable)
-
+Top_model_summary<-NULL
 for(i in 1:length(ES_BD_unique)){
-  i<-1
+  #i<-1
   Res_sub<-subset(Resistence_data,variable==ES_BD_unique[i])
   M0<-lmer(logis_Res~1+(1|Replicate),data=Res_sub)
   M1<-lmer(logis_Res~Scen_lab+(1|Replicate),data=Res_sub)
   M2<-lmer(logis_Res~Scen_lab+I(Scen_lab^2)+(1|Replicate),data=Res_sub)
   M3<-lmer(logis_Res~Scen_lab*Scen_lab2+(1|Replicate),data=Res_sub)
   M4<-lmer(logis_Res~Scen_lab*Scen_lab2+I(Scen_lab^2)*Scen_lab2+(1|Replicate),data=Res_sub)
-  
+  Model_selection<-data.frame(Variable=ES_BD_unique[i],AICc(M0,M1,M2,M3,M4),
+             Model=c("Null", "Linear", "Linear interaction","Non-linear","Non-linear interaction"))
+  Model_selection_sorted<-Model_selection[with(Model_selection, order(AICc)), ]
+  Top_model<-Model_selection_sorted[1,]
+  Top_model_summary<-rbind(Top_model_summary,Top_model)
 }
+
+write.csv(Top_model_summary,"Tables/Resistance_top_models.csv",row.names = F)
+
+
+#now do the same for persistence data
+
+#load data and transform resistence variable to conform to model assumptions 
+Persistence_data<-read.csv("Data/R_output/Persistence_replicates.csv")
+Persistence_data$logis_Per<-plogis(Persistence_data$Resistance2)
+
+
+ES_BD_unique<-unique(Persistence_data$variable)
+Top_model_summary<-NULL
+for(i in 1:length(ES_BD_unique)){
+  #i<-1
+  Per_sub<-subset(Persistence_data,variable==ES_BD_unique[i])
+  M0<-lmer(logis_Per~1+(1|Replicate),data=Per_sub)
+  M1<-lmer(logis_Per~Scen_lab+(1|Replicate),data=Per_sub)
+  M2<-lmer(logis_Per~Scen_lab+I(Scen_lab^2)+(1|Replicate),data=Per_sub)
+  M3<-lmer(logis_Per~Scen_lab*Scen_lab2+(1|Replicate),data=Per_sub)
+  M4<-lmer(logis_Per~Scen_lab*Scen_lab2+I(Scen_lab^2)*Scen_lab2+(1|Replicate),data=Per_sub)
+  Model_selection<-data.frame(Variable=ES_BD_unique[i],AICc(M0,M1,M2,M3,M4),
+                              Model=c("Null", "Linear", "Linear interaction","Non-linear","Non-linear interaction"))
+  Model_selection_sorted<-Model_selection[with(Model_selection, order(AICc)), ]
+  Top_model<-Model_selection_sorted[1,]
+  Top_model_summary<-rbind(Top_model_summary,Top_model)
+}
+
+write.csv(Top_model_summary,"Tables/Persistence_top_models.csv",row.names = F)
+
