@@ -1,14 +1,35 @@
-"Variable","df","AICc","Model"
-"AGB_M",8,-147.219171858903,"Non-linear interaction"
-"SRR_M",8,-297.978238938777,"Non-linear interaction"
-"Min_rate_M",6,-159.7253473849,"Non-linear"
-"Fungi_M",8,-180.497328830128,"Non-linear interaction"
-"GF_M",6,-153.750052538585,"Non-linear"
-"Lichen_M",8,-223.174169705019,"Non-linear interaction"
-"Aesthetic_M",8,-267.945635500441,"Non-linear interaction"
-"Recreation_M",8,-214.060286683416,"Non-linear interaction"
-"Fungi_val_M",8,-158.859724477818,"Non-linear interaction"
-"Carbon_stock_M",8,-155.07243838235,"Non-linear interaction"
-"Nitrogen_stock_M",3,-2423.4513114824,"Null"
-"Timber_M",5,-110.620042414047,"Linear interaction"
-"Tree_richness_M",6,-236.37696586006,"Non-linear"
+"Variable","Pulse","Model","df","AICc","Intercept","Slope","Slope_sq","R_sq","Order"
+"Aboveground biomass","Pulse","Null",3,-1206.55,1,NA,NA,0,1
+"Aboveground biomass","Pulse + Press","Quadratic",5,-31.94,0.906,-0.221,-0.107,0.98,1
+"Aesthetic value","Pulse","Null",3,-1206.55,1,NA,NA,0,2
+"Aesthetic value","Pulse + Press","Quadratic",5,-92.02,0.989,-0.037,-0.021,0.99,2
+"Commercially valuable 
+fungi richness","Pulse","Null",3,-1206.55,1,NA,NA,0,3
+"Commercially valuable 
+fungi richness","Pulse + Press","Quadratic",5,-37.18,0.912,-0.187,-0.084,0.98,3
+"Fungi species richness","Pulse","Null",3,-1206.55,1,NA,NA,0,4
+"Fungi species richness","Pulse + Press","Quadratic",5,-48.45,0.948,-0.142,-0.075,0.98,4
+"Lichen species 
+richness","Pulse","Null",3,-1206.55,1,NA,NA,0,5
+"Lichen species 
+richness","Pulse + Press","Quadratic",5,-70.16,0.983,-0.065,-0.039,0.98,5
+"Ground flora 
+species richness","Pulse","Quadratic",5,-58.76,0.591,0.121,0.023,0.98,6
+"Ground flora 
+species richness","Pulse + Press","Quadratic",5,-28.87,0.902,0.171,-0.064,0.95,6
+"Nitrogen mineralisation 
+rate","Pulse","Linear",4,-62.27,0.673,0.126,NA,0.98,7
+"Nitrogen mineralisation 
+rate","Pulse + Press","Quadratic",5,-37.4,0.929,0.147,-0.065,0.96,7
+"Recreation value","Pulse","Null",3,-1206.55,1,NA,NA,0,8
+"Recreation value","Pulse + Press","Quadratic",5,-65.59,0.977,-0.08,-0.046,0.98,8
+"Nitrogen stock","Pulse","Null",3,-1206.55,1,NA,NA,0,9
+"Nitrogen stock","Pulse + Press","Null",3,-1206.55,1,NA,NA,0,9
+"Soil respiration rate","Pulse","Null",3,-1206.55,1,NA,NA,0,10
+"Soil respiration rate","Pulse + Press","Quadratic",5,-106.79,0.992,-0.024,-0.013,0.99,10
+"Timber volume","Pulse","Quadratic",5,-26.31,0.936,-0.249,-0.149,0.97,11
+"Timber volume","Pulse + Press","Quadratic",5,-8.01,0.784,-0.343,-0.118,0.95,11
+"Carbon stock","Pulse","Null",3,-1206.55,1,NA,NA,0,12
+"Carbon stock","Pulse + Press","Quadratic",5,-36.4,0.949,-0.17,-0.097,0.97,12
+"Tree species richness","Pulse","Null",3,-110.99,0.929,NA,NA,0,13
+"Tree species richness","Pulse + Press","Null",3,-73.4,0.852,NA,NA,0,13

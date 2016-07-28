@@ -1,15 +1,37 @@
-"Variable","df","AICc","Model"
-"Tree_richness_M",3,-2423.4513114824,"Null"
-"Timber_M",5,-177.583816460065,"Linear interaction"
-"Nitrogen_stock_M",5,-393.50137823569,"Linear interaction"
-"Carbon_stock_M",4,-260.83336422946,"Linear"
-"Fungi_val_M",5,-195.406389460336,"Linear interaction"
-"Recreation_M",4,-261.015514927624,"Linear"
-"Aesthetic_M",4,-320.897032221826,"Linear"
-"Lichen_M",4,-263.934351789245,"Linear"
-"GF_M",3,-293.808002058523,"Null"
-"Fungi_M",4,-234.365405955742,"Linear"
-"Min_rate_M",3,-318.097831020864,"Null"
-"SRR_M",4,-362.155216922463,"Linear"
-"AGB_M",4,-193.792024560895,"Linear"
-"Replicate",3,-2423.4513114824,"Null"
+"Variable","Pulse","Model","df","AICc","Intercept","Slope","R_sq","Order"
+"Aboveground biomass","Pulse + Press","Linear",4,-31.21,0.529,-0.304,0.97,1
+"Aboveground biomass","Pulse","Linear",4,-35.07,0.521,-0.297,0.98,1
+"Aesthetic value","Pulse + Press","Linear",4,-94.32,0.914,-0.065,0.99,2
+"Aesthetic value","Pulse","Linear",4,-96.93,0.912,-0.064,0.99,2
+"Commercially valuable 
+fungi richness","Pulse + Press","Linear",4,-29.8,0.604,-0.242,0.95,3
+"Commercially valuable 
+fungi richness","Pulse","Linear",4,-33.16,0.598,-0.236,0.96,3
+"Fungi species richness","Pulse + Press","Linear",4,-49.84,0.686,-0.214,0.98,4
+"Fungi species richness","Pulse","Linear",4,-55.71,0.681,-0.21,0.99,4
+"Lichen species 
+richness","Pulse + Press","Linear",4,-69.79,0.847,-0.119,0.98,5
+"Lichen species 
+richness","Pulse","Linear",4,-71.29,0.844,-0.118,0.98,5
+"Ground flora 
+species richness","Pulse + Press","Null",3,-71.6,0.991,NA,0,6
+"Ground flora 
+species richness","Pulse","Null",3,-1206.55,1,NA,0,6
+"Nitrogen mineralisation 
+rate","Pulse + Press","Null",3,-83.27,0.993,NA,0,7
+"Nitrogen mineralisation 
+rate","Pulse","Null",3,-1206.55,1,NA,0,7
+"Recreation value","Pulse + Press","Linear",4,-68.62,0.816,-0.139,0.99,8
+"Recreation value","Pulse","Linear",4,-71.39,0.812,-0.138,0.99,8
+"Nitrogen stock","Pulse + Press","Linear",4,-103.15,0.988,-0.013,0.84,9
+"Nitrogen stock","Pulse","Linear",4,-102.06,0.988,-0.013,0.83,9
+"Soil respiration rate","Pulse + Press","Linear",4,-111.37,0.944,-0.04,0.99,10
+"Soil respiration rate","Pulse","Linear",4,-116.6,0.943,-0.04,0.99,10
+"Timber volume","Pulse + Press","Linear",4,-21.85,0.438,-0.343,0.96,11
+"Timber volume","Pulse","Linear",4,-23.51,0.428,-0.335,0.96,11
+"Carbon stock","Pulse + Press","Linear",4,-63.18,0.778,-0.157,0.99,12
+"Carbon stock","Pulse","Linear",4,-71.09,0.775,-0.154,0.99,12
+"Tree species richness","Pulse + Press","Null",3,-1206.55,1,NA,0,13
+"Tree species richness","Pulse","Null",3,-1206.55,1,NA,0,13
+"Replicate","Pulse + Press","Null",3,-1206.55,1,NA,0,14
+"Replicate","Pulse","Null",3,-1206.55,1,NA,0,14
